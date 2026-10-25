@@ -488,3 +488,23 @@ begin
   return new;
 end;
 $$;
+
+-- ===== Pós-setup: contas criadas ANTES do banco existir =====
+-- Cria o perfil de quem já se cadastrou (o gatilho ainda não existia).
+insert into public.profiles (id, full_name, email)
+select id, coalesce(raw_user_meta_data ->> 'full_name', ''), email
+from auth.users
+on conflict (id) do nothing;
+
+-- Confirma o e-mail e torna gestor a conta do Fabricio.
+update auth.users
+set email_confirmed_at = coalesce(email_confirmed_at, now())
+where lower(email) = 'fabriciomouratreinador@gmail.com';
+
+update public.profiles
+set role = 'admin'
+where lower(email) = 'fabriciomouratreinador@gmail.com';
+
+-- Conferência: deve listar sua conta com role = admin.
+select p.email, p.role, u.email_confirmed_at is not null as email_confirmado
+from public.profiles p join auth.users u on u.id = p.id;
