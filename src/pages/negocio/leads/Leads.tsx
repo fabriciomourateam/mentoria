@@ -260,9 +260,9 @@ export default function Leads() {
                     <div className="tx">
                       <b>
                         {l.name}{' '}
-                        <span className={`pill ${st.pill}`} style={{ marginLeft: 4, verticalAlign: 'middle' }}>
+                        <em className={`pill ${st.pill}`} style={{ marginLeft: 4, verticalAlign: 'middle', fontStyle: 'normal' }}>
                           {st.label}
-                        </span>
+                        </em>
                       </b>
                       {sub && <span>{sub}</span>}
                       {(l.next_step || l.next_date) && (
