@@ -9,6 +9,7 @@ import { api } from '../../lib/api'
 import { trackLabel } from '../../lib/derive'
 import { useStore } from '../../lib/store'
 import { rehypeTableLabels } from '../../lib/md-table-labels'
+import { ImportMaterials } from './ImportMaterials'
 import type { ChecklistItem, Lesson, Material, MaterialKind, Track } from '../../lib/types'
 
 /* ---------- helpers ---------- */
@@ -163,6 +164,7 @@ export function AdminContent() {
 
   return (
     <>
+      <ImportMaterials />
       <div className="toolbar r">
         <h2 className="dsp grow" style={{ fontSize: 19 }}>
           Trilhas e aulas
