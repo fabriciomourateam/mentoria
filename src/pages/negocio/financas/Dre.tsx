@@ -24,7 +24,7 @@ export default function Dre() {
   const { get } = useWorkspace()
   const [mes, setMes] = useState(nowMonth)
 
-  const meses = dreMeses(data)
+  const meses = useMemo(() => dreMeses(data), [data])
   const pl = proLaboreCalc(get('prolabore'))
   const impSug = num(get('prolabore').imposto)
   const m = meses[mes] ?? {}
