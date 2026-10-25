@@ -789,7 +789,7 @@ Muito treinador posta todo dia e não recebe uma única mensagem de aluno. O pro
 | Sexta | História | Confiança | Sua história ou a de um aluno |
 | Sábado | Venda | Vender | Convite para a avaliação inicial |
 
-Domingo é folga ou tendência leve. Uma regra simples: 4 de cada 6 posts atraem ou geram confiança, e 1 vende. Quem só vende, cansa. Quem nunca vende, não fatura.
+Domingo é folga ou tendência leve. Uma regra simples: 5 de cada 6 posts atraem ou geram confiança, e 1 vende. Quem só vende, cansa. Quem nunca vende, não fatura.
 
 ## Stories que vendem
 
