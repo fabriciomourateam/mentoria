@@ -187,8 +187,8 @@ export function createDemoApi(): Api {
       return m.external_url
     },
 
-    async listProgress() {
-      const id = me()
+    async listProgress(userId) {
+      const id = userId ?? me()
       return wait(db.progress.filter((p) => p.user_id === id))
     },
     async saveProgress(lessonId, checked, completed) {

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { Icon } from '../../components/Icon'
 import { CTA, Empty, Skeleton } from '../../components/ui'
@@ -167,7 +168,7 @@ export function AdminStudents() {
                 <span className="av" style={{ width: 36, height: 36, fontSize: 12, flexShrink: 0 }}>
                   {initials(s.profile.full_name, s.profile.email)}
                 </span>
-                <div className="tx">
+                <Link className="tx" to={`/admin/alunos/${s.profile.id}`} title="Ver o progresso e o Meu Negócio deste aluno">
                   <b>{s.profile.full_name || s.profile.email || 'Sem nome'}</b>
                   {s.profile.full_name && s.profile.email && <span>{s.profile.email}</span>}
                   <span>
@@ -175,7 +176,7 @@ export function AdminStudents() {
                     {s.completedLessons === 1 ? 'aula concluída' : 'aulas concluídas'}
                     {s.lastActivity ? ` · última atividade ${fmtDay(s.lastActivity)}` : ''}
                   </span>
-                </div>
+                </Link>
                 <div style={{ display: 'flex', gap: 6, alignItems: 'center', flexWrap: 'wrap' }}>
                   <StatusPill s={s} />
                   {e?.expires_at && <span className="pill">até {fmtDate(e.expires_at)}</span>}

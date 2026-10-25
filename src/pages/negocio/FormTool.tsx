@@ -27,7 +27,7 @@ export function FormTool({ toolKey, schema }: { toolKey: string; schema: FormSch
 }
 
 /** Quando a ficha fica pronta, marca os itens correspondentes no checklist da aula (só adiciona). */
-function useCheckpointSync(schema: FormSchema, data: Record<string, unknown>, state: string) {
+export function useCheckpointSync(schema: FormSchema, data: Record<string, unknown>, state: string) {
   const { content, progress, saveProgress } = useStore()
   const last = useRef('')
   useEffect(() => {

@@ -113,8 +113,8 @@ export function createSupabaseApi(url: string, key: string): Api {
       return m.external_url
     },
 
-    async listProgress() {
-      const id = await uid()
+    async listProgress(userId) {
+      const id = userId ?? (await uid())
       return must(await sb.from('lesson_progress').select('*').eq('user_id', id)) as Progress[]
     },
     async saveProgress(lessonId, checked, completed) {

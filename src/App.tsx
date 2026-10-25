@@ -6,6 +6,7 @@ import { AdminLayout } from './pages/admin/AdminLayout'
 import { AdminAppearance } from './pages/admin/AdminAppearance'
 import { AdminContent, AdminLessonEdit, AdminTrackEdit } from './pages/admin/AdminContent'
 import { AdminStudents } from './pages/admin/AdminStudents'
+import { AdminStudentView } from './pages/admin/AdminStudentView'
 import { Business } from './pages/Business'
 import { ToolPage } from './pages/negocio/ToolPage'
 import { Home } from './pages/Home'
@@ -92,6 +93,8 @@ export default function App() {
             <Route path="conteudo/trilha/:trackId" element={<AdminTrackEdit />} />
             <Route path="conteudo/aula/:lessonId" element={<AdminLessonEdit />} />
             <Route path="alunos" element={<AdminStudents />} />
+            <Route path="alunos/:id" element={<AdminStudentView />} />
+            <Route path="alunos/:id/:tool" element={<AdminStudentView />} />
             <Route path="aparencia" element={<AdminAppearance />} />
           </Route>
         </Route>

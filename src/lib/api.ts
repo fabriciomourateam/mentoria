@@ -44,7 +44,8 @@ export interface Api {
   materialUrl(m: Material): Promise<string | null>
 
   // progresso do usuário logado
-  listProgress(): Promise<Progress[]>
+  /** Sem userId: do usuário logado. Com userId: só o admin (para acompanhar um aluno). */
+  listProgress(userId?: string): Promise<Progress[]>
   saveProgress(lessonId: string, checked: string[], completed: boolean): Promise<Progress>
 
   // meu negócio (espaço de trabalho do aluno). userId só para o admin consultar um aluno.
