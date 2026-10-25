@@ -7,6 +7,7 @@ import { AdminAppearance } from './pages/admin/AdminAppearance'
 import { AdminContent, AdminLessonEdit, AdminTrackEdit } from './pages/admin/AdminContent'
 import { AdminStudents } from './pages/admin/AdminStudents'
 import { Business } from './pages/Business'
+import { ToolPage } from './pages/negocio/ToolPage'
 import { Home } from './pages/Home'
 import { LessonPage } from './pages/Lesson'
 import { Library } from './pages/Library'
@@ -77,6 +78,7 @@ export default function App() {
           <Route path="aula/:id" element={<LessonPage />} />
           <Route path="biblioteca" element={<Library />} />
           <Route path="negocio" element={<Business />} />
+          <Route path="negocio/:tool" element={<ToolPage />} />
           <Route
             path="admin"
             element={

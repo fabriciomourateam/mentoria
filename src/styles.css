@@ -2286,3 +2286,334 @@ button.res:hover .dl {
 .md table:not(.cards) td:last-child:not(:first-child) {
   white-space: nowrap;
 }
+
+/* ---------- Meu Negócio: ferramentas ---------- */
+.tcard {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 18px 20px;
+  min-height: 150px;
+}
+.tcard .top2 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.tcard h3 {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 16.5px;
+  letter-spacing: -0.015em;
+  line-height: 1.25;
+}
+.tcard p {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+.tcard .bar {
+  margin-top: auto;
+}
+.tool-head {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  margin: 4px 2px 18px;
+}
+.tool-ico {
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  flex-shrink: 0;
+  background: linear-gradient(145deg, var(--accent-deep), var(--accent));
+  color: var(--on-accent);
+  display: grid;
+  place-items: center;
+}
+.tool-ico svg.i {
+  width: 24px;
+  height: 24px;
+}
+.tool-head .tx {
+  min-width: 0;
+  flex: 1;
+}
+.tool-head .ey {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-ink);
+}
+.tool-head h1 {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(24px, 4vw, 32px);
+  letter-spacing: -0.03em;
+  line-height: 1.12;
+  margin-top: 4px;
+}
+.tool-head p {
+  color: var(--ink2);
+  margin-top: 6px;
+  max-width: 60ch;
+}
+.tool-head .meta {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 10px;
+  min-height: 24px;
+}
+.tool-prog {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 12px;
+  max-width: 360px;
+}
+.tool-prog .bar {
+  flex: 1;
+}
+.tool-prog span {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+  white-space: nowrap;
+}
+@media (max-width: 560px) {
+  .tool-head {
+    flex-direction: column;
+    gap: 12px;
+  }
+  .tool-ico {
+    width: 46px;
+    height: 46px;
+    border-radius: 14px;
+  }
+}
+.sec {
+  padding: 22px 24px;
+}
+@media (max-width: 560px) {
+  .sec {
+    padding: 18px 16px;
+  }
+}
+.sec h2 {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: -0.02em;
+}
+.sec-intro {
+  color: var(--muted);
+  font-size: 13.5px;
+  margin-top: 4px;
+  max-width: 64ch;
+}
+.sec-fields {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.sec-fields .field + .field {
+  margin-top: 0;
+}
+.sec-fields .field {
+  display: flex;
+  flex-direction: column;
+}
+.affix {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--card-2);
+  border-radius: 13px;
+  padding-left: 14px;
+  border: 1px solid transparent;
+  transition: border-color 0.3s var(--ease2), box-shadow 0.3s var(--ease2), background-color 0.3s var(--ease2);
+}
+.affix.percent,
+.affix.number {
+  padding-left: 0;
+  padding-right: 14px;
+}
+.affix.number {
+  padding-right: 0;
+}
+.affix:focus-within {
+  border-color: var(--accent);
+  background: var(--card);
+  box-shadow: 0 0 0 4px var(--accent-tint);
+}
+.affix i {
+  font-style: normal;
+  font-weight: 700;
+  color: var(--muted);
+  font-size: 14px;
+}
+.affix .input {
+  background: transparent;
+  border: none;
+  box-shadow: none !important;
+  padding-left: 0;
+}
+.affix.percent .input,
+.affix.number .input {
+  padding-left: 14px;
+}
+.lrows {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.lrow {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  background: var(--card-2);
+  border-radius: 14px;
+  padding: 10px;
+}
+.lrow .input,
+.lrow .select,
+.lrow .textarea {
+  background: var(--card);
+  padding: 10px 12px;
+  font-size: 14.5px;
+}
+.lcols {
+  flex: 1;
+  min-width: 0;
+  display: grid;
+  gap: 8px;
+}
+.lcols.c2 {
+  grid-template-columns: 1fr 1.4fr;
+}
+.lcols.c3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.lcols.c4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+.lcol {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+.lcol.wide {
+  grid-column: 1 / -1;
+}
+.lcl {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+.lrm {
+  background: var(--card);
+  margin-top: 19px;
+  flex-shrink: 0;
+}
+@media (max-width: 640px) {
+  .lcols.c2,
+  .lcols.c3,
+  .lcols.c4 {
+    grid-template-columns: 1fr;
+  }
+}
+/* resultados calculados */
+.kpis {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 10px;
+}
+.kpi {
+  background: var(--card-2);
+  border-radius: 16px;
+  padding: 14px 16px;
+}
+.kpi.hl {
+  background: linear-gradient(145deg, var(--accent-deep), var(--accent));
+  color: var(--on-accent);
+}
+.kpi .k {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+}
+.kpi.hl .k {
+  color: var(--on-accent);
+  opacity: 0.85;
+}
+.kpi .v {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 22px;
+  letter-spacing: -0.03em;
+  margin-top: 4px;
+  font-variant-numeric: tabular-nums;
+}
+.kpi .d {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+.kpi.hl .d {
+  color: var(--on-accent);
+  opacity: 0.85;
+}
+/* mensagens com copiar (guias) */
+.md .msg {
+  background: var(--card-2);
+  border-radius: 16px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border-left: 3px solid var(--accent);
+}
+.md .msg p {
+  white-space: pre-wrap;
+  color: var(--ink);
+  font-size: 15px;
+  max-width: none;
+}
+.md .msg .btn {
+  align-self: flex-start;
+}
+.md .md-pre {
+  background: var(--card-2);
+  border-radius: 12px;
+  padding: 12px 14px;
+  overflow-x: auto;
+  font-size: 13.5px;
+}
+.field > span.affix {
+  display: flex;
+  margin-bottom: 0;
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--ink);
+}
+.ro-fieldset {
+  border: none;
+  min-width: 0;
+}
+.ro-fieldset:disabled .btn,
+.ro-fieldset:disabled .icon-btn.lrm {
+  display: none;
+}
+@media (max-width: 760px) {
+  .tcard {
+    min-height: 0;
+  }
+}

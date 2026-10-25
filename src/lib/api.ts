@@ -1,12 +1,14 @@
 import type {
   AppSettings,
   EnrollmentStatus,
+  Lead,
   Lesson,
   Material,
   Me,
   Progress,
   StudentRow,
   Track,
+  WorkspaceEntry,
 } from './types'
 import { createSupabaseApi } from './api-supabase'
 import { createDemoApi } from './api-demo'
@@ -44,6 +46,13 @@ export interface Api {
   // progresso do usuário logado
   listProgress(): Promise<Progress[]>
   saveProgress(lessonId: string, checked: string[], completed: boolean): Promise<Progress>
+
+  // meu negócio (espaço de trabalho do aluno). userId só para o admin consultar um aluno.
+  listWorkspace(userId?: string): Promise<WorkspaceEntry[]>
+  saveWorkspace(key: string, data: Record<string, unknown>): Promise<WorkspaceEntry>
+  listLeads(userId?: string): Promise<Lead[]>
+  saveLead(l: Partial<Lead> & { name: string }): Promise<Lead>
+  deleteLead(id: string): Promise<void>
 
   // admin
   saveTrack(t: Partial<Track> & { title: string }): Promise<Track>

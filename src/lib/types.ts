@@ -88,3 +88,29 @@ export interface StudentRow {
   completedLessons: number
   lastActivity: string | null
 }
+
+export type LeadStage = 'novo' | 'conversa' | 'avaliacao' | 'proposta' | 'fechou' | 'perdido'
+
+export interface Lead {
+  id: string
+  user_id: string
+  name: string
+  contact: string | null
+  origin: string | null
+  stage: LeadStage
+  next_step: string | null
+  /** YYYY-MM-DD (dia de São Paulo) */
+  next_date: string | null
+  value: number | null
+  notes: string | null
+  created_at: string
+  updated_at: string
+}
+
+/** Uma ficha/ferramenta do "Meu Negócio" salva como JSON livre. */
+export interface WorkspaceEntry {
+  user_id: string
+  key: string
+  data: Record<string, unknown>
+  updated_at: string
+}

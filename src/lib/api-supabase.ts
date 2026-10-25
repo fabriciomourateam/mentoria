@@ -1,6 +1,6 @@
 import { createClient } from '@supabase/supabase-js'
 import type { Api, AuthUser } from './api'
-import type { AppSettings, Enrollment, Lesson, Material, Profile, Progress, StudentRow, Track } from './types'
+import type { AppSettings, Enrollment, Lead, Lesson, Material, Profile, Progress, StudentRow, Track, WorkspaceEntry } from './types'
 
 function must<T>(res: { data: T | null; error: { message: string } | null }): T {
   if (res.error) throw new Error(res.error.message)
@@ -131,6 +131,36 @@ export function createSupabaseApi(url: string, key: string): Api {
           .select()
           .single(),
       ) as Progress
+    },
+
+    async listWorkspace(userId) {
+      const id = userId ?? (await uid())
+      return must(await sb.from('workspace_entries').select('*').eq('user_id', id)) as WorkspaceEntry[]
+    },
+    async saveWorkspace(key, data) {
+      const id = await uid()
+      return must(
+        await sb.from('workspace_entries').upsert({ user_id: id, key, data }).select().single(),
+      ) as WorkspaceEntry
+    },
+    async listLeads(userId) {
+      const id = userId ?? (await uid())
+      return must(
+        await sb.from('leads').select('*').eq('user_id', id).order('created_at', { ascending: false }),
+      ) as Lead[]
+    },
+    async saveLead(l) {
+      const row: Partial<Lead> = { ...l }
+      delete row.created_at
+      delete row.updated_at
+      if (!row.id) {
+        delete row.id
+        row.user_id = await uid()
+      }
+      return must(await sb.from('leads').upsert(row).select().single()) as Lead
+    },
+    async deleteLead(id) {
+      must(await sb.from('leads').delete().eq('id', id))
     },
 
     async saveTrack(t) {

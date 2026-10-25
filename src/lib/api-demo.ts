@@ -1,6 +1,6 @@
 import type { Api, AuthUser } from './api'
 import { buildDemoContent } from './demo-seed'
-import type { AppSettings, Enrollment, Lesson, Material, Profile, Progress, Track } from './types'
+import type { AppSettings, Enrollment, Lead, Lesson, Material, Profile, Progress, Track, WorkspaceEntry } from './types'
 
 // Modo demonstração: tudo fica no navegador (localStorage). Serve para ver e testar
 // a plataforma antes do Supabase existir. Regras do login de teste:
@@ -19,6 +19,8 @@ interface DemoDb {
   progress: Progress[]
   files: Record<string, string>
   session: AuthUser | null
+  workspace?: WorkspaceEntry[]
+  leads?: Lead[]
 }
 
 const KEY = 'mentoria-demo-v1'
@@ -197,6 +199,56 @@ export function createDemoApi(): Api {
       else db.progress.push(row)
       save()
       return wait(row)
+    },
+
+    async listWorkspace(userId) {
+      const id = userId ?? me()
+      return wait((db.workspace ?? []).filter((w) => w.user_id === id))
+    },
+    async saveWorkspace(key, data) {
+      const id = me()
+      db.workspace = db.workspace ?? []
+      const row: WorkspaceEntry = { user_id: id, key, data, updated_at: now() }
+      const i = db.workspace.findIndex((w) => w.user_id === id && w.key === key)
+      if (i >= 0) db.workspace[i] = row
+      else db.workspace.push(row)
+      save()
+      return wait(row)
+    },
+    async listLeads(userId) {
+      const id = userId ?? me()
+      return wait((db.leads ?? []).filter((l) => l.user_id === id).sort((a, b) => b.created_at.localeCompare(a.created_at)))
+    },
+    async saveLead(l) {
+      const id = me()
+      db.leads = db.leads ?? []
+      const stamp = now()
+      const i = l.id ? db.leads.findIndex((x) => x.id === l.id) : -1
+      const row: Lead =
+        i >= 0
+          ? { ...db.leads[i], ...l, updated_at: stamp }
+          : {
+              id: rid(),
+              user_id: id,
+              contact: null,
+              origin: null,
+              stage: 'novo',
+              next_step: null,
+              next_date: null,
+              value: null,
+              notes: null,
+              created_at: stamp,
+              ...l,
+              updated_at: stamp,
+            }
+      if (i >= 0) db.leads[i] = row
+      else db.leads.push(row)
+      save()
+      return wait(row)
+    },
+    async deleteLead(id) {
+      db.leads = (db.leads ?? []).filter((l) => l.id !== id)
+      save()
     },
 
     async saveTrack(t) {
