@@ -2246,3 +2246,43 @@ button.res:hover .dl {
     display: none;
   }
 }
+
+/* tabelas das aulas: no celular, as de 3+ colunas viram cartões rotulados */
+@media (max-width: 640px) {
+  .md table.cards,
+  .md table.cards tbody,
+  .md table.cards tr,
+  .md table.cards td {
+    display: block;
+    width: 100%;
+  }
+  .md table.cards thead {
+    display: none;
+  }
+  .md table.cards tr {
+    background: var(--card-2);
+    border-radius: 14px;
+    padding: 12px 14px;
+  }
+  .md table.cards tr + tr {
+    margin-top: 8px;
+  }
+  .md table.cards td {
+    border: none;
+    padding: 2px 0;
+  }
+  .md table.cards td:first-child {
+    color: var(--ink);
+    font-weight: 700;
+    font-size: 15px;
+    padding-bottom: 4px;
+  }
+  .md table.cards td:not(:first-child)::before {
+    content: attr(data-label) ': ';
+    font-weight: 700;
+    color: var(--ink2);
+  }
+}
+.md table:not(.cards) td:last-child:not(:first-child) {
+  white-space: nowrap;
+}

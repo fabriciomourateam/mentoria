@@ -1,5 +1,6 @@
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
+import { rehypeTableLabels } from '../lib/md-table-labels'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { Icon } from '../components/Icon'
 import { CTA, Empty, MaterialRow, Skeleton } from '../components/ui'
@@ -85,7 +86,7 @@ export function LessonPage() {
 
             {lesson.body_md.trim() ? (
               <div className="md">
-                <ReactMarkdown remarkPlugins={[remarkGfm]}>{lesson.body_md}</ReactMarkdown>
+                <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeTableLabels]}>{lesson.body_md}</ReactMarkdown>
               </div>
             ) : (
               <div className="soon">

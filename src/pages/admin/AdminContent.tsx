@@ -8,6 +8,7 @@ import { CTA, Empty, Skeleton } from '../../components/ui'
 import { api } from '../../lib/api'
 import { trackLabel } from '../../lib/derive'
 import { useStore } from '../../lib/store'
+import { rehypeTableLabels } from '../../lib/md-table-labels'
 import type { ChecklistItem, Lesson, Material, MaterialKind, Track } from '../../lib/types'
 
 /* ---------- helpers ---------- */
@@ -876,7 +877,7 @@ function LessonForm({
               {preview ? (
                 body.trim() ? (
                   <div className="md">
-                    <ReactMarkdown remarkPlugins={[remarkGfm]}>{body}</ReactMarkdown>
+                    <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeTableLabels]}>{body}</ReactMarkdown>
                   </div>
                 ) : (
                   <p className="muted" style={{ fontSize: 13.5 }}>
