@@ -1,10 +1,10 @@
 import { useMemo } from 'react'
 import { Icon } from '../../../components/Icon'
-import { brl, num, pct, useEntry } from '../../../lib/workspace'
+import { brl, pct, useEntry } from '../../../lib/workspace'
 import type { FormSchema } from '../forms'
 import { FieldInput, useCheckpointSync } from '../FormTool'
 import type { ToolProgress } from '../types'
-import { has, proLaboreCalc } from './calc'
+import { num, has, proLaboreCalc } from './calc'
 import type { Data } from './calc'
 
 const MAIN = ['custo_vida', 'margem', 'receita', 'imposto', 'taxas', 'fixos', 'variaveis']

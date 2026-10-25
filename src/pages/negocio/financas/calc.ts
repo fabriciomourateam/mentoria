@@ -1,7 +1,13 @@
-import { num } from '../../../lib/workspace'
+import { num as baseNum } from '../../../lib/workspace'
 
 // Cálculos puros das cinco ferramentas financeiras e a leitura cruzada entre elas:
 // o pró-labore alimenta a precificação, que alimenta o equilíbrio, a DRE e a projeção.
+
+/** Como num() da plataforma, mas entende milhar com ponto sem decimais: "12.000" vale 12000. */
+export function num(v: unknown): number {
+  if (typeof v === 'string' && /^\s*-?\d{1,3}(\.\d{3})+\s*$/.test(v)) return baseNum(v.replace(/\./g, ''))
+  return baseNum(v)
+}
 
 export type Data = Record<string, unknown>
 export type Get = (key: string) => Data

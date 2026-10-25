@@ -1,9 +1,9 @@
 import { useMemo, useState } from 'react'
-import { brl, num, pct, useEntry, useWorkspace } from '../../../lib/workspace'
+import { brl, pct, useEntry, useWorkspace } from '../../../lib/workspace'
 import type { FormSchema } from '../forms'
 import { FieldInput, useCheckpointSync } from '../FormTool'
 import type { ToolProgress } from '../types'
-import { DRE_FIXOS, dreCalc, dreMeses, fmt, has, monthLabel, monthsBack, nowMonth, proLaboreCalc } from './calc'
+import { num, DRE_FIXOS, dreCalc, dreMeses, fmt, has, monthLabel, monthsBack, nowMonth, proLaboreCalc } from './calc'
 import type { Data } from './calc'
 
 const VARS = ['comissoes', 'trafego', 'var_outros']

@@ -136,7 +136,9 @@ export function num(v: unknown): number {
   if (typeof v !== 'string') return 0
   const s = v.trim()
   if (!s) return 0
-  const norm = s.includes(',') ? s.replace(/\./g, '').replace(',', '.') : s
+  // "1.500,50" e "12.000" (milhar com ponto) viram 1500.5 e 12000; "1500.5" continua 1500.5.
+  const thousands = /^-?\d{1,3}(\.\d{3})+$/.test(s)
+  const norm = s.includes(',') ? s.replace(/\./g, '').replace(',', '.') : thousands ? s.replace(/\./g, '') : s
   const n = Number(norm.replace(/[^\d.-]/g, ''))
   return Number.isFinite(n) ? n : 0
 }
