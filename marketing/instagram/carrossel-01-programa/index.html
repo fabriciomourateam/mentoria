@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{--paper:#EDEAE3;--ink:#111111;--red:#FF4A1C;--mute:rgba(17,17,17,.55)}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#333;font-family:Inter,sans-serif;color:var(--ink)}
+  #pano{position:relative;width:8640px;height:1350px;overflow:hidden}
+  .s{position:absolute;top:0;width:1080px;height:1350px;background:var(--paper);overflow:hidden}
+  .s.red{background:var(--red)}
+  .s.dark{background:var(--ink);color:var(--paper)}
+  .a{position:absolute}
+  .mono{font-family:"Space Mono",monospace;font-size:22px;letter-spacing:.06em;text-transform:uppercase}
+  .chrome{top:58px;left:80px;right:80px;display:flex;justify-content:space-between;color:var(--mute)}
+  .dark .chrome,.dark .foot{color:rgba(237,234,227,.55)}
+  .red .chrome,.red .foot{color:rgba(17,17,17,.7)}
+  .foot{bottom:56px;left:80px;right:80px;display:flex;justify-content:space-between;color:var(--mute)}
+  .foot .go{color:var(--red);font-weight:700}
+  .H{font-family:Anton,sans-serif;text-transform:uppercase;line-height:1.04;letter-spacing:.005em}
+  .r{color:var(--red)}
+  .B{font-size:40px;line-height:1.3;font-weight:500;letter-spacing:-.01em}
+  .B b{font-weight:800}
+  .lab{font-family:"Space Mono",monospace;font-size:22px;letter-spacing:.06em;text-transform:uppercase;font-weight:700}
+  svg#thread{position:absolute;left:0;top:0;pointer-events:none}
+  .over{z-index:3}
+</style>
+</head>
+<body>
+<div id="pano">
+
+<!-- 01 CAPA -->
+<section class="s" style="left:0">
+  <div class="a chrome mono"><span>Fabricio Moura</span><span>01/08</span></div>
+  <div class="a" style="left:80px;top:250px;font-size:46px;font-weight:700;letter-spacing:-.02em">Você não precisa de mais</div>
+  <div class="a H" style="left:72px;top:318px;font-size:272px;line-height:1">PACIENTE.</div>
+  <div class="a" style="left:80px;top:700px;width:880px;font-size:62px;line-height:1.08;font-weight:800;letter-spacing:-.035em">Precisa de um programa que faça o aluno <span class="r">ficar.</span></div>
+  <div class="a lab" style="left:80px;top:960px;color:var(--mute)">Para treinadores e nutricionistas</div>
+  <div class="a foot mono"><span></span><span class="go">Arraste →</span></div>
+</section>
+
+<!-- 02 -->
+<section class="s" style="left:1080px">
+  <div class="a chrome mono"><span>Fabricio Moura</span><span>02/08</span></div>
+  <div class="a H" style="left:80px;top:150px;width:920px;font-size:128px">Todo mês é<br>a <span class="r">mesma coisa.</span></div>
+  <div class="a lab" style="left:150px;top:852px">Atende</div>
+  <div class="a lab" style="left:480px;top:852px">O aluno some</div>
+  <div class="a lab r" style="left:790px;top:852px">Do zero</div>
+  <div class="a B" style="left:80px;top:930px;width:820px">Você atende, o aluno some, e você corre atrás de gente nova <b>pra pagar as contas.</b></div>
+  <div class="a foot mono"><span></span><span class="go">→</span></div>
+</section>
+
+<!-- 03 -->
+<section class="s" style="left:2160px">
+  <div class="a chrome mono"><span>Fabricio Moura</span><span>03/08</span></div>
+  <div class="a H" style="left:80px;top:150px;width:940px;font-size:132px;line-height:1.1">Não é o seu conhecimento <span class="r">técnico.</span></div>
+  <div class="a B" style="left:80px;top:640px;width:860px">É vender <b>consulta solta</b> em vez de um <b>programa de acompanhamento.</b></div>
+  <div class="a lab" style="left:80px;top:910px;color:var(--mute)">Consulta solta: o aluno some</div>
+  <div class="a lab r" style="left:600px;top:910px">Programa: o aluno fica</div>
+  <div class="a foot mono"><span></span><span class="go">→</span></div>
+</section>
+
+<!-- 04 -->
+<section class="s" style="left:3240px">
+  <div class="a chrome mono"><span>Fabricio Moura</span><span>04/08</span></div>
+  <div class="a H" style="left:80px;top:150px;width:940px;font-size:96px">Um acompanhamento com começo, meio e <span class="r">renovação.</span></div>
+  <div class="a" style="left:80px;top:500px;width:920px">
+    <div style="display:flex;gap:34px;align-items:baseline;border-top:3px solid var(--ink);padding:24px 0 26px">
+      <span class="H r" style="font-size:64px;line-height:1">01</span>
+      <div><div style="font-size:44px;font-weight:800;letter-spacing:-.025em">Duração definida</div><div style="font-size:28px;color:var(--mute);margin-top:4px">O aluno entra num processo, não numa consulta.</div></div></div>
+    <div style="display:flex;gap:34px;align-items:baseline;border-top:3px solid var(--ink);padding:24px 0 26px">
+      <span class="H r" style="font-size:64px;line-height:1">02</span>
+      <div><div style="font-size:44px;font-weight:800;letter-spacing:-.025em">Entrega contínua</div><div style="font-size:28px;color:var(--mute);margin-top:4px">Ajustes, check-ins e evolução todo mês.</div></div></div>
+    <div style="display:flex;gap:34px;align-items:baseline;border-top:3px solid var(--ink);padding:24px 0 0">
+      <span class="H r" style="font-size:64px;line-height:1">03</span>
+      <div><div style="font-size:44px;font-weight:800;letter-spacing:-.025em">Suporte de perto</div><div style="font-size:28px;color:var(--mute);margin-top:4px">Ele sente que tem alguém acompanhando de verdade.</div></div></div>
+  </div>
+  <div class="a" style="left:80px;top:1040px;font-size:46px;font-weight:800;letter-spacing:-.03em">O aluno vê resultado <span class="r">e renova.</span></div>
+  <div class="a foot mono"><span></span><span class="go">→</span></div>
+</section>
+
+<!-- 05 -->
+<section class="s" style="left:4320px">
+  <div class="a chrome mono"><span>Fabricio Moura</span><span>05/08</span></div>
+  <div class="a H" style="left:80px;top:150px;width:940px;font-size:100px">Aluno que renova é faturamento que você <span class="r">já sabe que vem.</span></div>
+  <div class="a lab" style="left:40px;top:1010px">Jan</div>
+  <div class="a lab" style="left:220px;top:946px">Fev</div>
+  <div class="a lab" style="left:400px;top:882px">Mar</div>
+  <div class="a lab" style="left:580px;top:818px">Abr</div>
+  <div class="a lab" style="left:760px;top:754px">Mai</div>
+  <div class="a lab r" style="left:940px;top:690px">Jun</div>
+  <div class="a B" style="left:80px;top:1110px;width:900px;font-size:34px">Previsibilidade: o aluno fica, o faturamento soma.</div>
+  <div class="a foot mono"><span></span><span class="go">→</span></div>
+</section>
+
+<!-- 06 (vermelho) -->
+<section class="s red" style="left:5400px">
+  <div class="a chrome mono"><span>Fabricio Moura</span><span>06/08</span></div>
+  <div class="a lab" style="left:80px;top:300px">Faça a conta</div>
+  <div class="a H" style="left:80px;top:430px;font-size:122px;line-height:1;white-space:nowrap">50 alunos × R$ 400</div>
+  <div class="a H" style="left:70px;top:650px;font-size:262px;line-height:1;white-space:nowrap">R$ 20 MIL</div>
+  <div class="a" style="left:80px;top:1010px;font-size:48px;font-weight:800;letter-spacing:-.03em">todo mês. Sem vender a sua hora.</div>
+  <div class="a lab" style="left:80px;top:1140px;font-weight:400;font-size:20px;opacity:.75">Exemplo ilustrativo. O resultado depende do seu programa.</div>
+  <div class="a foot mono"><span></span><span style="font-weight:700">→</span></div>
+</section>
+
+<!-- 07 (preto) -->
+<section class="s dark" style="left:6480px">
+  <div class="a chrome mono"><span>Fabricio Moura</span><span>07/08</span></div>
+  <div class="a lab r" style="left:80px;top:150px">Foi assim comigo</div>
+  <div class="a H" style="left:80px;top:350px;font-size:190px;line-height:1;color:rgba(237,234,227,.4)">20</div>
+  <div class="a H r" style="left:440px;top:540px;font-size:330px;line-height:1">200+</div>
+  <div class="a lab" style="left:440px;top:880px">alunos em um ano</div>
+  <div class="a" style="left:80px;top:1010px;width:920px;display:flex;gap:60px;border-top:2px solid rgba(237,234,227,.25);padding-top:34px">
+    <div><div class="H" style="font-size:84px;line-height:1">+R$ 3 MI</div><div style="font-size:26px;margin-top:10px;color:rgba(237,234,227,.7)">faturados com consultoria online</div></div>
+    <div><div class="H" style="font-size:84px;line-height:1">R$ 20 MIL</div><div style="font-size:26px;margin-top:10px;color:rgba(237,234,227,.7)">no primeiro mês com processo</div></div>
+  </div>
+  <div class="a foot mono"><span></span><span class="go">→</span></div>
+</section>
+
+<!-- 08 -->
+<section class="s" style="left:7560px">
+  <div class="a chrome mono" style="top:58px"><span>Fabricio Moura</span><span>08/08</span></div>
+  <div class="a H" style="left:80px;top:215px;width:840px;font-size:106px">Quer montar o seu programa de <span class="r">acompanha&shy;mento?</span></div>
+  <div class="a" style="left:80px;top:700px;width:920px;height:190px;background:var(--ink);color:var(--paper);display:flex;align-items:center;justify-content:space-between;padding:0 48px">
+    <div><div class="lab" style="font-weight:400;opacity:.6">Comenta aqui</div><div class="H r" style="font-size:110px;line-height:1;margin-top:6px">MENTORIA</div></div>
+    <div class="H" style="font-size:90px;line-height:1">↓</div>
+  </div>
+  <div class="a B" style="left:80px;top:950px;width:880px">Eu te chamo no direct pra uma <b>avaliação gratuita</b> do seu cenário.</div>
+  
+</section>
+
+<!-- a linha que atravessa o carrossel -->
+<svg id="thread" class="over" width="8640" height="1350" viewBox="0 0 8640 1350">
+  <defs><clipPath id="c6"><rect x="5400" y="0" width="1080" height="1350"/></clipPath></defs>
+  <g id="line" fill="none" stroke-width="22" stroke-linejoin="miter" stroke-linecap="butt">
+    <!-- 01 risco + 02 zigue-zague -->
+    <polyline points="50,455 1080,455 1190,455 1290,800 1440,560 1590,790 1740,600 1890,815 2110,815 2110,980 2160,980" />
+    <!-- 03 tracejado (consulta solta) -->
+    <polyline points="2160,980 2700,980" stroke-dasharray="46 34" />
+    <!-- 03 sólido + 04 + 05 escada + 06 linha da soma + 07 subida + 08 seta -->
+    <polyline points="2700,980 4320,980 4500,980 4500,916 4680,916 4680,852 4860,852 4860,788 5040,788 5040,724 5220,724 5220,660 5300,660 5300,600 6480,600 6700,600 7460,140 8540,140 8540,620" />
+  </g>
+</svg>
+</div>
+<script>
+  // linha vermelha em tudo, preta por cima no slide vermelho
+  const g = document.getElementById('line');
+  g.setAttribute('stroke', '#FF4A1C');
+  const blk = g.cloneNode(true); blk.removeAttribute('id'); blk.setAttribute('stroke', '#111111'); blk.setAttribute('clip-path', 'url(#c6)');
+  g.parentNode.appendChild(blk);
+  // ponta da seta no fim
+  const ns = 'http://www.w3.org/2000/svg';
+  const arrow = document.createElementNS(ns, 'path');
+  arrow.setAttribute('d', 'M8505,610 L8575,610 L8540,672 Z'); arrow.setAttribute('fill', '#FF4A1C');
+  g.parentNode.appendChild(arrow);
+</script>
+</body>
+</html>
