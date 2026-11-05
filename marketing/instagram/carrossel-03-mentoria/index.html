@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{--paper:#EDEAE3;--ink:#111111;--red:#FF4A1C;--mute:rgba(17,17,17,.55)}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#333;font-family:Inter,sans-serif;color:var(--ink)}
+  #pano{position:relative;width:8640px;height:1350px;overflow:hidden}
+  .s{position:absolute;top:0;width:1080px;height:1350px;background:var(--paper);overflow:hidden}
+  .s.red{background:var(--red)}
+  .s.dark{background:var(--ink);color:var(--paper)}
+  .a{position:absolute}
+  .mono{font-family:"Space Mono",monospace;font-size:22px;letter-spacing:.06em;text-transform:uppercase}
+  .chrome{top:58px;left:80px;right:80px;display:flex;justify-content:space-between;color:var(--mute)}
+  .dark .chrome,.dark .foot{color:rgba(237,234,227,.55)}
+  .red .chrome,.red .foot{color:rgba(17,17,17,.7)}
+  .foot{bottom:56px;left:80px;right:80px;display:flex;justify-content:space-between;color:var(--mute)}
+  .foot .go{color:var(--red);font-weight:700}
+  .H{font-family:Anton,sans-serif;text-transform:uppercase;line-height:1.04;letter-spacing:.005em}
+  .r{color:var(--red)}
+  .B{font-size:40px;line-height:1.3;font-weight:500;letter-spacing:-.01em}
+  .B b{font-weight:800}
+  .lab{font-family:"Space Mono",monospace;font-size:22px;letter-spacing:.06em;text-transform:uppercase;font-weight:700}
+  svg#thread{position:absolute;left:0;top:0;pointer-events:none}
+  .over{z-index:3}
+  .st{position:absolute;top:582px;left:80px;width:76px;height:76px;border-radius:50%;background:var(--ink);color:var(--paper);display:grid;place-items:center;font-family:Anton,sans-serif;font-size:34px;z-index:5}
+  .red .st{color:var(--red)}
+  .dark .st{background:var(--red);color:var(--ink)}
+  .stl{position:absolute;top:530px;left:180px;z-index:5}
+  .tag{display:inline-block;border:3px solid var(--ink);padding:10px 18px;font-family:"Space Mono",monospace;font-weight:700;font-size:24px;letter-spacing:.06em;text-transform:uppercase;margin:0 10px 12px 0}
+  .ck{display:flex;gap:22px;align-items:baseline;font-size:44px;font-weight:800;letter-spacing:-.03em;margin-bottom:22px}
+  .ck b{font-family:Anton,sans-serif;font-weight:400;color:var(--red);font-size:44px;letter-spacing:0}
+</style>
+</head>
+<body>
+<div id="pano">
+
+<!-- 01 CAPA -->
+<section class="s" style="left:0">
+  <div class="a chrome mono"><span>Fabricio Moura</span><span>01/08</span></div>
+  <div class="a" style="left:80px;top:250px;font-size:46px;font-weight:700;letter-spacing:-.02em">Como funciona a minha</div>
+  <div class="a H" style="left:72px;top:326px;font-size:236px;line-height:1">MENTORIA.</div>
+  <div class="a" style="left:80px;top:700px;width:900px;font-size:58px;line-height:1.1;font-weight:800;letter-spacing:-.035em">Pra treinadores e nutricionistas que querem passar dos <span class="r">R$ 20 mil por mês</span> com consultoria online.</div>
+  <div class="a lab" style="left:80px;top:1010px;color:var(--mute)">O caminho, etapa por etapa</div>
+  <div class="a foot mono"><span></span><span class="go">Arraste →</span></div>
+</section>
+
+<!-- 02 pra quem é -->
+<section class="s" style="left:1080px">
+  <div class="a chrome mono"><span>Fabricio Moura</span><span>02/08</span></div>
+  <div class="a H" style="left:80px;top:150px;font-size:140px;line-height:1">Pra quem é.</div>
+  <div class="a B" style="left:80px;top:330px;width:880px">Pra quem já atende e quer dar o próximo passo.</div>
+  <div class="a lab" style="left:740px;top:560px;color:var(--mute)">Ponto de partida</div>
+  <div class="a" style="left:80px;top:720px;width:920px">
+    <div class="ck"><b>✓</b>Você já atende e entrega resultado.</div>
+    <div class="ck"><b>✓</b>Quer parar de vender a sua hora.</div>
+    <div class="ck"><b>✓</b>Quer depender menos de indicação.</div>
+  </div>
+  <div class="a lab" style="left:80px;top:1060px;font-weight:400;color:var(--mute)">Não é pra quem procura fórmula mágica.</div>
+  <div class="a foot mono"><span></span><span class="go">→</span></div>
+</section>
+
+<!-- 03 programa (vermelho) -->
+<section class="s red" style="left:2160px">
+  <div class="a chrome mono"><span>Fabricio Moura</span><span>03/08</span></div>
+  <div class="a H" style="left:80px;top:150px;width:940px;font-size:100px">Montamos juntos o seu programa de acompanhamento.</div>
+  <div class="st">01</div><div class="a lab stl">Etapa 01 · Programa</div>
+  <div class="a" style="left:80px;top:720px;width:940px"><span class="tag">Formato</span><span class="tag">Duração</span><span class="tag">Preço</span><span class="tag">Entrega</span></div>
+  <div class="a" style="left:80px;top:880px;width:880px;font-size:46px;font-weight:800;letter-spacing:-.03em;line-height:1.15">O que faz o aluno ficar mês após mês e renovar.</div>
+  <div class="a foot mono"><span></span><span style="font-weight:700">→</span></div>
+</section>
+
+<!-- 04 vendas e captação -->
+<section class="s" style="left:3240px">
+  <div class="a chrome mono"><span>Fabricio Moura</span><span>04/08</span></div>
+  <div class="a H" style="left:80px;top:150px;width:940px;font-size:100px">Um processo pra trazer e fechar <span class="r">aluno todo mês.</span></div>
+  <div class="st">02</div><div class="a lab stl">Etapa 02 · Vendas e captação</div>
+  <div class="a lab" style="left:80px;top:730px;font-size:26px;display:flex;gap:18px;align-items:center"><span>Seguidor</span><span class="r">→</span><span>Conversa</span><span class="r">→</span><span>Avaliação</span><span class="r">→</span><span class="r">Aluno</span></div>
+  <div class="a B" style="left:80px;top:830px;width:880px">Sem depender só de indicação. <b>Sem ficar esperando o aluno te chamar.</b></div>
+  <div class="a foot mono"><span></span><span class="go">→</span></div>
+</section>
+
+<!-- 05 plataforma -->
+<section class="s" style="left:4320px">
+  <div class="a chrome mono"><span>Fabricio Moura</span><span>05/08</span></div>
+  <div class="a H" style="left:80px;top:150px;width:940px;font-size:128px;line-height:1.14">Tudo num<br><span class="r">lugar só.</span></div>
+  <div class="st">03</div><div class="a lab stl">Etapa 03 · Plataforma</div>
+  <div class="a" style="left:80px;top:720px;width:920px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:30px">
+    <div style="border-top:3px solid var(--ink);padding-top:20px"><div class="H" style="font-size:58px;line-height:1">Aulas</div><div style="font-size:27px;margin-top:10px;color:var(--mute)">passo a passo, com checklist</div></div>
+    <div style="border-top:3px solid var(--ink);padding-top:20px"><div class="H" style="font-size:58px;line-height:1">Materiais</div><div style="font-size:27px;margin-top:10px;color:var(--mute)">prontos pra usar</div></div>
+    <div style="border-top:3px solid var(--red);padding-top:20px"><div class="H r" style="font-size:58px;line-height:1">Ferramentas</div><div style="font-size:27px;margin-top:10px;color:var(--mute)">pra organizar o seu negócio</div></div>
+  </div>
+  <div class="a B" style="left:80px;top:1000px;width:880px">Você aplica enquanto aprende. <b>Fica tudo salvo.</b></div>
+  <div class="a foot mono"><span></span><span class="go">→</span></div>
+</section>
+
+<!-- 06 call mensal (preto) -->
+<section class="s dark" style="left:5400px">
+  <div class="a chrome mono"><span>Fabricio Moura</span><span>06/08</span></div>
+  <div class="a H" style="left:80px;top:150px;width:940px;font-size:140px">Todo mês,<br><span class="r">ao vivo.</span></div>
+  <div class="st">04</div><div class="a lab stl" style="color:var(--paper)">Etapa 04 · Call mensal</div>
+  <div class="a" style="left:80px;top:720px;width:880px;font-size:44px;line-height:1.25;font-weight:500;letter-spacing:-.015em">Uma videochamada com todos os mentorados. <b style="font-weight:800">Você tira dúvidas e aprende com o caso dos outros também.</b></div>
+  <div class="a foot mono"><span></span><span class="go">→</span></div>
+</section>
+
+<!-- 07 como entrar -->
+<section class="s" style="left:6480px">
+  <div class="a chrome mono"><span>Fabricio Moura</span><span>07/08</span></div>
+  <div class="a H" style="left:80px;top:150px;width:940px;font-size:104px">Começa com uma <span class="r">avaliação gratuita.</span></div>
+  <div class="a B" style="left:80px;top:720px;width:880px">A gente olha o seu cenário de hoje e <b>onde você pode chegar.</b></div>
+  <div class="a lab" style="left:80px;top:900px;color:var(--mute)">Sem compromisso</div>
+  <div class="a foot mono"><span></span><span class="go">→</span></div>
+</section>
+
+<!-- 08 CTA -->
+<section class="s" style="left:7560px">
+  <div class="a chrome mono"><span>Fabricio Moura</span><span>08/08</span></div>
+  <div class="a H" style="left:80px;top:170px;width:860px;font-size:112px">Quer entrar <span class="r">no caminho?</span></div>
+  <div class="a" style="left:80px;top:700px;width:920px;height:190px;background:var(--ink);color:var(--paper);display:flex;align-items:center;justify-content:space-between;padding:0 48px">
+    <div><div class="lab" style="font-weight:400;opacity:.6">Comenta aqui</div><div class="H r" style="font-size:110px;line-height:1;margin-top:6px">MENTORIA</div></div>
+    <div class="H" style="font-size:90px;line-height:1">↓</div>
+  </div>
+  <div class="a B" style="left:80px;top:950px;width:880px">Ou toque no link da bio. Eu te chamo pra <b>avaliação gratuita.</b></div>
+</section>
+
+<!-- a linha: um trajeto com estações -->
+<svg id="thread" class="over" width="8640" height="1350" viewBox="0 0 8640 1350">
+  <defs><clipPath id="c6"><rect x="2160" y="0" width="1080" height="1350"/></clipPath></defs>
+  <g id="line" fill="none" stroke-width="22" stroke-linejoin="miter" stroke-linecap="butt">
+    <polyline points="92,620 8540,620 8540,640" />
+  </g>
+</svg>
+</div>
+<script>
+  const g = document.getElementById('line');
+  g.setAttribute('stroke', '#FF4A1C');
+  const blk = g.cloneNode(true); blk.removeAttribute('id'); blk.setAttribute('stroke', '#111111'); blk.setAttribute('clip-path', 'url(#c6)');
+  g.parentNode.appendChild(blk);
+  const ns = 'http://www.w3.org/2000/svg';
+  const dot = document.createElementNS(ns, 'circle');
+  dot.setAttribute('cx', '92'); dot.setAttribute('cy', '620'); dot.setAttribute('r', '22'); dot.setAttribute('fill', '#FF4A1C');
+  g.parentNode.appendChild(dot);
+  const arrow = document.createElementNS(ns, 'path');
+  arrow.setAttribute('d', 'M8505,630 L8575,630 L8540,692 Z'); arrow.setAttribute('fill', '#FF4A1C');
+  g.parentNode.appendChild(arrow);
+</script>
+</body>
+</html>
