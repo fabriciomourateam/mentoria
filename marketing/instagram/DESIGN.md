@@ -41,9 +41,9 @@ Regra: texto nunca encosta na linha; a linha entra num slide na mesma altura em 
 ## Como gerar
 1. Edite `carrossel-XX/index.html` (todo o carrossel é um painel `#pano` de 8640px;
    cada `<section class="s">` é um slide em `left: i*1080px`; a linha é o `<polyline>`).
-2. Imagens: `node marketing/instagram/render.js marketing/instagram/carrossel-XX`
+2. Imagens: `node marketing/instagram/render.cjs marketing/instagram/carrossel-XX`
    (gera `slide-01..08.png` e `pano.png`; precisa do Playwright com Chromium).
-3. PDF para o Canva: `node marketing/instagram/pdf.js marketing/instagram/carrossel-XX`.
+3. PDF para o Canva: `node marketing/instagram/pdf.cjs marketing/instagram/carrossel-XX`.
    No Canva: Criar > Importar arquivo > PDF vira design editável. A importação às vezes
    cola palavras em textos pequenos: confira e corrija (o conector do Canva consegue
    editar o texto direto no design).

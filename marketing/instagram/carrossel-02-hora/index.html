@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{--paper:#EDEAE3;--ink:#111111;--red:#FF4A1C;--mute:rgba(17,17,17,.55)}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#333;font-family:Inter,sans-serif;color:var(--ink)}
+  #pano{position:relative;width:8640px;height:1350px;overflow:hidden}
+  .s{position:absolute;top:0;width:1080px;height:1350px;background:var(--paper);overflow:hidden}
+  .s.red{background:var(--red)}
+  .s.dark{background:var(--ink);color:var(--paper)}
+  .a{position:absolute}
+  .mono{font-family:"Space Mono",monospace;font-size:22px;letter-spacing:.06em;text-transform:uppercase}
+  .chrome{top:58px;left:80px;right:80px;display:flex;justify-content:space-between;color:var(--mute)}
+  .dark .chrome,.dark .foot{color:rgba(237,234,227,.55)}
+  .red .chrome,.red .foot{color:rgba(17,17,17,.7)}
+  .foot{bottom:56px;left:80px;right:80px;display:flex;justify-content:space-between;color:var(--mute)}
+  .foot .go{color:var(--red);font-weight:700}
+  .H{font-family:Anton,sans-serif;text-transform:uppercase;line-height:1.04;letter-spacing:.005em}
+  .r{color:var(--red)}
+  .B{font-size:40px;line-height:1.3;font-weight:500;letter-spacing:-.01em}
+  .B b{font-weight:800}
+  .lab{font-family:"Space Mono",monospace;font-size:22px;letter-spacing:.06em;text-transform:uppercase;font-weight:700}
+  svg#thread{position:absolute;left:0;top:0;pointer-events:none}
+  .over{z-index:3}
+</style>
+</head>
+<body>
+<div id="pano">
+
+<!-- 01 CAPA -->
+<section class="s" style="left:0">
+  <div class="a chrome mono"><span>Fabricio Moura</span><span>01/08</span></div>
+  <div class="a" style="left:80px;top:226px;font-size:46px;font-weight:700;letter-spacing:-.02em">Por que eu parei de vender a minha</div>
+  <div class="a H" style="left:70px;top:300px;font-size:380px;line-height:1">HORA.</div>
+  <div class="a" style="left:80px;top:760px;width:880px;font-size:62px;line-height:1.08;font-weight:800;letter-spacing:-.035em">E por que você deveria pensar nisso <span class="r">também.</span></div>
+  <div class="a lab" style="left:80px;top:1010px;color:var(--mute)">Para treinadores e nutricionistas</div>
+  <div class="a foot mono"><span></span><span class="go">Arraste →</span></div>
+</section>
+
+<!-- 02 agenda = teto -->
+<section class="s" style="left:1080px">
+  <div class="a chrome mono"><span>Fabricio Moura</span><span>02/08</span></div>
+  <div class="a H" style="left:80px;top:130px;width:940px;font-size:86px;line-height:1.14">No modelo por hora, agenda cheia é <span class="r">o seu teto.</span></div>
+  <div class="a lab" style="left:850px;top:446px;color:var(--mute)">Seu teto</div>
+  <div class="a" id="blocks" style="left:88px;top:502px;width:904px;height:280px;display:flex;gap:24px">
+    <i style="flex:1;background:var(--ink)"></i><i style="flex:1;background:var(--ink)"></i><i style="flex:1;background:var(--ink)"></i><i style="flex:1;background:var(--ink)"></i>
+    <i style="flex:1;background:var(--ink)"></i><i style="flex:1;background:var(--ink)"></i><i style="flex:1;background:var(--ink)"></i><i style="flex:1;background:var(--ink)"></i>
+  </div>
+  <div class="a lab" style="left:88px;top:800px;width:904px;display:flex;justify-content:space-between;font-weight:400;color:var(--mute)"><span>08h</span><span>09h</span><span>10h</span><span>11h</span><span>14h</span><span>15h</span><span>16h</span><span>17h</span></div>
+  <div class="a B" style="left:80px;top:900px;width:860px">Cada hora atendida é uma hora vendida. <b>Lotou a agenda, travou o faturamento.</b></div>
+  <div class="a foot mono"><span></span><span class="go">→</span></div>
+</section>
+
+<!-- 03 a conta -->
+<section class="s" style="left:2160px">
+  <div class="a chrome mono"><span>Fabricio Moura</span><span>03/08</span></div>
+  <div class="a lab" style="left:80px;top:220px">Faça a conta</div>
+  <div class="a H" style="left:80px;top:300px;font-size:104px;line-height:1;white-space:nowrap">6 × R$ 100 × 22 dias</div>
+  <div class="a H" style="left:70px;top:540px;font-size:250px;line-height:1;white-space:nowrap">R$ 13.200</div>
+  <div class="a" style="left:80px;top:850px;width:900px;font-size:48px;font-weight:800;letter-spacing:-.03em;line-height:1.1">Isso com a agenda <span class="r">lotada, todo dia.</span></div>
+  <div class="a lab" style="left:80px;top:1150px;font-weight:400;font-size:20px;color:var(--mute)">Exemplo ilustrativo: 6 atendimentos por dia, R$ 100 cada, 22 dias úteis.</div>
+  <div class="a foot mono"><span></span><span class="go">→</span></div>
+</section>
+
+<!-- 04 desmarque (vermelho) -->
+<section class="s red" style="left:3240px">
+  <div class="a chrome mono"><span>Fabricio Moura</span><span>04/08</span></div>
+  <div class="a H" style="left:80px;top:170px;font-size:100px;line-height:1;white-space:nowrap">E quando desmarcam?</div>
+  <div class="a H" style="left:70px;top:375px;font-size:220px;line-height:1;white-space:nowrap;opacity:.55">R$ 13.200</div>
+  <div class="a H" style="left:70px;top:640px;font-size:220px;line-height:1;white-space:nowrap">R$ 8.800</div>
+  <div class="a" style="left:80px;top:990px;width:820px;font-size:44px;font-weight:800;letter-spacing:-.03em;line-height:1.15">1 em cada 3 desmarca. E você ficou lá, esperando.</div>
+  <div class="a foot mono"><span></span><span style="font-weight:700">→</span></div>
+</section>
+
+<!-- 05 online: o teto some -->
+<section class="s" style="left:4320px">
+  <div class="a chrome mono"><span>Fabricio Moura</span><span>05/08</span></div>
+  <div class="a H" style="left:80px;top:150px;width:940px;font-size:116px">No online, <span class="r">o teto some.</span></div>
+  <div class="a" style="left:0;top:700px;width:1080px;border-top:5px dashed rgba(17,17,17,.35)"></div>
+  <div class="a lab" style="left:600px;top:722px;color:var(--mute)">Teto do presencial</div>
+  <div class="a B" style="left:80px;top:1000px;width:900px">O aluno segue o plano no dia a dia dele. Você acompanha de perto, <b>sem depender de horário marcado.</b></div>
+  <div class="a foot mono"><span></span><span class="go">→</span></div>
+</section>
+
+<!-- 06 mais perto -->
+<section class="s" style="left:5400px">
+  <div class="a chrome mono"><span>Fabricio Moura</span><span>06/08</span></div>
+  <div class="a H" style="left:80px;top:150px;width:940px;font-size:116px">Mais perto, <span class="r">não mais longe.</span></div>
+  <div class="a lab" style="left:113px;top:600px">Seg</div>
+  <div class="a lab" style="left:313px;top:600px">Ter</div>
+  <div class="a lab" style="left:513px;top:600px">Qua</div>
+  <div class="a lab" style="left:713px;top:600px">Qui</div>
+  <div class="a lab" style="left:913px;top:600px">Sex</div>
+  <div class="a B" style="left:80px;top:720px;width:900px">O resultado depende do aluno aplicar. No presencial você vê ele uma hora por semana. <b>No online você acompanha a rotina dele de verdade.</b></div>
+  <div class="a foot mono"><span></span><span class="go">→</span></div>
+</section>
+
+<!-- 07 resultado (preto) -->
+<section class="s dark" style="left:6480px">
+  <div class="a chrome mono"><span>Fabricio Moura</span><span>07/08</span></div>
+  <div class="a lab r" style="left:80px;top:150px">O resultado</div>
+  <div class="a H" style="left:80px;top:640px;font-size:100px;line-height:1.04">Mais alunos.<br><span class="r">Mais faturamento.</span><br>Menos horas presas.</div>
+  <div class="a" style="left:80px;top:1040px;width:900px;font-size:30px;line-height:1.35;color:rgba(237,234,227,.75)">Foi assim que eu saí de 30 para mais de 200 alunos em um ano.</div>
+  <div class="a foot mono"><span></span><span class="go">→</span></div>
+</section>
+
+<!-- 08 CTA -->
+<section class="s" style="left:7560px">
+  <div class="a chrome mono"><span>Fabricio Moura</span><span>08/08</span></div>
+  <div class="a H" style="left:80px;top:215px;width:840px;font-size:106px">Quer fazer essa transição <span class="r">do jeito certo?</span></div>
+  <div class="a" style="left:80px;top:700px;width:920px;height:190px;background:var(--ink);color:var(--paper);display:flex;align-items:center;justify-content:space-between;padding:0 48px">
+    <div><div class="lab" style="font-weight:400;opacity:.6">Comenta aqui</div><div class="H r" style="font-size:110px;line-height:1;margin-top:6px">MENTORIA</div></div>
+    <div class="H" style="font-size:90px;line-height:1">↓</div>
+  </div>
+  <div class="a B" style="left:80px;top:950px;width:880px">Eu te chamo no direct pra uma <b>avaliação gratuita</b> do seu cenário.</div>
+</section>
+
+<!-- a linha que atravessa o carrossel -->
+<svg id="thread" class="over" width="8640" height="1350" viewBox="0 0 8640 1350">
+  <defs><clipPath id="c6"><rect x="3240" y="0" width="1080" height="1350"/></clipPath></defs>
+  <g id="line" fill="none" stroke-width="22" stroke-linejoin="miter" stroke-linecap="butt">
+    <!-- 01 risca HORA, 02 vira o teto, 03 linha da soma, 04 risca 13.200 e despenca -->
+    <polyline points="50,490 4240,490 4240,940 4320,940" />
+    <!-- 05 fura o teto, 06 check-ins diários, 07 sobe, 08 seta -->
+    <polyline points="4320,940 4700,940 5020,560 5400,560 5440,560 5513,450 5586,560 5640,560 5713,450 5786,560 5840,560 5913,450 5986,560 6040,560 6113,450 6186,560 6240,560 6313,450 6386,560 6480,560 6730,560 7460,160 8540,160 8540,620" />
+  </g>
+</svg>
+</div>
+<script>
+  const g = document.getElementById('line');
+  g.setAttribute('stroke', '#FF4A1C');
+  const blk = g.cloneNode(true); blk.removeAttribute('id'); blk.setAttribute('stroke', '#111111'); blk.setAttribute('clip-path', 'url(#c6)');
+  g.parentNode.appendChild(blk);
+  const ns = 'http://www.w3.org/2000/svg';
+  const arrow = document.createElementNS(ns, 'path');
+  arrow.setAttribute('d', 'M8505,610 L8575,610 L8540,672 Z'); arrow.setAttribute('fill', '#FF4A1C');
+  g.parentNode.appendChild(arrow);
+</script>
+</body>
+</html>
