@@ -1,8 +1,9 @@
-import { useEffect, useRef, useState } from 'react'
+import { createContext, useCallback, useContext, useEffect, useRef, useState } from 'react'
 import { Link, NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { api } from '../lib/api'
 import { initials } from '../lib/derive'
 import { useStore } from '../lib/store'
+import { CourseNav } from './CourseNav'
 import { Icon } from './Icon'
 
 const NAV = [
@@ -79,42 +80,93 @@ function AvatarMenu() {
   )
 }
 
+const DrawerCtx = createContext<() => void>(() => {})
+/** Abre a gaveta com o mapa do curso (no celular e em telas médias). */
+// eslint-disable-next-line react-refresh/only-export-components
+export const useOpenCourseNav = () => useContext(DrawerCtx)
+
 export function Layout() {
   const { me } = useStore()
   const loc = useLocation()
+  const [drawer, setDrawer] = useState(false)
+  const openDrawer = useCallback(() => setDrawer(true), [])
+
   useEffect(() => {
     window.scrollTo({ top: 0 })
   }, [loc.pathname])
+  useEffect(() => {
+    setDrawer(false)
+  }, [loc.pathname])
+  useEffect(() => {
+    if (!drawer) return
+    const esc = (e: KeyboardEvent) => e.key === 'Escape' && setDrawer(false)
+    document.addEventListener('keydown', esc)
+    document.body.classList.add('no-scroll')
+    return () => {
+      document.removeEventListener('keydown', esc)
+      document.body.classList.remove('no-scroll')
+    }
+  }, [drawer])
 
   return (
-    <>
-      <header className="top">
-        <div className="in">
-          <Link to="/" aria-label="Início">
+    <DrawerCtx.Provider value={openDrawer}>
+      <div className="shell">
+        <aside className="side" aria-label="Mapa do curso">
+          <Link to="/" className="side-brand" aria-label="Início">
             <Brand />
           </Link>
-          <nav className="spaces" aria-label="Principal">
-            {NAV.map((n) => (
-              <NavLink key={n.to} to={n.to} end={n.end}>
-                {n.label}
-              </NavLink>
-            ))}
-          </nav>
-          <div className="rt">
-            {me?.isAdmin && (
-              <Link className="icon-btn" to="/admin" title="Painel do gestor" aria-label="Painel do gestor">
-                <Icon name="settings" />
+          <CourseNav />
+        </aside>
+
+        <div className="shell-main">
+          <header className="top">
+            <div className="in">
+              <button className="icon-btn" onClick={openDrawer} aria-label="Abrir trilhas e aulas" title="Trilhas e aulas">
+                <Icon name="menu" />
+              </button>
+              <Link to="/" aria-label="Início">
+                <Brand />
               </Link>
-            )}
-            <AvatarMenu />
+              <nav className="spaces" aria-label="Principal">
+                {NAV.map((n) => (
+                  <NavLink key={n.to} to={n.to} end={n.end}>
+                    {n.label}
+                  </NavLink>
+                ))}
+              </nav>
+              <div className="rt">
+                {me?.isAdmin && (
+                  <Link className="icon-btn" to="/admin" title="Painel do gestor" aria-label="Painel do gestor">
+                    <Icon name="settings" />
+                  </Link>
+                )}
+                <AvatarMenu />
+              </div>
+            </div>
+          </header>
+          <main className="main">
+            <div className="wrap">
+              <Outlet />
+            </div>
+          </main>
+        </div>
+      </div>
+
+      {drawer && (
+        <div className="drawer-wrap" role="dialog" aria-modal="true" aria-label="Trilhas e aulas">
+          <button className="drawer-bg" aria-label="Fechar" onClick={() => setDrawer(false)} />
+          <div className="drawer">
+            <div className="drawer-hd">
+              <Brand />
+              <button className="icon-btn" onClick={() => setDrawer(false)} aria-label="Fechar">
+                <Icon name="close" />
+              </button>
+            </div>
+            <CourseNav />
           </div>
         </div>
-      </header>
-      <main className="main">
-        <div className="wrap">
-          <Outlet />
-        </div>
-      </main>
+      )}
+
       <nav className="tabbar" aria-label="Principal">
         {NAV.map((n) => (
           <NavLink key={n.to} to={n.to} end={n.end}>
@@ -123,6 +175,6 @@ export function Layout() {
           </NavLink>
         ))}
       </nav>
-    </>
+    </DrawerCtx.Provider>
   )
 }

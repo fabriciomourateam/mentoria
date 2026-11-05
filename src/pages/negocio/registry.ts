@@ -69,3 +69,7 @@ export const isReady = (t: ToolDef) =>
   t.type === 'custom' ? true : t.type === 'guide' ? !!t.guide?.trim() : !!t.schema?.sections.length
 
 export const toolByKey = (key: string) => TOOLS.find((t) => t.key === key)
+
+/** Ferramentas que a aula pede (pela trilha e posição da aula), na ordem do catálogo. */
+export const toolsForLesson = (trackSlug: string | undefined, position: number) =>
+  trackSlug ? TOOLS.filter((t) => isReady(t) && t.lesson?.slug === trackSlug && t.lesson.position === position) : []

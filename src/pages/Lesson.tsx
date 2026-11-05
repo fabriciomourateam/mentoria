@@ -3,6 +3,8 @@ import remarkGfm from 'remark-gfm'
 import { rehypeTableLabels } from '../lib/md-table-labels'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { Icon } from '../components/Icon'
+import { useOpenCourseNav } from '../components/Layout'
+import { toolsForLesson } from './negocio/registry'
 import { CTA, Empty, MaterialRow, Skeleton } from '../components/ui'
 import { isDone, lessonContext, materialsFor } from '../lib/derive'
 import { useStore } from '../lib/store'
@@ -11,6 +13,7 @@ export function LessonPage() {
   const { id } = useParams()
   const nav = useNavigate()
   const { content, progress, saveProgress, toast } = useStore()
+  const openNav = useOpenCourseNav()
   if (!content) return <Skeleton rows={2} h={220} />
   const ctx = id ? lessonContext(content, id) : null
   if (!ctx)
@@ -20,7 +23,8 @@ export function LessonPage() {
       </Empty>
     )
 
-  const { lesson, track, siblings, index, next } = ctx
+  const { lesson, track, siblings, index, prev, next } = ctx
+  const tools = toolsForLesson(track?.slug, lesson.position)
   const p = progress.get(lesson.id)
   const checked = new Set(p?.checked ?? [])
   const items = lesson.checklist ?? []
@@ -72,9 +76,14 @@ export function LessonPage() {
         <b>
           Aula {index} de {siblings.length}
         </b>
+        <button className="map-btn" onClick={openNav}>
+          <Icon name="panel" />
+          Aulas da trilha
+        </button>
       </div>
 
       <div className="lg">
+        <div className="lcol">
         <div className="bezel r" style={{ ['--i' as string]: 1 }}>
           <article className="card lb">
             <span className="tag2">
@@ -97,6 +106,28 @@ export function LessonPage() {
                   <b>Texto completo em produção</b>
                   O objetivo acima já mostra o que você vai entregar. {items.length ? 'Comece pelo checklist abaixo.' : ''}
                 </span>
+              </div>
+            )}
+
+            {tools.length > 0 && (
+              <div className="lt-tools">
+                <h2 className="blk">Faça aqui na plataforma</h2>
+                <p className="blk-sub">Preencha enquanto a aula está fresca. Fica salvo no seu Meu Negócio.</p>
+                {tools.map((t) => (
+                  <Link key={t.key} className="lt-tool" to={`/negocio/${t.key}`}>
+                    <span className="tool-ico">
+                      <Icon name={t.icon} />
+                    </span>
+                    <span className="tx">
+                      <b>{t.title}</b>
+                      <span>{t.desc}</span>
+                    </span>
+                    <span className="go">
+                      Abrir
+                      <Icon name="arrow" />
+                    </span>
+                  </Link>
+                ))}
               </div>
             )}
 
@@ -153,6 +184,31 @@ export function LessonPage() {
               </div>
             </div>
           </article>
+        </div>
+        {(prev || next) && (
+          <nav className="pager r" aria-label="Navegar entre aulas">
+            {prev ? (
+              <Link className="pg" to={`/aula/${prev.id}`}>
+                <span className="ey">
+                  <Icon name="back" />
+                  Anterior
+                </span>
+                <b>{prev.title}</b>
+              </Link>
+            ) : (
+              <span />
+            )}
+            {next && (
+              <Link className="pg nx" to={`/aula/${next.id}`}>
+                <span className="ey">
+                  Próxima
+                  <Icon name="arrow" />
+                </span>
+                <b>{next.title}</b>
+              </Link>
+            )}
+          </nav>
+        )}
         </div>
 
         <aside className="aside r" style={{ ['--i' as string]: 2 }}>

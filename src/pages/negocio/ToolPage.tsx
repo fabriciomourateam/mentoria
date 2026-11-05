@@ -4,6 +4,7 @@ import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import { Link, useParams } from 'react-router-dom'
 import { Icon } from '../../components/Icon'
+import { useOpenCourseNav } from '../../components/Layout'
 import { CTA, Empty, ProgressBar } from '../../components/ui'
 import { rehypeTableLabels } from '../../lib/md-table-labels'
 import { useStore } from '../../lib/store'
@@ -27,6 +28,7 @@ export function ToolPage() {
   const { tool: key } = useParams()
   const { content } = useStore()
   const ws = useWorkspace()
+  const openNav = useOpenCourseNav()
   const tool = key ? toolByKey(key) : undefined
 
   if (!tool || !isReady(tool))
@@ -47,6 +49,12 @@ export function ToolPage() {
         <Link to="/negocio">Meu Negócio</Link>
         <Icon name="chevron" />
         <b>{tool.title}</b>
+        {lesson && (
+          <button className="map-btn" onClick={openNav}>
+            <Icon name="panel" />
+            Aulas da trilha
+          </button>
+        )}
       </div>
       <header className="tool-head r">
         <span className="tool-ico">
@@ -61,7 +69,7 @@ export function ToolPage() {
             {lesson && (
               <Link className="link" to={`/aula/${lesson.id}`}>
                 <Icon name="book" />
-                Rever a aula
+                Rever a aula: {lesson.title}
               </Link>
             )}
           </div>
