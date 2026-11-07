@@ -3,6 +3,7 @@ import remarkGfm from 'remark-gfm'
 import { rehypeTableLabels } from '../lib/md-table-labels'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { Icon } from '../components/Icon'
+import { VideoEmbed } from '../components/VideoEmbed'
 import { useOpenCourseNav } from '../components/Layout'
 import { toolsForLesson } from './negocio/registry'
 import { CTA, Empty, MaterialRow, Skeleton } from '../components/ui'
@@ -91,6 +92,7 @@ export function LessonPage() {
             </span>
             <h1>{lesson.title}</h1>
             {lesson.objective && <p className="lead">{lesson.objective}</p>}
+            {lesson.video_url && <VideoEmbed url={lesson.video_url} title={lesson.title} />}
             <div className="sep" />
 
             {lesson.body_md.trim() ? (

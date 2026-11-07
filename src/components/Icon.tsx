@@ -42,6 +42,7 @@ const P: Record<string, string> = {
   pen: 'M12 20h9M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4z',
   close: 'M6 6l12 12M18 6L6 18',
   menu: 'M4 7h16M4 12h16M4 17h16',
+  play: 'M8 5.5v13l10.5-6.5z',
   panel: 'M4 4h16v16H4zM9 4v16',
   external: 'M14 4h6v6M20 4l-9 9M18 14v6H4V6h6',
 }

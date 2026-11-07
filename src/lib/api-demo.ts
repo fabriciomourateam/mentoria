@@ -283,6 +283,7 @@ export function createDemoApi(): Api {
         body_md: '',
         checklist: [],
         checkpoint_title: null,
+        video_url: null,
         published: true,
       }))
       save()

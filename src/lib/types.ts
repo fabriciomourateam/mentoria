@@ -52,6 +52,8 @@ export interface Lesson {
   body_md: string
   checklist: ChecklistItem[]
   checkpoint_title: string | null
+  /** Link do vídeo da aula (YouTube, Vimeo, Panda, Bunny ou .mp4). */
+  video_url?: string | null
   published: boolean
   updated_at?: string
 }

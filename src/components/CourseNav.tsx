@@ -164,6 +164,11 @@ export function CourseNav() {
                           <Link to={`/aula/${l.id}`} className={`cn-l ${cur ? 'cur' : ''} ${ok ? 'ok' : ''} ${isNext ? 'nx' : ''}`} aria-current={cur ? 'page' : undefined}>
                             <span className="d">{ok ? <Icon name="check" /> : i + 1}</span>
                             <span className="t">{l.title}</span>
+                            {l.video_url && (
+                              <span className="flag vid" title="Tem vídeo">
+                                <Icon name="play" />
+                              </span>
+                            )}
                             {l.checkpoint_title && (
                               <span className="flag" title={`Entrega: ${l.checkpoint_title}`}>
                                 <Icon name="target" />

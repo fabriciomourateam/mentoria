@@ -508,3 +508,6 @@ where lower(email) = 'fabriciomouratreinador@gmail.com';
 -- Conferência: deve listar sua conta com role = admin.
 select p.email, p.role, u.email_confirmed_at is not null as email_confirmado
 from public.profiles p join auth.users u on u.id = p.id;
+
+-- 20261107120000_lessons_video.sql
+alter table public.lessons add column if not exists video_url text;

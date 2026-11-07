@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
+import { parseVideo, VideoEmbed } from '../../components/VideoEmbed'
 import type { ReactNode } from 'react'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
@@ -763,6 +764,7 @@ function LessonForm({
   const [preview, setPreview] = useState(false)
   const [items, setItems] = useState<ChecklistItem[]>(lesson?.checklist ?? [])
   const [checkpoint, setCheckpoint] = useState(lesson?.checkpoint_title ?? '')
+  const [videoUrl, setVideoUrl] = useState(lesson?.video_url ?? '')
   const [published, setPublished] = useState(lesson?.published ?? true)
   const [busy, setBusy] = useState(false)
   const [err, setErr] = useState<string | null>(null)
@@ -785,6 +787,7 @@ function LessonForm({
     setErr(null)
     const t = title.trim()
     if (!t) return setErr('Dê um título para a aula.')
+    if (videoUrl.trim() && !parseVideo(videoUrl)) return setErr('Não reconheci esse link de vídeo. Use o link do YouTube, Vimeo, Panda Video, Bunny ou de um arquivo .mp4.')
     setBusy(true)
     try {
       const clean: ChecklistItem[] = items
@@ -802,6 +805,8 @@ function LessonForm({
         body_md: body,
         checklist: clean,
         checkpoint_title: checkpoint.trim() || null,
+        // Só manda o campo quando há vídeo (ou havia): funciona mesmo antes da coluna existir no banco.
+        ...(videoUrl.trim() || lesson?.video_url ? { video_url: videoUrl.trim() || null } : {}),
         published,
         position,
       })
@@ -865,6 +870,20 @@ function LessonForm({
                 placeholder="Uma frase: o que o aluno entrega ao fim da aula."
               />
             </label>
+            <label className="field">
+              <span>Vídeo da aula (link)</span>
+              <input
+                className="input"
+                value={videoUrl}
+                onChange={(e) => setVideoUrl(e.target.value)}
+                placeholder="Ex.: https://youtu.be/... (YouTube não listado, Vimeo, Panda Video)"
+                inputMode="url"
+              />
+              <small className="muted" style={{ fontSize: 12.5, marginTop: 6, display: 'block' }}>
+                Cole o link do vídeo. Ele aparece no topo da aula, antes do texto.
+              </small>
+            </label>
+            {videoUrl.trim() && parseVideo(videoUrl) && <VideoEmbed url={videoUrl} />}
 
             <div className="field">
               <span>Texto da aula</span>

@@ -3282,3 +3282,34 @@ body.no-scroll {
     grid-column: auto;
   }
 }
+
+/* vídeo da aula */
+.video-embed {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  margin: 20px 0 6px;
+  border-radius: var(--r);
+  overflow: hidden;
+  background: #000;
+  box-shadow: var(--shadow-sm);
+}
+.video-embed.vert {
+  aspect-ratio: 9 / 16;
+  max-width: 380px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.video-embed iframe,
+.video-embed video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+.cn-l .flag.vid {
+  color: var(--muted);
+}
+.cn-l .flag.vid svg.i {
+  fill: currentColor;
+}
