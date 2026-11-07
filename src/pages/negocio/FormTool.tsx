@@ -5,6 +5,19 @@ import { useEntry } from '../../lib/workspace'
 import type { Column, Field, FormSchema, Row } from './forms'
 import { INSIGHTS } from './insights'
 
+const SHORT = new Set(['number', 'money', 'percent', 'select'])
+
+/** Agrupa campos curtos consecutivos (números e seleções) para ficarem lado a lado; o resto fica sozinho. */
+function groupFields(fields: Field[]): Field[][] {
+  const out: Field[][] = []
+  for (const f of fields) {
+    const last = out[out.length - 1]
+    if (SHORT.has(f.kind) && last && SHORT.has(last[0].kind)) last.push(f)
+    else out.push([f])
+  }
+  return out
+}
+
 /** Renderiza uma ficha a partir do schema, com salvamento automático. */
 export function FormTool({ toolKey, schema }: { toolKey: string; schema: FormSchema }) {
   const { data, patch, state, readOnly } = useEntry(toolKey)
@@ -17,13 +30,21 @@ export function FormTool({ toolKey, schema }: { toolKey: string; schema: FormSch
       {Insights && <Insights />}
       <fieldset className="stack ro-fieldset" disabled={readOnly}>
         {schema.sections.map((s, i) => (
-          <section key={s.title} className="card sec r" style={{ ['--i' as string]: i + 1 }}>
+          <section key={s.title} className="card sec tight r" style={{ ['--i' as string]: i + 1 }}>
             <h2>{s.title}</h2>
             {s.intro && <p className="sec-intro">{s.intro}</p>}
-            <div className="sec-fields">
-              {s.fields.map((f) => (
-                <FieldInput key={f.id} field={f} value={data[f.id]} onChange={(v) => patch({ [f.id]: v })} />
-              ))}
+            <div className="sec-fields compact">
+              {groupFields(s.fields).map((g) =>
+                g.length > 1 ? (
+                  <div key={g[0].id} className="fgrid">
+                    {g.map((f) => (
+                      <FieldInput key={f.id} field={f} value={data[f.id]} onChange={(v) => patch({ [f.id]: v })} />
+                    ))}
+                  </div>
+                ) : (
+                  <FieldInput key={g[0].id} field={g[0]} value={data[g[0].id]} onChange={(v) => patch({ [g[0].id]: v })} />
+                ),
+              )}
             </div>
           </section>
         ))}

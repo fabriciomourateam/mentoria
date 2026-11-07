@@ -3,6 +3,7 @@ import { Icon } from '../components/Icon'
 import { CTA, ProgressBar } from '../components/ui'
 import { useStore } from '../lib/store'
 import { useWorkspace } from '../lib/workspace'
+import { Calculators } from './negocio/insights/Calculators'
 import { HubStrip } from './negocio/insights/HubStrip'
 import { useCheckins, useLeadRows } from './negocio/insights/data'
 import { GROUPS, isReady, TOOLS } from './negocio/registry'
@@ -51,6 +52,8 @@ export function Business() {
       </section>
 
       <HubStrip leads={leadRows} checkins={checkins} loaded={leadsLoaded && checkinsLoaded} />
+
+      <Calculators />
 
       {GROUPS.map((g, gi) => {
         const items = tools.filter((t) => t.group === g.id)
