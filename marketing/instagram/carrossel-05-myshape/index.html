@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{--paper:#EDEAE3;--ink:#111111;--red:#FF4A1C;--mute:rgba(17,17,17,.55)}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#333;font-family:Inter,sans-serif;color:var(--ink)}
+  #pano{position:relative;width:8640px;height:1350px;overflow:hidden}
+  .s{position:absolute;top:0;width:1080px;height:1350px;background:var(--paper);overflow:hidden}
+  .s.red{background:var(--red)}
+  .s.dark{background:var(--ink);color:var(--paper)}
+  .a{position:absolute}
+  .mono{font-family:"Space Mono",monospace;font-size:22px;letter-spacing:.06em;text-transform:uppercase}
+  .chrome{top:58px;left:80px;right:80px;display:flex;justify-content:space-between;color:var(--mute)}
+  .dark .chrome,.dark .foot{color:rgba(237,234,227,.55)}
+  .red .chrome,.red .foot{color:rgba(17,17,17,.7)}
+  .foot{bottom:56px;left:80px;right:80px;display:flex;justify-content:space-between;color:var(--mute)}
+  .foot .go{color:var(--red);font-weight:700}
+  .H{font-family:Anton,sans-serif;text-transform:uppercase;line-height:1.04;letter-spacing:.005em}
+  .r{color:var(--red)}
+  .B{font-size:40px;line-height:1.3;font-weight:500;letter-spacing:-.01em}
+  .B b{font-weight:800}
+  .lab{font-family:"Space Mono",monospace;font-size:22px;letter-spacing:.06em;text-transform:uppercase;font-weight:700}
+  svg#thread{position:absolute;left:0;top:0;pointer-events:none}
+  .over{z-index:3}
+  .st{position:absolute;top:582px;left:80px;width:76px;height:76px;border-radius:50%;background:var(--ink);color:var(--paper);display:grid;place-items:center;font-family:Anton,sans-serif;font-size:34px;z-index:5}
+  .red .st{color:var(--red)}
+  .dark .st{background:var(--red);color:var(--ink)}
+  .stl{position:absolute;top:530px;left:180px;z-index:5}
+  .tag{display:inline-block;border:3px solid var(--ink);padding:10px 18px;font-family:"Space Mono",monospace;font-weight:700;font-size:24px;letter-spacing:.06em;text-transform:uppercase;margin:0 10px 12px 0}
+  .ck{display:flex;gap:22px;align-items:baseline;font-size:44px;font-weight:800;letter-spacing:-.03em;margin-bottom:22px}
+  .ck b{font-family:Anton,sans-serif;font-weight:400;color:var(--red);font-size:44px;letter-spacing:0}
+  .tr{display:grid;grid-template-columns:330px 1fr;gap:28px;align-items:baseline;padding:22px 0;border-top:3px solid var(--ink)}
+  .tr .x{color:var(--mute);text-decoration:line-through;text-decoration-thickness:3px;font-weight:600}
+  .tr .ok{font-weight:800;letter-spacing:-.02em}
+  .tr .ok::before{content:"→ ";color:var(--red)}
+  .nd{position:absolute;top:582px;width:76px;height:76px;border-radius:50%;background:var(--ink);color:var(--red);display:grid;place-items:center;font-family:Anton,sans-serif;font-size:34px;z-index:5}
+</style>
+</head>
+<body>
+<div id="pano">
+<section class="s" style="left:0"><div class="a chrome mono"><span>Fabricio Moura</span><span>01/08</span></div>
+  <div class="a" style="left:80px;top:250px;font-size:46px;font-weight:700;letter-spacing:-.02em">Como eu acompanho mais de 200 alunos:</div>
+  <div class="a H" style="left:72px;top:326px;font-size:236px;line-height:1">MYSHAPE.</div>
+  <div class="a" style="left:80px;top:700px;width:900px;font-size:58px;line-height:1.1;font-weight:800;letter-spacing:-.035em">O sistema que eu criei pra minha consultoria <span class="r">não depender do WhatsApp.</span></div>
+  <div class="a lab" style="left:80px;top:1010px;color:var(--mute)">Bastidores da minha consultoria</div>
+  <div class="a foot mono"><span></span><span class="go">Arraste →</span></div>
+</section>
+<section class="s" style="left:1080px"><div class="a chrome mono"><span>Fabricio Moura</span><span>02/08</span></div>
+  <div class="a lab" style="left:80px;top:150px;color:var(--mute)">Foi assim que eu comecei</div>
+  <div class="a H" style="left:80px;top:200px;width:940px;font-size:100px;line-height:1.04">Planilha, PDF e <span class="r">300 mensagens</span> por dia.</div>
+  <div class="a B" style="left:80px;top:720px;width:880px">Funciona com 20 alunos. <b>Com 200, você vira refém do celular</b> e o acompanhamento perde qualidade.</div>
+  <div class="a foot mono"><span></span><span class="go">→</span></div>
+</section>
+<section class="s red" style="left:2160px"><div class="a chrome mono"><span>Fabricio Moura</span><span>03/08</span></div>
+  <div class="a H" style="left:80px;top:150px;width:940px;font-size:120px">Dois lados, um sistema.</div>
+  <div class="nd" style="left:80px">P</div><div class="a lab" style="left:80px;top:530px">Profissional</div>
+  <div class="nd" style="left:924px">A</div><div class="a lab" style="left:868px;top:530px">Aluno</div>
+  <div class="a" style="left:80px;top:720px;width:430px;font-size:36px;line-height:1.25;font-weight:700">Monta dieta e treino, acompanha check-ins e evolução.</div>
+  <div class="a" style="left:570px;top:720px;width:430px;font-size:36px;line-height:1.25;font-weight:700">Recebe tudo num app no celular, todo dia.</div>
+  <div class="a foot mono"><span></span><span style="font-weight:700">→</span></div>
+</section>
+<section class="s" style="left:3240px"><div class="a chrome mono"><span>Fabricio Moura</span><span>04/08</span></div>
+  <div class="a H" style="left:80px;top:150px;width:940px;font-size:96px">O aluno abre o app e <span class="r">sabe o que fazer hoje.</span></div>
+  <div class="a" style="left:80px;top:700px;width:940px"><span class="tag">Dieta do dia</span><span class="tag">Substituições</span><span class="tag">Treino do dia</span><span class="tag">Hidratação</span><span class="tag">Evolução</span></div>
+  <div class="a B" style="left:80px;top:920px;width:880px">Sem PDF perdido na conversa. <b>Sem "qual era o treino de hoje mesmo?"</b></div>
+  <div class="a foot mono"><span></span><span class="go">→</span></div>
+</section>
+<section class="s" style="left:4320px"><div class="a chrome mono"><span>Fabricio Moura</span><span>05/08</span></div>
+  <div class="a H" style="left:80px;top:150px;width:940px;font-size:116px">Desafio, ranking <span class="r">e sequência.</span></div>
+  <div class="a lab" style="left:72px;top:650px;width:960px;display:flex;justify-content:space-between"><span>Seg</span><span>Ter</span><span>Qua</span><span>Qui</span><span>Sex</span><span>Sáb</span><span>Dom</span></div>
+  <div class="a B" style="left:80px;top:760px;width:880px">Aluno engajado aplica. Quem aplica tem resultado. <b>E resultado renova.</b></div>
+  <div class="a foot mono"><span></span><span class="go">→</span></div>
+</section>
+<section class="s dark" style="left:5400px"><div class="a chrome mono"><span>Fabricio Moura</span><span>06/08</span></div>
+  <div class="a lab r" style="left:80px;top:150px">O que muda pra você</div>
+  <div class="a H" style="left:80px;top:640px;width:940px;font-size:110px;line-height:1.04">Menos WhatsApp.<br><span class="r">Mais resultado.</span></div>
+  <div class="a" style="left:80px;top:960px;width:880px;font-size:38px;line-height:1.3;color:rgba(237,234,227,.8)">Eu acompanho de perto sem precisar estar disponível 24 horas.</div>
+  <div class="a foot mono"><span></span><span class="go">→</span></div>
+</section>
+<section class="s" style="left:6480px"><div class="a chrome mono"><span>Fabricio Moura</span><span>07/08</span></div>
+  <div class="a lab" style="left:80px;top:300px">Vem aí</div>
+  <div class="a H" style="left:80px;top:380px;width:940px;font-size:104px">Uma versão pros profissionais <span class="r">da mentoria.</span></div>
+  <div class="a B" style="left:80px;top:800px;width:880px">Estou preparando o MyShape pra quem está comigo usar na própria consultoria, <b>com a sua marca.</b></div>
+  <div class="a foot mono"><span></span><span class="go">→</span></div>
+</section>
+<section class="s" style="left:7560px"><div class="a chrome mono"><span>Fabricio Moura</span><span>08/08</span></div>
+  <div class="a H" style="left:80px;top:250px;width:860px;font-size:106px">Quer ver o MyShape <span class="r">por dentro?</span></div>
+  <div class="a" style="left:80px;top:700px;width:920px;height:190px;background:var(--ink);color:var(--paper);display:flex;align-items:center;justify-content:space-between;padding:0 48px">
+    <div><div class="lab" style="font-weight:400;opacity:.6">Comenta aqui</div><div class="H r" style="font-size:110px;line-height:1;margin-top:6px">MYSHAPE</div></div>
+    <div class="H" style="font-size:90px;line-height:1">↓</div>
+  </div>
+  <div class="a B" style="left:80px;top:950px;width:880px">Eu te mando um vídeo mostrando como ele funciona na minha consultoria.</div>
+</section>
+<svg id="thread" class="over" width="8640" height="1350" viewBox="0 0 8640 1350">
+  <defs><clipPath id="c6"><rect x="2160" y="0" width="1080" height="1350"/></clipPath></defs>
+  <g id="line" fill="none" stroke-width="22" stroke-linejoin="miter" stroke-linecap="butt">
+    <polyline points="92,620 4320,620 4400,620 4430,620 4460,470 4490,620 4570,620 4600,470 4630,620 4710,620 4740,470 4770,620 4850,620 4880,470 4910,620 4990,620 5020,470 5050,620 5130,620 5160,470 5190,620 5270,620 5300,470 5330,620 5400,620 5640,620 6400,160 8540,160 8540,620" />
+  </g>
+</svg>
+</div>
+<script>
+  const g = document.getElementById('line');
+  g.setAttribute('stroke', '#FF4A1C');
+  const blk = g.cloneNode(true); blk.removeAttribute('id'); blk.setAttribute('stroke', '#111111'); blk.setAttribute('clip-path', 'url(#c6)');
+  g.parentNode.appendChild(blk);
+  const ns = 'http://www.w3.org/2000/svg';
+  const dot = document.createElementNS(ns, 'circle'); dot.setAttribute('cx','92'); dot.setAttribute('cy','620'); dot.setAttribute('r','22'); dot.setAttribute('fill','#FF4A1C'); g.parentNode.appendChild(dot);
+  const arrow = document.createElementNS(ns, 'path');
+  arrow.setAttribute('d', 'M8505,610 L8575,610 L8540,672 Z'); arrow.setAttribute('fill', '#FF4A1C');
+  g.parentNode.appendChild(arrow);
+</script>
+</body>
+</html>

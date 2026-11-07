@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{--paper:#EDEAE3;--ink:#111111;--red:#FF4A1C;--mute:rgba(17,17,17,.55)}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#333;font-family:Inter,sans-serif;color:var(--ink)}
+  #pano{position:relative;width:8640px;height:1350px;overflow:hidden}
+  .s{position:absolute;top:0;width:1080px;height:1350px;background:var(--paper);overflow:hidden}
+  .s.red{background:var(--red)}
+  .s.dark{background:var(--ink);color:var(--paper)}
+  .a{position:absolute}
+  .mono{font-family:"Space Mono",monospace;font-size:22px;letter-spacing:.06em;text-transform:uppercase}
+  .chrome{top:58px;left:80px;right:80px;display:flex;justify-content:space-between;color:var(--mute)}
+  .dark .chrome,.dark .foot{color:rgba(237,234,227,.55)}
+  .red .chrome,.red .foot{color:rgba(17,17,17,.7)}
+  .foot{bottom:56px;left:80px;right:80px;display:flex;justify-content:space-between;color:var(--mute)}
+  .foot .go{color:var(--red);font-weight:700}
+  .H{font-family:Anton,sans-serif;text-transform:uppercase;line-height:1.04;letter-spacing:.005em}
+  .r{color:var(--red)}
+  .B{font-size:40px;line-height:1.3;font-weight:500;letter-spacing:-.01em}
+  .B b{font-weight:800}
+  .lab{font-family:"Space Mono",monospace;font-size:22px;letter-spacing:.06em;text-transform:uppercase;font-weight:700}
+  svg#thread{position:absolute;left:0;top:0;pointer-events:none}
+  .over{z-index:3}
+  .st{position:absolute;top:582px;left:80px;width:76px;height:76px;border-radius:50%;background:var(--ink);color:var(--paper);display:grid;place-items:center;font-family:Anton,sans-serif;font-size:34px;z-index:5}
+  .red .st{color:var(--red)}
+  .dark .st{background:var(--red);color:var(--ink)}
+  .stl{position:absolute;top:530px;left:180px;z-index:5}
+  .tag{display:inline-block;border:3px solid var(--ink);padding:10px 18px;font-family:"Space Mono",monospace;font-weight:700;font-size:24px;letter-spacing:.06em;text-transform:uppercase;margin:0 10px 12px 0}
+  .ck{display:flex;gap:22px;align-items:baseline;font-size:44px;font-weight:800;letter-spacing:-.03em;margin-bottom:22px}
+  .ck b{font-family:Anton,sans-serif;font-weight:400;color:var(--red);font-size:44px;letter-spacing:0}
+  .tr{display:grid;grid-template-columns:330px 1fr;gap:28px;align-items:baseline;padding:22px 0;border-top:3px solid var(--ink)}
+  .tr .x{color:var(--mute);text-decoration:line-through;text-decoration-thickness:3px;font-weight:600}
+  .tr .ok{font-weight:800;letter-spacing:-.02em}
+  .tr .ok::before{content:"→ ";color:var(--red)}
+  .nd{position:absolute;top:582px;width:76px;height:76px;border-radius:50%;background:var(--ink);color:var(--red);display:grid;place-items:center;font-family:Anton,sans-serif;font-size:34px;z-index:5}
+</style>
+</head>
+<body>
+<div id="pano">
+<section class="s" style="left:0"><div class="a chrome mono"><span>Fabricio Moura</span><span>01/08</span></div>
+  <div class="a" style="left:80px;top:226px;font-size:46px;font-weight:700;letter-spacing:-.02em">Você está postando pro seu</div>
+  <div class="a H" style="left:70px;top:325px;font-size:330px;line-height:1">COLEGA.</div>
+  <div class="a" style="left:80px;top:760px;width:900px;font-size:58px;line-height:1.1;font-weight:800;letter-spacing:-.035em">Quem paga é o <span class="r">aluno.</span> E ele não fala a sua língua.</div>
+  <div class="a lab" style="left:80px;top:1010px;color:var(--mute)">O erro nº 1 de quem começa no digital</div>
+  <div class="a foot mono"><span></span><span class="go">Arraste →</span></div>
+</section>
+<section class="s" style="left:1080px"><div class="a chrome mono"><span>Fabricio Moura</span><span>02/08</span></div>
+  <div class="a lab" style="left:80px;top:300px;color:var(--mute)">O que você posta</div>
+  <div class="a H" style="left:70px;top:410px;font-size:160px;line-height:1;white-space:nowrap;opacity:.85">PERIODIZAÇÃO</div>
+  <div class="a H" style="left:80px;top:660px;width:900px;font-size:92px">O que o aluno entende: <span class="r">nada.</span></div>
+  <div class="a B" style="left:80px;top:920px;width:880px">Ele não se vê no post e passa reto. <b>Quem curte é outro profissional.</b></div>
+  <div class="a foot mono"><span></span><span class="go">→</span></div>
+</section>
+<section class="s red" style="left:2160px"><div class="a chrome mono"><span>Fabricio Moura</span><span>03/08</span></div>
+  <div class="a lab" style="left:80px;top:140px">O que funciona</div>
+  <div class="a H" style="left:80px;top:188px;width:940px;font-size:88px;line-height:1.04">Treino de 40 minutos que cabe na sua semana.</div>
+  <div class="a" style="left:80px;top:570px;font-size:50px;font-weight:800;letter-spacing:-.03em">Mesma técnica. Outra língua.</div>
+  <div class="a" style="left:80px;top:700px;width:880px;font-size:40px;line-height:1.3;font-weight:500">O aluno não compra o método. Compra o que muda na rotina dele.</div>
+  <div class="a foot mono"><span></span><span style="font-weight:700">→</span></div>
+</section>
+<section class="s" style="left:3240px"><div class="a chrome mono"><span>Fabricio Moura</span><span>04/08</span></div>
+  <div class="a H" style="left:80px;top:150px;width:940px;font-size:150px;line-height:1">A regra.</div>
+  <div class="a" style="left:80px;top:570px;width:920px">
+    <div class="ck"><b>1</b>Fale da dor, não do método.</div>
+    <div class="ck"><b>2</b>Fale da rotina dele, não da ciência.</div>
+    <div class="ck"><b>3</b>Mostre o resultado na vida, não no exame.</div>
+  </div>
+  <div class="a B" style="left:80px;top:920px;width:880px">O conhecimento técnico continua todo lá. <b>Ele só muda de lugar.</b></div>
+  <div class="a foot mono"><span></span><span class="go">→</span></div>
+</section>
+<section class="s" style="left:4320px"><div class="a chrome mono"><span>Fabricio Moura</span><span>05/08</span></div>
+  <div class="a H" style="left:80px;top:150px;width:940px;font-size:120px;white-space:nowrap">Em vez de… <span class="r">diga.</span></div>
+  <div class="a" style="left:80px;top:540px;width:920px;font-size:34px;line-height:1.25">
+    <div class="tr"><span class="x">Déficit calórico</span><span class="ok">Comer bem e secar sem passar fome</span></div>
+    <div class="tr"><span class="x">Hipertrofia</span><span class="ok">Ganhar forma e firmeza</span></div>
+    <div class="tr"><span class="x">Periodização</span><span class="ok">Treino que evolui toda semana</span></div>
+    <div class="tr"><span class="x">Adesão à dieta</span><span class="ok">Conseguir manter, até no fim de semana</span></div>
+  </div>
+  <div class="a foot mono"><span></span><span class="go">→</span></div>
+</section>
+<section class="s dark" style="left:5400px"><div class="a chrome mono"><span>Fabricio Moura</span><span>06/08</span></div>
+  <div class="a lab r" style="left:80px;top:150px">Então onde fica o técnico?</div>
+  <div class="a H" style="left:80px;top:620px;width:940px;font-size:132px">O técnico fica <span class="r">na entrega.</span></div>
+  <div class="a" style="left:80px;top:960px;width:880px;font-size:38px;line-height:1.3;color:rgba(237,234,227,.8)">É ele que faz o aluno ter resultado e renovar. No post, ele só atrapalha a venda.</div>
+  <div class="a foot mono"><span></span><span class="go">→</span></div>
+</section>
+<section class="s" style="left:6480px"><div class="a chrome mono"><span>Fabricio Moura</span><span>07/08</span></div>
+  <div class="a lab" style="left:80px;top:300px">Faz o teste agora</div>
+  <div class="a H" style="left:80px;top:380px;width:940px;font-size:110px">Sua mãe entenderia o seu último post?</div>
+  <div class="a B" style="left:80px;top:800px;width:880px">Se não, reescreva com as palavras que o aluno usa quando te manda mensagem. <b>Elas já estão no seu WhatsApp.</b></div>
+  <div class="a foot mono"><span></span><span class="go">→</span></div>
+</section>
+<section class="s" style="left:7560px"><div class="a chrome mono"><span>Fabricio Moura</span><span>08/08</span></div>
+  <div class="a H" style="left:80px;top:250px;width:860px;font-size:106px">Quer criar conteúdo que <span class="r">vende?</span></div>
+  <div class="a" style="left:80px;top:700px;width:920px;height:190px;background:var(--ink);color:var(--paper);display:flex;align-items:center;justify-content:space-between;padding:0 48px">
+    <div><div class="lab" style="font-weight:400;opacity:.6">Comenta aqui</div><div class="H r" style="font-size:110px;line-height:1;margin-top:6px">MENTORIA</div></div>
+    <div class="H" style="font-size:90px;line-height:1">↓</div>
+  </div>
+  <div class="a B" style="left:80px;top:950px;width:880px">Eu te chamo pra uma <b>avaliação gratuita</b> do seu perfil e do seu cenário.</div>
+</section>
+<svg id="thread" class="over" width="8640" height="1350" viewBox="0 0 8640 1350">
+  <defs><clipPath id="c6"><rect x="2160" y="0" width="1080" height="1350"/></clipPath></defs>
+  <g id="line" fill="none" stroke-width="22" stroke-linejoin="miter" stroke-linecap="butt">
+    <polyline points="50,490 5600,490 6400,160 8540,160 8540,620" />
+  </g>
+</svg>
+</div>
+<script>
+  const g = document.getElementById('line');
+  g.setAttribute('stroke', '#FF4A1C');
+  const blk = g.cloneNode(true); blk.removeAttribute('id'); blk.setAttribute('stroke', '#111111'); blk.setAttribute('clip-path', 'url(#c6)');
+  g.parentNode.appendChild(blk);
+  const ns = 'http://www.w3.org/2000/svg';
+  const arrow = document.createElementNS(ns, 'path');
+  arrow.setAttribute('d', 'M8505,610 L8575,610 L8540,672 Z'); arrow.setAttribute('fill', '#FF4A1C');
+  g.parentNode.appendChild(arrow);
+</script>
+</body>
+</html>
