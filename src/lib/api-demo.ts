@@ -1,6 +1,21 @@
 import type { Api, AuthUser } from './api'
 import { buildDemoContent } from './demo-seed'
-import type { AppSettings, Enrollment, Lead, Lesson, Material, Profile, Progress, Track, WorkspaceEntry } from './types'
+import { addDays, weekStart } from './dates'
+import type {
+  AppSettings,
+  Call,
+  CallQuestion,
+  CheckpointReview,
+  Enrollment,
+  Lead,
+  Lesson,
+  Material,
+  Profile,
+  Progress,
+  Track,
+  WeeklyCheckin,
+  WorkspaceEntry,
+} from './types'
 
 // Modo demonstração: tudo fica no navegador (localStorage). Serve para ver e testar
 // a plataforma antes do Supabase existir. Regras do login de teste:
@@ -21,6 +36,10 @@ interface DemoDb {
   session: AuthUser | null
   workspace?: WorkspaceEntry[]
   leads?: Lead[]
+  reviews?: CheckpointReview[]
+  checkins?: WeeklyCheckin[]
+  calls?: Call[]
+  questions?: CallQuestion[]
 }
 
 const KEY = 'mentoria-demo-v1'
@@ -74,8 +93,42 @@ function load(): DemoDb {
   return seed()
 }
 
+function demoCalls(): Call[] {
+  const at = (days: number, h: number) => {
+    const d = new Date(Date.now() + days * 864e5)
+    d.setUTCHours(h + 3, 0, 0, 0) // h em São Paulo
+    return d.toISOString()
+  }
+  return [
+    { id: 'call-1', title: 'Call mensal: oferta e preço', starts_at: at(-25, 20), meet_url: 'https://meet.google.com/abc-defg-hij', recording_url: 'https://youtu.be/dQw4w9WgXcQ', agenda: 'Revisão das ofertas da turma e dúvidas de precificação.', created_at: now() },
+    { id: 'call-2', title: 'Call mensal: vendas e follow-up', starts_at: at(5, 20), meet_url: 'https://meet.google.com/abc-defg-hij', recording_url: null, agenda: 'Script de vendas, objeções mais comuns e rotina de follow-up.', created_at: now() },
+  ]
+}
+
+function demoCheckins(userId: string): WeeklyCheckin[] {
+  const base = weekStart()
+  return Array.from({ length: 8 }, (_, i) => {
+    const w = addDays(base, (i - 8) * 7)
+    return {
+      id: `ck-${userId}-${i}`,
+      user_id: userId,
+      week_start: w,
+      leads: 6 + i * 2,
+      conversas: 3 + i,
+      vendas: Math.floor(i / 2),
+      alunos_ativos: 18 + i * 2,
+      faturamento: 1800 + i * 450,
+      nota: null,
+      created_at: now(),
+      updated_at: now(),
+    }
+  })
+}
+
 export function createDemoApi(): Api {
   let db = load()
+  if (!db.calls) db.calls = demoCalls()
+  if (!db.checkins) db.checkins = demoCheckins('u-0')
   const listeners = new Set<(u: AuthUser | null) => void>()
   const save = () => {
     try {
@@ -248,6 +301,96 @@ export function createDemoApi(): Api {
     },
     async deleteLead(id) {
       db.leads = (db.leads ?? []).filter((l) => l.id !== id)
+      save()
+    },
+
+    async listReviews(userId) {
+      const rows = db.reviews ?? []
+      const mine = userId ? rows.filter((r) => r.user_id === userId) : isAdmin() ? rows : rows.filter((r) => r.user_id === me())
+      return wait([...mine].sort((a, b) => b.submitted_at.localeCompare(a.submitted_at)))
+    },
+    async submitReview(lessonId, note) {
+      const id = me()
+      db.reviews = db.reviews ?? []
+      const i = db.reviews.findIndex((r) => r.user_id === id && r.lesson_id === lessonId)
+      const row: CheckpointReview = {
+        id: i >= 0 ? db.reviews[i].id : rid(),
+        user_id: id,
+        lesson_id: lessonId,
+        status: 'pending',
+        student_note: note.trim() || null,
+        mentor_note: i >= 0 ? db.reviews[i].mentor_note : null,
+        submitted_at: now(),
+        reviewed_at: null,
+      }
+      if (i >= 0) db.reviews[i] = row
+      else db.reviews.push(row)
+      save()
+      return wait(row)
+    },
+    async reviewCheckpoint(rid_, status, note) {
+      if (!isAdmin()) throw new Error('Só o mentor revisa.')
+      const r = (db.reviews ?? []).find((x) => x.id === rid_)
+      if (!r) throw new Error('Entrega não encontrada.')
+      Object.assign(r, { status, mentor_note: note.trim() || null, reviewed_at: now() })
+      save()
+      return wait(r)
+    },
+
+    async listCheckins(userId) {
+      const id = userId ?? me()
+      return wait((db.checkins ?? []).filter((c) => c.user_id === id).sort((a, b) => a.week_start.localeCompare(b.week_start)))
+    },
+    async saveCheckin(c) {
+      const id = me()
+      db.checkins = db.checkins ?? []
+      const i = db.checkins.findIndex((x) => x.user_id === id && x.week_start === c.week_start)
+      const stamp = now()
+      const row: WeeklyCheckin =
+        i >= 0 ? { ...db.checkins[i], ...c, updated_at: stamp } : { id: rid(), user_id: id, ...c, created_at: stamp, updated_at: stamp }
+      if (i >= 0) db.checkins[i] = row
+      else db.checkins.push(row)
+      save()
+      return wait(row)
+    },
+
+    async listCalls() {
+      return wait([...(db.calls ?? [])].sort((a, b) => a.starts_at.localeCompare(b.starts_at)))
+    },
+    async saveCall(c) {
+      if (!isAdmin()) throw new Error('Só o mentor edita as calls.')
+      db.calls = db.calls ?? []
+      const row = upsert(db.calls, c, () => ({
+        id: '',
+        title: c.title,
+        starts_at: c.starts_at,
+        meet_url: null,
+        recording_url: null,
+        agenda: null,
+        created_at: now(),
+      }))
+      save()
+      return wait(row)
+    },
+    async deleteCall(id) {
+      db.calls = (db.calls ?? []).filter((c) => c.id !== id)
+      db.questions = (db.questions ?? []).filter((q) => q.call_id !== id)
+      save()
+    },
+    async listCallQuestions(callId) {
+      let rows = db.questions ?? []
+      if (!isAdmin()) rows = rows.filter((q) => q.user_id === me())
+      if (callId) rows = rows.filter((q) => q.call_id === callId)
+      return wait([...rows].sort((a, b) => a.created_at.localeCompare(b.created_at)))
+    },
+    async askQuestion(callId, question) {
+      const row: CallQuestion = { id: rid(), call_id: callId, user_id: me(), question: question.trim(), created_at: now() }
+      db.questions = [...(db.questions ?? []), row]
+      save()
+      return wait(row)
+    },
+    async deleteQuestion(id) {
+      db.questions = (db.questions ?? []).filter((q) => q.id !== id)
       save()
     },
 

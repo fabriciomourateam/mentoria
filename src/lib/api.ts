@@ -1,5 +1,10 @@
 import type {
   AppSettings,
+  Call,
+  CallQuestion,
+  CheckinInput,
+  CheckpointReview,
+  WeeklyCheckin,
   EnrollmentStatus,
   Lead,
   Lesson,
@@ -54,6 +59,28 @@ export interface Api {
   listLeads(userId?: string): Promise<Lead[]>
   saveLead(l: Partial<Lead> & { name: string }): Promise<Lead>
   deleteLead(id: string): Promise<void>
+
+  // revisão das entregas. Aluno: só as dele. Admin: todas (ou de um aluno, com userId).
+  listReviews(userId?: string): Promise<CheckpointReview[]>
+  submitReview(lessonId: string, note: string): Promise<CheckpointReview>
+  /** Só o admin. */
+  reviewCheckpoint(id: string, status: 'approved' | 'changes', note: string): Promise<CheckpointReview>
+
+  // check-in semanal (ordem: semana mais antiga primeiro). userId só para o admin.
+  listCheckins(userId?: string): Promise<WeeklyCheckin[]>
+  /** Cria ou atualiza o check-in da semana (uma linha por semana). */
+  saveCheckin(c: CheckinInput): Promise<WeeklyCheckin>
+
+  // calls ao vivo (ordem: mais antiga primeiro)
+  listCalls(): Promise<Call[]>
+  /** Só o admin. */
+  saveCall(c: Partial<Call> & { title: string; starts_at: string }): Promise<Call>
+  /** Só o admin. */
+  deleteCall(id: string): Promise<void>
+  /** Aluno: só as dele. Admin: todas. */
+  listCallQuestions(callId?: string): Promise<CallQuestion[]>
+  askQuestion(callId: string, question: string): Promise<CallQuestion>
+  deleteQuestion(id: string): Promise<void>
 
   // admin
   saveTrack(t: Partial<Track> & { title: string }): Promise<Track>

@@ -1,6 +1,7 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './styles.css'
+import './components/charts.css'
 import App from './App.tsx'
 import { StoreProvider } from './lib/store.tsx'
 import { WorkspaceProvider } from './lib/workspace.tsx'

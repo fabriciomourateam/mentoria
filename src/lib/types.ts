@@ -116,3 +116,53 @@ export interface WorkspaceEntry {
   data: Record<string, unknown>
   updated_at: string
 }
+
+export type ReviewStatus = 'pending' | 'approved' | 'changes'
+
+/** Entrega (checkpoint) enviada para o mentor revisar. Uma por aluno e aula. */
+export interface CheckpointReview {
+  id: string
+  user_id: string
+  lesson_id: string
+  status: ReviewStatus
+  student_note: string | null
+  mentor_note: string | null
+  submitted_at: string
+  reviewed_at: string | null
+}
+
+/** Números da semana do aluno. week_start = segunda-feira (YYYY-MM-DD, dia de São Paulo). */
+export interface WeeklyCheckin {
+  id: string
+  user_id: string
+  week_start: string
+  leads: number
+  conversas: number
+  vendas: number
+  alunos_ativos: number
+  faturamento: number | null
+  nota: string | null
+  created_at: string
+  updated_at: string
+}
+
+export type CheckinInput = Pick<WeeklyCheckin, 'week_start' | 'leads' | 'conversas' | 'vendas' | 'alunos_ativos' | 'faturamento' | 'nota'>
+
+/** Call ao vivo da turma. starts_at em ISO (UTC); exibir sempre em horário de São Paulo. */
+export interface Call {
+  id: string
+  title: string
+  starts_at: string
+  meet_url: string | null
+  recording_url: string | null
+  agenda: string | null
+  created_at: string
+}
+
+export interface CallQuestion {
+  id: string
+  call_id: string
+  user_id: string
+  question: string
+  created_at: string
+}

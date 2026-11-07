@@ -1,6 +1,21 @@
 import { createClient } from '@supabase/supabase-js'
 import type { Api, AuthUser } from './api'
-import type { AppSettings, Enrollment, Lead, Lesson, Material, Profile, Progress, StudentRow, Track, WorkspaceEntry } from './types'
+import type {
+  AppSettings,
+  Call,
+  CallQuestion,
+  CheckpointReview,
+  Enrollment,
+  Lead,
+  Lesson,
+  Material,
+  Profile,
+  Progress,
+  StudentRow,
+  Track,
+  WeeklyCheckin,
+  WorkspaceEntry,
+} from './types'
 
 function must<T>(res: { data: T | null; error: { message: string } | null }): T {
   if (res.error) throw new Error(res.error.message)
@@ -161,6 +176,62 @@ export function createSupabaseApi(url: string, key: string): Api {
     },
     async deleteLead(id) {
       must(await sb.from('leads').delete().eq('id', id))
+    },
+
+    async listReviews(userId) {
+      let q = sb.from('checkpoint_reviews').select('*').order('submitted_at', { ascending: false })
+      if (userId) q = q.eq('user_id', userId)
+      return must(await q) as CheckpointReview[]
+    },
+    async submitReview(lessonId, note) {
+      return must(await sb.rpc('submit_checkpoint', { p_lesson: lessonId, p_note: note })) as CheckpointReview
+    },
+    async reviewCheckpoint(id, status, note) {
+      return must(await sb.rpc('review_checkpoint', { p_id: id, p_status: status, p_note: note })) as CheckpointReview
+    },
+
+    async listCheckins(userId) {
+      const id = userId ?? (await uid())
+      return must(
+        await sb.from('weekly_checkins').select('*').eq('user_id', id).order('week_start', { ascending: true }),
+      ) as WeeklyCheckin[]
+    },
+    async saveCheckin(c) {
+      const id = await uid()
+      return must(
+        await sb
+          .from('weekly_checkins')
+          .upsert({ ...c, user_id: id }, { onConflict: 'user_id,week_start' })
+          .select()
+          .single(),
+      ) as WeeklyCheckin
+    },
+
+    async listCalls() {
+      return must(await sb.from('calls').select('*').order('starts_at', { ascending: true })) as Call[]
+    },
+    async saveCall(c) {
+      const row: Partial<Call> = { ...c }
+      if (!row.id) delete row.id
+      delete row.created_at
+      return must(await sb.from('calls').upsert(row).select().single()) as Call
+    },
+    async deleteCall(id) {
+      must(await sb.from('calls').delete().eq('id', id))
+    },
+    async listCallQuestions(callId) {
+      let q = sb.from('call_questions').select('*').order('created_at', { ascending: true })
+      if (callId) q = q.eq('call_id', callId)
+      return must(await q) as CallQuestion[]
+    },
+    async askQuestion(callId, question) {
+      const id = await uid()
+      return must(
+        await sb.from('call_questions').insert({ call_id: callId, user_id: id, question: question.trim() }).select().single(),
+      ) as CallQuestion
+    },
+    async deleteQuestion(id) {
+      must(await sb.from('call_questions').delete().eq('id', id))
     },
 
     async saveTrack(t) {
