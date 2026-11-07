@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { NextCallCard } from './calls/NextCallCard'
 import { CheckinCard } from './checkin/CheckinCard'
 import { Icon, TRACK_ICON } from '../components/Icon'
 import { CTA, Empty, ProgressBar, Skeleton } from '../components/ui'
@@ -151,6 +152,7 @@ export function Home() {
       </div>
       <div className="week-grid">
         <CheckinCard />
+        <NextCallCard />
       </div>
 
       <div className="sh">

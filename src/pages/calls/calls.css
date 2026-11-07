@@ -1,0 +1,194 @@
+/* Calls ao vivo (aluno + Home) */
+.call-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ff5d5d;
+  box-shadow: 0 0 0 0 rgba(255, 93, 93, 0.7);
+  animation: callPulse 1.6s infinite;
+}
+@keyframes callPulse {
+  70% {
+    box-shadow: 0 0 0 9px rgba(255, 93, 93, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 93, 93, 0);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .call-dot {
+    animation: none;
+  }
+}
+.call-hero {
+  margin-bottom: 18px;
+}
+.call-hero .call-when {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  font-weight: 600;
+  font-size: 15px;
+}
+.call-hero .call-when svg.i {
+  width: 18px;
+  height: 18px;
+}
+.call-hero .call-agenda {
+  white-space: pre-line;
+}
+.call-hero.is-live {
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.55), 0 24px 50px -30px rgba(var(--accent-rgb), 0.9);
+}
+.call-note {
+  font-size: 13px;
+  opacity: 0.85;
+}
+.call-q {
+  padding: 24px;
+  margin-bottom: 28px;
+}
+.call-q h2,
+.call-list h2 {
+  font-size: 20px;
+}
+.call-q > .muted {
+  margin: 4px 0 14px;
+  font-size: 14px;
+}
+.call-q-act {
+  margin-top: 12px;
+}
+.call-qlist {
+  list-style: none;
+  margin: 18px 0 0;
+  padding: 0;
+}
+.call-qlist li {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 12px 14px;
+  background: var(--card-2);
+  border-radius: 13px;
+  font-size: 14.5px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+.call-qlist li + li {
+  margin-top: 8px;
+}
+.call-x {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  color: var(--muted);
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+.call-x:hover {
+  color: var(--danger);
+  background: var(--card);
+}
+.call-x svg.i {
+  width: 16px;
+  height: 16px;
+}
+.call-list h2 {
+  margin-bottom: 14px;
+}
+.call-past-h {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 18px;
+  background: transparent;
+  border: 0;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  font: inherit;
+}
+.call-past-h .tx {
+  flex: 1;
+  min-width: 0;
+}
+.call-past-h .tx b {
+  display: block;
+  font-size: 15px;
+  font-weight: 600;
+}
+.call-past-h .tx span {
+  display: block;
+  font-size: 12.5px;
+  color: var(--muted);
+}
+.call-chev {
+  display: grid;
+  transition: transform 0.3s var(--ease2);
+}
+.call-chev.open {
+  transform: rotate(90deg);
+}
+.call-past-b {
+  padding: 0 18px 18px;
+}
+.call-past-b .muted {
+  font-size: 14px;
+  margin-bottom: 12px;
+  white-space: pre-line;
+}
+
+/* Card da Home */
+.nextcall {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 18px;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+}
+.nextcall .tx {
+  flex: 1;
+  min-width: 180px;
+}
+.nextcall .tx b {
+  display: block;
+  font-size: 15.5px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+.nextcall .nc-ey {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent-ink);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.nextcall .nc-when {
+  display: block;
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+.nextcall.live {
+  border-color: var(--accent);
+  background: var(--accent-tint);
+}
+@media (max-width: 560px) {
+  .nextcall > .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}

@@ -1,0 +1,138 @@
+.ac-form {
+  padding: 24px;
+  margin-bottom: 18px;
+}
+.ac-form h2 {
+  font-size: 20px;
+  margin-bottom: 14px;
+}
+.ac-two {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 14px;
+}
+.ac-two .field + .field {
+  margin-top: 0;
+}
+.ac-err {
+  margin-top: 12px;
+  color: var(--danger);
+  font-size: 13.5px;
+}
+.ac-acts {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.ac-form .ac-acts {
+  margin-top: 18px;
+  justify-content: flex-end;
+}
+.ac-sec {
+  margin-bottom: 18px;
+  overflow: hidden;
+}
+.ac-h {
+  padding: 16px 18px 6px;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+}
+.ac-item {
+  padding: 14px 18px;
+  border-top: 1px solid var(--line);
+}
+.ac-h + .ac-item {
+  border-top: none;
+}
+.ac-main {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.ac-main .tx {
+  flex: 1;
+  min-width: 220px;
+}
+.ac-main .tx b {
+  display: block;
+  font-size: 15px;
+  font-weight: 600;
+}
+.ac-main .tx > span {
+  display: block;
+  font-size: 13px;
+  color: var(--muted);
+}
+.ac-pills {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+.ac-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+  padding: 4px 0;
+  background: none;
+  border: 0;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink2);
+  cursor: pointer;
+}
+.ac-chev {
+  display: grid;
+  transition: transform 0.3s var(--ease2);
+}
+.ac-chev svg.i {
+  width: 14px;
+  height: 14px;
+}
+.ac-chev.open {
+  transform: rotate(90deg);
+}
+.ac-qs {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+}
+.ac-qs li {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 10px 12px;
+  background: var(--card-2);
+  border-radius: 12px;
+  font-size: 14px;
+}
+.ac-qs li + li {
+  margin-top: 8px;
+}
+.ac-qs li b {
+  font-weight: 600;
+  margin-right: 8px;
+}
+.ac-qs li small {
+  color: var(--muted);
+  font-size: 12px;
+}
+.ac-qs li p {
+  margin-top: 4px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+@media (max-width: 560px) {
+  .ac-two {
+    grid-template-columns: 1fr;
+  }
+}

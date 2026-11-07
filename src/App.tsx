@@ -5,10 +5,12 @@ import { useStore } from './lib/store'
 import { AdminLayout } from './pages/admin/AdminLayout'
 import { AdminAppearance } from './pages/admin/AdminAppearance'
 import { AdminContent, AdminLessonEdit, AdminTrackEdit } from './pages/admin/AdminContent'
+import { AdminCalls } from './pages/admin/AdminCalls'
 import { AdminReviews } from './pages/admin/AdminReviews'
 import { AdminStudents } from './pages/admin/AdminStudents'
 import { AdminStudentView } from './pages/admin/AdminStudentView'
 import { Business } from './pages/Business'
+import { CallsPage } from './pages/calls/CallsPage'
 import { CheckinPage } from './pages/checkin/CheckinPage'
 import { ToolPage } from './pages/negocio/ToolPage'
 import { Home } from './pages/Home'
@@ -81,6 +83,7 @@ export default function App() {
           <Route path="aula/:id" element={<LessonPage />} />
           <Route path="biblioteca" element={<Library />} />
           <Route path="checkin" element={<CheckinPage />} />
+          <Route path="calls" element={<CallsPage />} />
           <Route path="negocio" element={<Business />} />
           <Route path="negocio/:tool" element={<ToolPage />} />
           <Route
@@ -96,6 +99,7 @@ export default function App() {
             <Route path="conteudo/trilha/:trackId" element={<AdminTrackEdit />} />
             <Route path="conteudo/aula/:lessonId" element={<AdminLessonEdit />} />
             <Route path="revisoes" element={<AdminReviews />} />
+            <Route path="calls" element={<AdminCalls />} />
             <Route path="alunos" element={<AdminStudents />} />
             <Route path="alunos/:id" element={<AdminStudentView />} />
             <Route path="alunos/:id/:tool" element={<AdminStudentView />} />

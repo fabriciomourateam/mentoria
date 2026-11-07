@@ -24,6 +24,7 @@ export function AdminLayout() {
         <NavLink to="revisoes">
           Revisões{pending > 0 && <span className="adm-badge">{pending}</span>}
         </NavLink>
+        <NavLink to="calls">Calls</NavLink>
         <NavLink to="alunos">Alunos</NavLink>
         <NavLink to="aparencia">Aparência</NavLink>
       </nav>

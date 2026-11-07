@@ -4,6 +4,7 @@ import { api } from '../lib/api'
 import { initials, isDone, lessonsOf, nextLesson, overall, sortedTracks, trackLabel, trackStats } from '../lib/derive'
 import { useStore } from '../lib/store'
 import { useWorkspace } from '../lib/workspace'
+import { useNextCall } from '../pages/calls/NextCallCard'
 import { useCheckinDue } from '../pages/checkin/useCheckins'
 import { isReady, toolByKey, toolsForLesson, TOOLS } from '../pages/negocio/registry'
 import { Icon, TRACK_ICON } from './Icon'
@@ -58,6 +59,7 @@ export function CourseNav() {
   const nav = useNavigate()
   const where = useWhere()
   const checkinDue = useCheckinDue()
+  const nextCall = useNextCall()
   const next = content ? nextLesson(content, progress) : null
   const focus = where.trackId ?? next?.track_id
   const [openId, setOpenId] = useState<string | undefined>(focus)
@@ -124,6 +126,11 @@ export function CourseNav() {
           <Icon name="chart" />
           Check-in semanal
           {checkinDue && !me?.isAdmin && <span className="ct due">Pendente</span>}
+        </NavLink>
+        <NavLink to="/calls">
+          <Icon name="users" />
+          Calls ao vivo
+          {nextCall.live ? <span className="ct due">Ao vivo</span> : null}
         </NavLink>
         <NavLink to="/biblioteca">
           <Icon name="book" />
