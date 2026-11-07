@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { CheckinCard } from './checkin/CheckinCard'
 import { Icon, TRACK_ICON } from '../components/Icon'
 import { CTA, Empty, ProgressBar, Skeleton } from '../components/ui'
 import { firstName, lessonContext, nextCheckpoint, nextLesson, overall, sortedTracks, trackStats } from '../lib/derive'
@@ -144,6 +145,13 @@ export function Home() {
           </Link>
         </>
       )}
+
+      <div className="sh">
+        <h2>Sua semana</h2>
+      </div>
+      <div className="week-grid">
+        <CheckinCard />
+      </div>
 
       <div className="sh">
         <h2>O caminho</h2>

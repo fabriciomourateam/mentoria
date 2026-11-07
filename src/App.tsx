@@ -9,6 +9,7 @@ import { AdminReviews } from './pages/admin/AdminReviews'
 import { AdminStudents } from './pages/admin/AdminStudents'
 import { AdminStudentView } from './pages/admin/AdminStudentView'
 import { Business } from './pages/Business'
+import { CheckinPage } from './pages/checkin/CheckinPage'
 import { ToolPage } from './pages/negocio/ToolPage'
 import { Home } from './pages/Home'
 import { LessonPage } from './pages/Lesson'
@@ -79,6 +80,7 @@ export default function App() {
           <Route path="trilhas/:slug" element={<TrackPage />} />
           <Route path="aula/:id" element={<LessonPage />} />
           <Route path="biblioteca" element={<Library />} />
+          <Route path="checkin" element={<CheckinPage />} />
           <Route path="negocio" element={<Business />} />
           <Route path="negocio/:tool" element={<ToolPage />} />
           <Route

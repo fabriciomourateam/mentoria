@@ -7,6 +7,7 @@ import { initials, lessonsOf, sortedTracks } from '../../lib/derive'
 import { useStore } from '../../lib/store'
 import type { Progress, StudentRow } from '../../lib/types'
 import { useWorkspace, WorkspaceProvider } from '../../lib/workspace'
+import { CheckinHistory } from '../checkin/CheckinHistory'
 import { FormTool } from '../negocio/FormTool'
 import { GROUPS, isReady, toolByKey, TOOLS } from '../negocio/registry'
 
@@ -132,6 +133,11 @@ function Overview({ student }: { student: StudentRow }) {
           })}
         </div>
       )}
+
+      <div className="sh">
+        <h2>Check-in semanal</h2>
+      </div>
+      <CheckinHistory userId={id} />
 
       <div className="sh">
         <h2>Meu Negócio do aluno</h2>

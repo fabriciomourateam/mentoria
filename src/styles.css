@@ -3328,3 +3328,13 @@ body.no-scroll {
   font-weight: 800;
   vertical-align: 1px;
 }
+
+.cn-main .ct.due {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+.week-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 14px;
+}

@@ -4,6 +4,7 @@ import { api } from '../lib/api'
 import { initials, isDone, lessonsOf, nextLesson, overall, sortedTracks, trackLabel, trackStats } from '../lib/derive'
 import { useStore } from '../lib/store'
 import { useWorkspace } from '../lib/workspace'
+import { useCheckinDue } from '../pages/checkin/useCheckins'
 import { isReady, toolByKey, toolsForLesson, TOOLS } from '../pages/negocio/registry'
 import { Icon, TRACK_ICON } from './Icon'
 import { ProgressBar } from './ui'
@@ -56,6 +57,7 @@ export function CourseNav() {
   const ws = useWorkspace()
   const nav = useNavigate()
   const where = useWhere()
+  const checkinDue = useCheckinDue()
   const next = content ? nextLesson(content, progress) : null
   const focus = where.trackId ?? next?.track_id
   const [openId, setOpenId] = useState<string | undefined>(focus)
@@ -117,6 +119,11 @@ export function CourseNav() {
               {toolsStarted}/{tools.length}
             </span>
           )}
+        </NavLink>
+        <NavLink to="/checkin">
+          <Icon name="chart" />
+          Check-in semanal
+          {checkinDue && !me?.isAdmin && <span className="ct due">Pendente</span>}
         </NavLink>
         <NavLink to="/biblioteca">
           <Icon name="book" />
