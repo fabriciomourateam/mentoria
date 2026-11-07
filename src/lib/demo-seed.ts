@@ -1,3 +1,4 @@
+import { TRAFEGO_LESSONS, TRAFEGO_TRACK } from './demo-trafego'
 import type { Lesson, Material, Track } from './types'
 
 // Espelho da migration 20261025120100_seed_grade.sql, usado só no modo demonstração.
@@ -178,6 +179,8 @@ export function buildDemoContent(): { tracks: Track[]; lessons: Lesson[]; materi
       })
     })
   }
+  tracks.push({ ...TRAFEGO_TRACK, position: tracks.length })
+  lessons.push(...TRAFEGO_LESSONS)
   const pos: Record<string, number> = {}
   const materials: Material[] = MATERIALS.map(([slug, title, description, kind], i) => {
     pos[slug] = (pos[slug] ?? 0) + 1

@@ -16,14 +16,14 @@
   stroke: var(--line);
   stroke-width: 1;
 }
-.chart .bar {
+.chart .cbar {
   fill: color-mix(in srgb, var(--accent) 32%, var(--card-2));
   transition: fill 0.3s var(--ease2);
 }
-.chart .bar.hi {
+.chart .cbar.hi {
   fill: var(--accent);
 }
-.chart .bar.neg {
+.chart .cbar.neg {
   fill: var(--danger);
 }
 .chart .line {

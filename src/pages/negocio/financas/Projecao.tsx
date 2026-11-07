@@ -1,3 +1,4 @@
+import { LineChart } from '../../../components/charts'
 import { brl, pct, useEntry, useWorkspace } from '../../../lib/workspace'
 import { FieldInput } from '../FormTool'
 import type { ToolProgress } from '../types'
@@ -185,6 +186,16 @@ export default function Projecao() {
                   ? ` O conservador fica acima do ponto de equilíbrio (${eq.base.pe} alunos).`
                   : ` Atenção: o conservador termina abaixo do ponto de equilíbrio (${eq.base.pe} alunos). Ele deveria cobrir as contas.`)}
             </p>
+            <LineChart
+              labels={real.meses.map((mm) => MESES_CURTOS[mm.idx])}
+              series={[
+                { name: 'Conservador', values: cons.meses.map((x) => x.fat), tone: 'muted', dashed: true },
+                { name: 'Realista', values: real.meses.map((x) => x.fat), tone: 'accent' },
+                { name: 'Ousado', values: c.cenarios[2].meses.map((x) => x.fat), tone: 'ink' },
+              ]}
+              format={(n) => brl(n)}
+              ariaLabel="Faturamento projetado por mês nos três cenários"
+            />
             <div className="md">
               <table className="cards">
                 <thead>

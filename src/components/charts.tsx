@@ -52,7 +52,7 @@ export function BarChart({
                 width={bw}
                 height={Math.max(bottom - top, d.value ? 0.6 : 0)}
                 rx={0.8}
-                className={`bar ${i === hi ? 'hi' : ''} ${v < 0 ? 'neg' : ''}`}
+                className={`cbar ${i === hi ? 'hi' : ''} ${v < 0 ? 'neg' : ''}`}
               >
                 <title>{`${d.label}: ${d.value === null ? '-' : format(v)}`}</title>
               </rect>

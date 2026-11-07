@@ -3338,3 +3338,7 @@ body.no-scroll {
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 14px;
 }
+.cn-main a.active .ct.due {
+  background: var(--accent);
+  color: var(--on-accent);
+}

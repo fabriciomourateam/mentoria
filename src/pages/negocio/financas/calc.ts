@@ -263,3 +263,30 @@ export function projecaoCalc(d: Data, get: Get) {
     meta: { meta, ticketMeta, convVenda, convLead, prazo, alunosNec, reposicao, vendas, avaliacoes, leads, leadsSemana, avalSemana },
   }
 }
+
+// ---------- Evolução da DRE (insights) ----------
+
+/** Indicadores opcionais do mês: ticket médio real e CAC, quando alunos/novos foram informados. */
+export function dreExtras(m: Data, c: { receita: number }) {
+  const alunos = num(m.alunos)
+  const novos = num(m.novos)
+  const aquisicao = num(m.trafego) + num(m.marketing)
+  return {
+    alunos,
+    novos,
+    ticketReal: alunos > 0 && c.receita > 0 ? c.receita / alunos : null,
+    cac: novos > 0 && aquisicao > 0 ? aquisicao / novos : null,
+  }
+}
+
+/** Meses salvos com receita (do mais antigo ao mais recente), já com os cálculos de cada um. */
+export function dreSerie(d: Data, plSug: number, impSug: number) {
+  const meses = dreMeses(d)
+  return Object.keys(meses)
+    .filter((k) => num(meses[k].receita) > 0)
+    .sort()
+    .map((k) => {
+      const c = dreCalc(meses[k], plSug, impSug)
+      return { k, ...c, ...dreExtras(meses[k], c) }
+    })
+}

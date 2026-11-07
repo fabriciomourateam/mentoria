@@ -17,6 +17,8 @@ import Precificacao, { progress as precificacaoProgress } from './financas/Preci
 import ProLabore, { progress as proLaboreProgress } from './financas/ProLabore'
 import Projecao, { progress as projecaoProgress } from './financas/Projecao'
 import Leads, { progress as leadsProgress } from './leads/Leads'
+import Trafego, { progress as trafegoProgress } from './trafego/Trafego'
+import { INSIGHTS } from './insights'
 import { md as gBoasVindas } from './guias/boas-vindas'
 import { md as gFollowUp } from './guias/follow-up'
 import { md as gIdeias } from './guias/ideias-conteudo'
@@ -32,6 +34,7 @@ export const GROUPS: { id: ToolGroup; title: string; desc: string }[] = [
 
 const form = (d: Omit<ToolDef, 'type' | 'progress'> & { schema: NonNullable<ToolDef['schema']> }): ToolDef => ({
   ...d,
+  Insights: INSIGHTS[d.key],
   type: 'form',
   progress: (get) => formProgress(d.schema, get(d.key)),
 })
@@ -51,6 +54,7 @@ export const TOOLS: ToolDef[] = [
   { key: 'equilibrio', title: 'Ponto de equilíbrio', desc: 'Quantos alunos você precisa para pagar tudo.', group: 'financas', icon: 'target', lesson: { slug: 'financas', position: 3 }, type: 'custom', Component: Equilibrio, progress: equilibrioProgress },
   { key: 'projecao', title: 'Projeção do ano', desc: 'Três cenários e o caminho da meta até o caixa.', group: 'financas', icon: 'layers', lesson: { slug: 'financas', position: 4 }, type: 'custom', Component: Projecao, progress: projecaoProgress },
   form({ key: 'pf-pj', title: 'Separação PF e PJ', desc: 'O checklist de 15 minutos para separar os bolsos.', group: 'financas', icon: 'list', lesson: { slug: 'financas', position: 2 }, schema: pfPj }),
+  { key: 'trafego', title: 'Calculadora de tráfego', desc: 'Quanto você pode pagar por lead e conversa, e o retorno esperado do anúncio.', group: 'financas', icon: 'chart', lesson: { slug: 'trafego-pago', position: 5 }, type: 'custom', Component: Trafego, progress: trafegoProgress },
   // rotina
   { key: 'leads', title: 'Meus leads', desc: 'Quem pediu informação, em que etapa está e o próximo passo.', group: 'rotina', icon: 'users', lesson: { slug: 'captacao', position: 4 }, type: 'custom', Component: Leads, progress: leadsProgress },
   form({ key: 'calendario', title: 'Calendário de conteúdo', desc: 'O que postar no mês, com objetivo em cada post.', group: 'rotina', icon: 'book', lesson: { slug: 'captacao', position: 1 }, schema: calendario }),

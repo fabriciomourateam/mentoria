@@ -20,6 +20,8 @@ export interface ToolDef {
   type: 'form' | 'custom' | 'guide'
   schema?: FormSchema
   Component?: ComponentType
+  /** Painel calculado exibido acima da ficha (aluno e visão do gestor). */
+  Insights?: ComponentType
   progress?: ToolProgress
   guide?: string
 }

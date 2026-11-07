@@ -1,0 +1,88 @@
+.ins-meter {
+  height: 10px;
+  border-radius: 99px;
+  background: color-mix(in srgb, var(--muted) 20%, transparent);
+  overflow: hidden;
+}
+.ins-meter i {
+  display: block;
+  height: 100%;
+  border-radius: 99px;
+  background: var(--accent);
+  transition: width 0.4s ease;
+}
+.ins-meter i.ok { background: var(--ok); }
+.ins-meter i.warn { background: #e0a21a; }
+.ins-meter i.bad { background: var(--danger); }
+
+.ins-panel .kpis { margin: 0; }
+.ins-sub {
+  font-size: 13px;
+  font-weight: 700;
+  margin: 4px 0 -4px;
+  color: var(--ink);
+}
+.ins-note {
+  margin: 0;
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--muted);
+}
+.ins-cols {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 760px) {
+  .ins-cols { grid-template-columns: 1fr 1fr; }
+}
+.ins-cmp {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.ins-cmp > div {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 4px 12px;
+  align-items: center;
+  padding: 10px 14px;
+  font-size: 14px;
+}
+.ins-cmp > div + div { border-top: 1px solid var(--line); }
+.ins-cmp .l { color: var(--muted); }
+.ins-cmp .v { text-align: right; font-weight: 700; color: var(--ink); }
+.ins-cmp .v small { display: block; font-weight: 500; font-size: 12px; color: var(--muted); }
+.ins-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.ins-row .t {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 10px;
+  font-size: 14px;
+}
+.ins-row .t b { color: var(--ink); }
+.ins-row .t span { color: var(--muted); font-size: 13px; text-align: right; }
+.hub-strip {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+.hub-strip .head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.hub-strip .kpi .d { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+@media (max-width: 520px) {
+  .ins-cmp > div { padding: 10px 12px; }
+}

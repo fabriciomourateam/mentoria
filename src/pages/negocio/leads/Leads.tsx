@@ -9,6 +9,7 @@ import { brl, num, useWorkspace } from '../../../lib/workspace'
 import type { FormSchema } from '../forms'
 import { useCheckpointSync } from '../FormTool'
 import type { ToolProgress } from '../types'
+import { LeadsFunnel } from '../insights/LeadsFunnel'
 
 export const progress: ToolProgress = (_get, extra) => Math.min(1, extra.leads / 10)
 
@@ -207,6 +208,7 @@ export default function Leads() {
         </Empty>
       ) : (
         <>
+          <LeadsFunnel leads={leads} />
           <div className="toolbar r" style={{ ['--i' as string]: 2, marginBottom: 0 }}>
             <input
               className="input grow"

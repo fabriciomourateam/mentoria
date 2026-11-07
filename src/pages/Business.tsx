@@ -1,23 +1,18 @@
-import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Icon } from '../components/Icon'
 import { CTA, ProgressBar } from '../components/ui'
-import { api } from '../lib/api'
 import { useStore } from '../lib/store'
 import { useWorkspace } from '../lib/workspace'
+import { HubStrip } from './negocio/insights/HubStrip'
+import { useCheckins, useLeadRows } from './negocio/insights/data'
 import { GROUPS, isReady, TOOLS } from './negocio/registry'
 
 export function Business() {
   const { settings } = useStore()
   const ws = useWorkspace()
-  const [leads, setLeads] = useState(0)
-
-  useEffect(() => {
-    api
-      .listLeads()
-      .then((l) => setLeads(l.length))
-      .catch(() => setLeads(0))
-  }, [])
+  const { rows: leadRows, loaded: leadsLoaded } = useLeadRows()
+  const { rows: checkins, loaded: checkinsLoaded } = useCheckins()
+  const leads = leadRows.length
 
   const tools = TOOLS.filter(isReady)
   const measured = tools.filter((t) => t.type !== 'guide')
@@ -54,6 +49,8 @@ export function Business() {
           </div>
         </div>
       </section>
+
+      <HubStrip leads={leadRows} checkins={checkins} loaded={leadsLoaded && checkinsLoaded} />
 
       {GROUPS.map((g, gi) => {
         const items = tools.filter((t) => t.group === g.id)

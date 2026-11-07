@@ -1,7 +1,9 @@
 import { brl, pct, useEntry, useWorkspace } from '../../../lib/workspace'
 import { FieldInput } from '../FormTool'
+import { Meter } from '../insights/Meter'
+import { useCheckins } from '../insights/data'
 import type { ToolProgress } from '../types'
-import { equilibrioCalc, fmt, has } from './calc'
+import { equilibrioCalc, fmt, has, projecaoCalc } from './calc'
 import type { Data } from './calc'
 
 export const progress: ToolProgress = (get) => {
@@ -16,6 +18,11 @@ export default function Equilibrio() {
   const c = equilibrioCalc(data, get)
   const base = c.base
   const pronto = base.pe != null
+  const { rows: checkins } = useCheckins()
+  const ult = checkins[checkins.length - 1]
+  const alunosProj = projecaoCalc(get('projecao'), get).alunosHoje
+  const alunosAgora = ult && ult.alunos_ativos > 0 ? ult.alunos_ativos : alunosProj > 0 ? alunosProj : null
+  const alunosSrc = ult && ult.alunos_ativos > 0 ? 'último check-in' : 'Projeção do ano'
 
   const fixosHint = !has(data.fixos)
     ? c.fixosSrc === 'precificacao'
@@ -91,6 +98,26 @@ export default function Equilibrio() {
             <p className="sec-intro" style={{ marginTop: 0 }}>
               Você precisa de {base.pe} alunos ativos para pagar tudo. Abaixo disso você está pagando para trabalhar; acima, cada aluno extra rende {brl(base.margem)} de lucro.
             </p>
+            {alunosAgora !== null && base.pe != null && (
+              <div className="ins-row">
+                <div className="t">
+                  <b>
+                    {alunosAgora >= base.pe
+                      ? alunosAgora === base.pe
+                        ? 'Você está exatamente no ponto de equilíbrio'
+                        : `Você está ${alunosAgora - base.pe} ${alunosAgora - base.pe === 1 ? 'aluno acima' : 'alunos acima'} do equilíbrio`
+                      : `Faltam ${base.pe - alunosAgora} ${base.pe - alunosAgora === 1 ? 'aluno' : 'alunos'} para o equilíbrio`}
+                  </b>
+                  <span>
+                    {alunosAgora} de {base.pe} ({alunosSrc})
+                  </span>
+                </div>
+                <Meter pct={(alunosAgora / base.pe) * 100} tone={alunosAgora >= base.pe ? 'ok' : alunosAgora >= base.pe * 0.7 ? 'warn' : 'bad'} label="Alunos atuais em relação ao ponto de equilíbrio" />
+                {alunosAgora >= base.pe && (
+                  <span className="ins-note">Lucro estimado dos alunos acima do equilíbrio: {brl((alunosAgora - base.pe) * base.margem)} por mês.</span>
+                )}
+              </div>
+            )}
             <b style={{ fontSize: 15 }}>E se você baixar o preço?</b>
             <div className="md">
               <table className="cards">

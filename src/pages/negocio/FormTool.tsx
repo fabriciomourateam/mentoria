@@ -3,26 +3,32 @@ import { Icon } from '../../components/Icon'
 import { useStore } from '../../lib/store'
 import { useEntry } from '../../lib/workspace'
 import type { Column, Field, FormSchema, Row } from './forms'
+import { INSIGHTS } from './insights'
 
 /** Renderiza uma ficha a partir do schema, com salvamento automático. */
 export function FormTool({ toolKey, schema }: { toolKey: string; schema: FormSchema }) {
   const { data, patch, state, readOnly } = useEntry(toolKey)
   useCheckpointSync(schema, data, readOnly ? 'idle' : state)
 
+  const Insights = INSIGHTS[toolKey]
+
   return (
-    <fieldset className="stack ro-fieldset" disabled={readOnly}>
-      {schema.sections.map((s, i) => (
-        <section key={s.title} className="card sec r" style={{ ['--i' as string]: i + 1 }}>
-          <h2>{s.title}</h2>
-          {s.intro && <p className="sec-intro">{s.intro}</p>}
-          <div className="sec-fields">
-            {s.fields.map((f) => (
-              <FieldInput key={f.id} field={f} value={data[f.id]} onChange={(v) => patch({ [f.id]: v })} />
-            ))}
-          </div>
-        </section>
-      ))}
-    </fieldset>
+    <div className="stack">
+      {Insights && <Insights />}
+      <fieldset className="stack ro-fieldset" disabled={readOnly}>
+        {schema.sections.map((s, i) => (
+          <section key={s.title} className="card sec r" style={{ ['--i' as string]: i + 1 }}>
+            <h2>{s.title}</h2>
+            {s.intro && <p className="sec-intro">{s.intro}</p>}
+            <div className="sec-fields">
+              {s.fields.map((f) => (
+                <FieldInput key={f.id} field={f} value={data[f.id]} onChange={(v) => patch({ [f.id]: v })} />
+              ))}
+            </div>
+          </section>
+        ))}
+      </fieldset>
+    </div>
   )
 }
 

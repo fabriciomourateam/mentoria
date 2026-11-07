@@ -1,9 +1,10 @@
 import { useMemo, useState } from 'react'
+import { BarChart, Delta, LineChart } from '../../../components/charts'
 import { brl, pct, useEntry, useWorkspace } from '../../../lib/workspace'
 import type { FormSchema } from '../forms'
 import { FieldInput, useCheckpointSync } from '../FormTool'
 import type { ToolProgress } from '../types'
-import { num, DRE_FIXOS, dreCalc, dreMeses, fmt, has, monthLabel, monthsBack, nowMonth, proLaboreCalc } from './calc'
+import { num, DRE_FIXOS, dreCalc, dreExtras, dreMeses, dreSerie, fmt, has, MESES_CURTOS, monthLabel, monthsBack, nowMonth, proLaboreCalc } from './calc'
 import type { Data } from './calc'
 
 const VARS = ['comissoes', 'trafego', 'var_outros']
@@ -60,6 +61,14 @@ export default function Dre() {
     .sort()
     .reverse()
     .map((k) => ({ k, ...dreCalc(meses[k], pl.necessario, impSug) }))
+
+  const serie = dreSerie(data, pl.necessario, impSug)
+  const pos = serie.findIndex((x) => x.k === mes)
+  const prev = pos > 0 ? serie[pos - 1] : null
+  const ex = dreExtras(m, c)
+  const prevEx = prev ? { ticketReal: prev.ticketReal, cac: prev.cac } : null
+  const lblMes = (k: string) => `${MESES_CURTOS[Number(k.slice(5, 7)) - 1]}/${k.slice(2, 4)}`
+  const ultimos = serie.slice(-12)
 
   const linha = (rotulo: string, valor: number, forte = false, menos = false) => (
     <tr>
@@ -157,6 +166,25 @@ export default function Dre() {
             <FieldInput field={money('f_outros', 'Outros custos fixos')} value={m.f_outros} onChange={(v) => setCampo('f_outros', v)} />
           </div>
         </section>
+
+        <section className="card sec r" style={{ ['--i' as string]: 5 }}>
+          <h2>Alunos do mês (opcional)</h2>
+          <p className="sec-intro">Com esses dois números a DRE calcula seu ticket médio real e quanto custou cada aluno novo.</p>
+          <div className="sec-fields">
+            <div className="grid g2">
+              <FieldInput
+                field={{ kind: 'number', id: 'alunos', label: 'Alunos ativos no mês', placeholder: '30' }}
+                value={m.alunos}
+                onChange={(v) => setCampo('alunos', v)}
+              />
+              <FieldInput
+                field={{ kind: 'number', id: 'novos', label: 'Alunos novos no mês', placeholder: '5' }}
+                value={m.novos}
+                onChange={(v) => setCampo('novos', v)}
+              />
+            </div>
+          </div>
+        </section>
       </fieldset>
 
       <section className="card sec r" style={{ ['--i' as string]: 5 }}>
@@ -167,18 +195,42 @@ export default function Dre() {
               <div className="kpi">
                 <div className="k">Receita líquida</div>
                 <div className="v">{brl(c.liquida)}</div>
-                <div className="d">receita menos imposto</div>
+                <div className="d">
+                  receita menos imposto {prev && <Delta now={c.liquida} before={prev.liquida} />}
+                </div>
               </div>
               <div className="kpi">
                 <div className="k">Margem de contribuição</div>
                 <div className="v">{brl(c.mc)}</div>
-                <div className="d">{pct(c.mcPct, 1)} da receita</div>
+                <div className="d">
+                  {pct(c.mcPct, 1)} da receita {prev && <Delta now={c.mc} before={prev.mc} />}
+                </div>
               </div>
               <div className="kpi hl">
                 <div className="k">Resultado do mês</div>
                 <div className="v">{brl(c.resultado)}</div>
-                <div className="d">{pct(c.resultadoPct, 1)} da receita</div>
+                <div className="d">
+                  {pct(c.resultadoPct, 1)} da receita {prev && <Delta now={c.resultado} before={prev.resultado} />}
+                </div>
               </div>
+              {ex.ticketReal !== null && (
+                <div className="kpi">
+                  <div className="k">Ticket médio real</div>
+                  <div className="v">{brl(ex.ticketReal)}</div>
+                  <div className="d">
+                    {ex.alunos} alunos {prevEx?.ticketReal != null && <Delta now={ex.ticketReal} before={prevEx.ticketReal} />}
+                  </div>
+                </div>
+              )}
+              {ex.cac !== null && (
+                <div className="kpi">
+                  <div className="k">CAC</div>
+                  <div className="v">{brl(ex.cac)}</div>
+                  <div className="d">
+                    por aluno novo {prevEx?.cac != null && <Delta now={ex.cac} before={prevEx.cac} invert />}
+                  </div>
+                </div>
+              )}
             </div>
             <p className="sec-intro" style={{ marginTop: 0 }}>
               {c.resultado >= 0
@@ -206,8 +258,33 @@ export default function Dre() {
         )}
       </section>
 
-      {historico.length > 0 && (
+      {ultimos.length >= 2 && (
         <section className="card sec r" style={{ ['--i' as string]: 6 }}>
+          <h2>Evolução mês a mês</h2>
+          <p className="sec-intro">Receita e resultado dos meses que você já preencheu. A comparação dos cartões acima é com o mês anterior salvo.</p>
+          <div className="sec-fields">
+            <LineChart
+              labels={ultimos.map((x) => lblMes(x.k))}
+              series={[
+                { name: 'Receita', values: ultimos.map((x) => x.receita), tone: 'accent' },
+                { name: 'Resultado', values: ultimos.map((x) => x.resultado), tone: 'ink' },
+              ]}
+              format={(n) => brl(n)}
+              ariaLabel="Receita e resultado por mês"
+            />
+            <b style={{ fontSize: 14 }}>Margem de resultado (% da receita)</b>
+            <BarChart
+              data={ultimos.map((x) => ({ label: lblMes(x.k), value: Math.round(x.resultadoPct * 1000) / 10 }))}
+              height={110}
+              format={(n) => `${n.toLocaleString('pt-BR', { maximumFractionDigits: 1 })}%`}
+              ariaLabel="Margem de resultado por mês"
+            />
+          </div>
+        </section>
+      )}
+
+      {historico.length > 0 && (
+        <section className="card sec r" style={{ ['--i' as string]: 7 }}>
           <h2>Histórico</h2>
           <p className="sec-intro">Os meses que você já preencheu. Toque em um mês para abrir.</p>
           <div className="sec-fields">

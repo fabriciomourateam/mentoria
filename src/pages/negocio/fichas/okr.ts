@@ -28,9 +28,9 @@ export const schema: FormSchema = {
           startRows: 3,
           columns: [
             { id: 'kr', label: 'Resultado-chave', kind: 'text', placeholder: 'Ex.: Reduzir o churn mensal' },
-            { id: 'base', label: 'Linha de base', kind: 'text', placeholder: 'Ex.: 10%' },
-            { id: 'meta', label: 'Meta', kind: 'text', placeholder: 'Ex.: 6%' },
-            { id: 'atual', label: 'Atual', kind: 'text', placeholder: 'Ex.: 8%' },
+            { id: 'base', label: 'Linha de base', kind: 'number', placeholder: 'Ex.: 10' },
+            { id: 'meta', label: 'Meta', kind: 'number', placeholder: 'Ex.: 6' },
+            { id: 'atual', label: 'Atual', kind: 'number', placeholder: 'Ex.: 8' },
           ],
         },
       ],

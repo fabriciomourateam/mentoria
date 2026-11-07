@@ -66,6 +66,7 @@ export const TRACK_ICON: Record<string, IconName> = {
   'entrega-jornada': 'route',
   'gestao-tempo': 'clock',
   financas: 'coin',
+  'trafego-pago': 'chart',
 }
 
 export const KIND_ICON: Record<string, IconName> = {
