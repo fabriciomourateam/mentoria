@@ -9,6 +9,7 @@ import { toolsForLesson } from './negocio/registry'
 import { CTA, Empty, MaterialRow, Skeleton } from '../components/ui'
 import { isDone, lessonContext, materialsFor } from '../lib/derive'
 import { useStore } from '../lib/store'
+import { ReviewBox } from './review/ReviewBox'
 
 export function LessonPage() {
   const { id } = useParams()
@@ -185,6 +186,7 @@ export function LessonPage() {
                 )}
               </div>
             </div>
+            {hasCheckpoint && <ReviewBox lessonId={lesson.id} ready={allChecked || completed} />}
           </article>
         </div>
         {(prev || next) && (

@@ -5,6 +5,7 @@ import { useStore } from './lib/store'
 import { AdminLayout } from './pages/admin/AdminLayout'
 import { AdminAppearance } from './pages/admin/AdminAppearance'
 import { AdminContent, AdminLessonEdit, AdminTrackEdit } from './pages/admin/AdminContent'
+import { AdminReviews } from './pages/admin/AdminReviews'
 import { AdminStudents } from './pages/admin/AdminStudents'
 import { AdminStudentView } from './pages/admin/AdminStudentView'
 import { Business } from './pages/Business'
@@ -92,6 +93,7 @@ export default function App() {
             <Route path="conteudo" element={<AdminContent />} />
             <Route path="conteudo/trilha/:trackId" element={<AdminTrackEdit />} />
             <Route path="conteudo/aula/:lessonId" element={<AdminLessonEdit />} />
+            <Route path="revisoes" element={<AdminReviews />} />
             <Route path="alunos" element={<AdminStudents />} />
             <Route path="alunos/:id" element={<AdminStudentView />} />
             <Route path="alunos/:id/:tool" element={<AdminStudentView />} />

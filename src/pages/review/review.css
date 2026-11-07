@@ -1,0 +1,17 @@
+.rv{margin-top:14px;border:1px solid var(--line);border-radius:var(--r);background:var(--card);padding:16px;display:grid;gap:10px}
+.rv.ok{border-color:var(--ok)}
+.rv.warn{border-color:var(--accent)}
+.rv h4{margin:0;font-size:1rem}
+.rv p{margin:0}
+.rv .rv-top{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.rv .rv-quote{border-left:3px solid var(--accent);background:var(--card-2);padding:10px 12px;border-radius:var(--r-sm);white-space:pre-wrap;overflow-wrap:anywhere}
+.rv .rv-quote small{display:block;color:var(--muted);margin-top:6px}
+.rv .rv-acts{display:flex;flex-wrap:wrap;gap:8px}
+.rv textarea{width:100%}
+.rv-item{display:grid;gap:10px;margin-bottom:12px;padding:16px}
+.rv-item h3{margin:0;font-size:1rem;overflow-wrap:anywhere}
+.rv-item .rv-meta{display:flex;flex-wrap:wrap;gap:6px 12px;color:var(--muted);font-size:.85rem}
+.rv-links{display:flex;flex-wrap:wrap;gap:6px 14px}
+.rv-links a{color:var(--accent);font-weight:600;font-size:.9rem;text-decoration:none}
+.rv-links a:hover{text-decoration:underline}
+.rv-list{margin-top:14px}
