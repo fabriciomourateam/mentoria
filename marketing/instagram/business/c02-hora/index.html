@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#EDEAE3;--ink:#111111;--red:#FF4A1C;--mute:rgba(17,17,17,.55)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#333;font-family:Inter,sans-serif;color:var(--ink)}
+#pano{position:relative;width:8640px;height:1350px;overflow:hidden}
+.s{position:absolute;top:0;width:1080px;height:1350px;background:var(--paper);overflow:hidden}
+.s.red{background:var(--red)}
+.s.dark{background:var(--ink);color:var(--paper)}
+.a{position:absolute}
+.mono{font-family:"Space Mono",monospace;font-size:22px;letter-spacing:.06em;text-transform:uppercase}
+.chrome{top:58px;left:80px;right:80px;display:flex;justify-content:space-between;color:var(--mute)}
+.dark .chrome,.dark .foot{color:rgba(237,234,227,.55)}
+.red .chrome,.red .foot{color:rgba(17,17,17,.7)}
+.foot{bottom:56px;left:80px;right:80px;display:flex;justify-content:space-between;color:var(--mute)}
+.foot .go{color:var(--red);font-weight:700}
+.red .foot .go{color:var(--ink)}
+.H{font-family:Anton,sans-serif;text-transform:uppercase;line-height:1.1;letter-spacing:.005em}
+.r{color:var(--red)}
+.red .r{color:var(--paper)}
+.lab{font-family:"Space Mono",monospace;font-size:22px;letter-spacing:.06em;text-transform:uppercase;font-weight:700}
+.dark .lab{color:var(--red)}
+.top{left:80px;width:920px;bottom:800px;display:flex;flex-direction:column;justify-content:flex-end;gap:22px}
+.low{left:80px;width:920px;top:662px;height:558px;display:flex;flex-direction:column;gap:34px}
+.B{font-size:52px;line-height:1.3;font-weight:500;letter-spacing:-.01em}
+.dark .B{color:rgba(237,234,227,.82)}
+.B b{font-weight:800}
+.dark .B b{color:var(--paper)}
+.ck{display:flex;gap:24px;align-items:baseline;font-size:58px;line-height:1.15;font-weight:800;letter-spacing:-.03em}
+.ck i{font-style:normal;font-family:Anton,sans-serif;font-weight:400;color:var(--red);min-width:1.1em}
+.tr{display:grid;grid-template-columns:400px 1fr;gap:28px;align-items:baseline;padding:22px 0;border-top:3px solid var(--ink);font-size:42px;line-height:1.2}
+.tr .x{color:var(--mute);text-decoration:line-through;text-decoration-thickness:3px;font-weight:600}
+.tr .ok{font-weight:800;letter-spacing:-.02em}
+.tr .ok::before{content:"→ ";color:var(--red)}
+.box{background:var(--ink);color:var(--paper);padding:40px 48px}
+svg#thread{position:absolute;left:0;top:0;pointer-events:none;z-index:3}
+</style></head>
+<body><div id="pano">
+<section class="s" style="left:0px">
+<div class="a chrome mono"><span>Fabricio Moura</span><span>01/08</span></div>
+<div class="a top"><div style="font-size:54px;font-weight:700;letter-spacing:-.02em">Você não vende</div><div class="H" style="font-size:300px;line-height:1;white-space:nowrap">Horas.</div></div>
+<div class="a low"><div class="B" style="font-size:72px;line-height:1.1;font-weight:800;letter-spacing:-.035em">Vende resultado. Quem cobra por hora já colocou um <span class="r">teto</span> no próprio salário.</div><div style="flex:1"></div><div class="lab" style="color:var(--mute)">Mentalidade de empresário</div></div>
+<div class="a foot mono"><span></span><span class="go">Arraste →</span></div>
+</section>
+<section class="s" style="left:1080px">
+<div class="a chrome mono"><span>Fabricio Moura</span><span>02/08</span></div>
+<div class="a top"><div class="lab" style="color:var(--mute)">A conta que ninguém faz</div><div class="H" style="font-size:132px">Seu dia tem o mesmo tamanho <span class="r">todo mês.</span></div></div>
+<div class="a low"><div class="B">Se cada real que entra depende de uma hora sua, crescer significa trabalhar mais. <b>Até o dia em que não cabe mais.</b></div></div>
+<div class="a foot mono"><span></span><span class="go">→</span></div>
+</section>
+<section class="s red" style="left:2160px">
+<div class="a chrome mono"><span>Fabricio Moura</span><span>03/08</span></div>
+<div class="a top"><div class="lab" style="">Exemplo ilustrativo</div><div class="H" style="font-size:168px;white-space:nowrap">8h × 22 dias</div></div>
+<div class="a low"><div class="H" style="font-size:180px;line-height:1.02">= 176 horas.</div><div class="B">É o máximo que quem vende hora consegue vender no mês. <b>Sem férias, sem doença, sem imprevisto.</b></div></div>
+<div class="a foot mono"><span></span><span class="go">→</span></div>
+</section>
+<section class="s" style="left:3240px">
+<div class="a chrome mono"><span>Fabricio Moura</span><span>04/08</span></div>
+<div class="a top"><div class="lab" style="color:var(--mute)">O que muda na cabeça do empresário</div><div class="H" style="font-size:132px">Isso funciona <span class="r">sem mim?</span></div></div>
+<div class="a low"><div class="B">Não é sobre sumir. <b>É sobre o paciente ter resultado mesmo nas horas em que você não está olhando.</b></div></div>
+<div class="a foot mono"><span></span><span class="go">→</span></div>
+</section>
+<section class="s" style="left:4320px">
+<div class="a chrome mono"><span>Fabricio Moura</span><span>05/08</span></div>
+<div class="a top"><div class="H" style="font-size:132px">Mesma profissão. <span class="r">Outra cabeça.</span></div></div>
+<div class="a low"><div><div class="tr"><span class="x">Quanto cobro pela consulta?</span><span class="ok">Quanto vale o resultado em 3 meses?</span></div><div class="tr"><span class="x">Preciso de mais pacientes</span><span class="ok">Preciso que eles fiquem mais</span></div><div class="tr"><span class="x">Respondo tudo na hora</span><span class="ok">Tenho horário e processo</span></div><div class="tr"><span class="x">Faço tudo sozinho</span><span class="ok">Sei o que delegar</span></div></div></div>
+<div class="a foot mono"><span></span><span class="go">→</span></div>
+</section>
+<section class="s dark" style="left:5400px">
+<div class="a chrome mono"><span>Fabricio Moura</span><span>06/08</span></div>
+<div class="a top"><div class="lab" style="">Na prática</div><div class="H" style="font-size:132px">Programa, processo <span class="r">e rotina.</span></div></div>
+<div class="a low"><div class="B">Programa de meses no lugar de consulta solta. Processo que se repete igual com todo paciente. <b>Rotina com hora pra atender e hora pra gerir.</b></div></div>
+<div class="a foot mono"><span></span><span class="go">→</span></div>
+</section>
+<section class="s" style="left:6480px">
+<div class="a chrome mono"><span>Fabricio Moura</span><span>07/08</span></div>
+<div class="a top"><div class="lab" style="color:var(--mute)">Uma pergunta pra hoje</div><div class="H" style="font-size:132px">Se você parar 15 dias, <span class="r">o que acontece?</span></div></div>
+<div class="a low"><div class="B">Se a resposta é "para tudo", você tem um emprego que criou pra si mesmo. <b>Dá pra mudar isso sem largar o atendimento.</b></div></div>
+<div class="a foot mono"><span></span><span class="go">→</span></div>
+</section>
+<section class="s" style="left:7560px">
+<div class="a chrome mono"><span>Fabricio Moura</span><span>08/08</span></div>
+<div class="a top"><div class="H" style="font-size:132px">Pensa nisso <span class="r">essa semana.</span></div></div>
+<div class="a low"><div class="box"><div class="lab" style="font-weight:400;opacity:.6;color:var(--paper)">Gostou?</div><div class="H r" style="font-size:112px;line-height:1;margin-top:10px">Salva esse post</div></div><div class="B">E manda pra um colega que precisa ver isso. <b>Todo dia tem post novo aqui.</b></div></div>
+<div class="a foot mono"><span></span><span class="go">→</span></div>
+</section>
+<svg id="thread" width="8640" height="1350" viewBox="0 0 8640 1350">
+  <defs><clipPath id="cr"><rect x="2160" y="0" width="1080" height="1350"/></clipPath></defs>
+  <g fill="none" stroke-width="22" stroke-linejoin="miter" stroke-linecap="butt">
+    <polyline points="40,600 8420,600 8420,640" stroke="#FF4A1C"/>
+    <polyline points="40,600 8420,600 8420,640" stroke="#111111" clip-path="url(#cr)"/>
+  </g>
+  <path d="M8385,638 L8455,638 L8420,680 Z" fill="#FF4A1C"/>
+</svg>
+</div>
+<script>
+document.fonts.ready.then(()=>{
+  // Nenhum título pode passar da largura (palavra longa ou linha sem quebra).
+  document.querySelectorAll('.H').forEach(t=>{
+    let guard = 80;
+    while (t.scrollWidth > t.clientWidth + 1 && guard--) t.style.fontSize = (parseFloat(getComputedStyle(t).fontSize)*0.96)+'px';
+  });
+  // Encolhe a fonte de cada bloco até caber na sua faixa (acima ou abaixo da linha).
+  document.querySelectorAll('.top').forEach(el=>{
+    const max = 550 - 170;
+    let guard = 60;
+    while (el.offsetHeight > max && guard--) el.querySelectorAll('.H,.B').forEach(t=>{
+      t.style.fontSize = (parseFloat(getComputedStyle(t).fontSize)*0.95)+'px';
+    });
+  });
+  document.querySelectorAll('.low').forEach(el=>{
+    let guard = 60;
+    while (el.scrollHeight > el.clientHeight + 1 && guard--) el.querySelectorAll('.H,.B,.ck,.tr').forEach(t=>{
+      t.style.fontSize = (parseFloat(getComputedStyle(t).fontSize)*0.95)+'px';
+    });
+  });
+  document.body.dataset.ready = '1';
+});
+</script>
+</body></html>
