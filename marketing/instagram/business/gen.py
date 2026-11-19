@@ -98,8 +98,8 @@ def slide(i, sl):
                    f'<div style="flex:1"></div><div class="lab" style="color:var(--mute)">{md(sl["lab"])}</div></div>')
     elif kind == "final":
         out.append(f'<div class="a top"><div class="H" style="font-size:132px">{md(sl["H"])}</div></div>')
-        out.append('<div class="a low"><div class="box"><div class="lab" style="font-weight:400;opacity:.6;color:var(--paper)">Gostou?</div>'
-                   '<div class="H r" style="font-size:112px;line-height:1;margin-top:10px">Salva esse post</div></div>'
+        out.append('<div class="a low"><div class="box"><div class="lab" style="font-weight:400;opacity:.6;color:var(--paper)">Quer aplicar isso no seu negócio?</div>'
+                   '<div class="H r" style="font-size:112px;line-height:1;margin-top:10px">Comenta MENTORIA</div></div>'
                    f'<div class="B">{md(sl.get("B","E manda pra um colega que precisa ver isso. **Todo dia tem post novo aqui.**"))}</div></div>')
     else:
         top = []

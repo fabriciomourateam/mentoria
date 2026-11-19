@@ -3,7 +3,7 @@ const fs = require('fs'), path = require('path');
 (async () => {
   const b = await chromium.launch();
   const p = await b.newPage({ viewport: { width: 8640, height: 1350 } });
-  for (const d of fs.readdirSync(__dirname).filter(x => /^c\d\d-/.test(x)).sort()) {
+  for (const d of fs.readdirSync(__dirname).filter(x => (x => /^c\d\d-/.test(x) && !x.endsWith('.zip'))(x)).sort()) {
     const dir = path.join(__dirname, d);
     await p.goto('file://' + dir + '/index.html', { waitUntil: 'networkidle' });
     await p.waitForFunction(() => document.body.dataset.ready === '1');
