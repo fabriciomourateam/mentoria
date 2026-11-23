@@ -80,10 +80,17 @@ def md(s):
 
 
 def chrome(i):
+    if sys.argv[1:2] == ["dark"]:
+        return (f'<div class="a chrome mono"><span class="brand"><b>FM</b>Fabricio Moura · Mentoria</span>'
+                f'<span>{i:02d} <em>/ 08</em></span></div>')
     return f'<div class="a chrome mono"><span>Fabricio Moura</span><span>{i:02d}/08</span></div>'
 
 
 def foot(i):
+    if sys.argv[1:2] == ["dark"]:
+        bars = "".join(f'<i class="{"on" if k <= i else ""}"></i>' for k in range(1, 9))
+        go = "Arraste" if i == 1 else ("" if i == 8 else "")
+        return f'<div class="a foot mono"><span class="prog">{bars}</span><span class="go">{go}{" →" if i < 8 else ""}</span></div>'
     return '<div class="a foot mono"><span></span><span class="go">{}</span></div>'.format("Arraste →" if i == 1 else "→")
 
 
@@ -110,6 +117,36 @@ DARK_CSS = """
 .photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(18,18,20,.15) 0%,rgba(18,18,20,.35) 35%,#121214 72%)}
 .k-cover .top{bottom:auto;top:620px;gap:10px}
 .k-cover .low{top:930px;height:300px}
+
+/* ---- premium ---- */
+.s::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.07;mix-blend-mode:overlay;
+ background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+.s>*{z-index:1}
+.s{background:radial-gradient(90% 60% at 105% 108%,rgba(242,88,31,.30),transparent 60%),radial-gradient(60% 40% at -10% -10%,rgba(255,255,255,.05),transparent 60%),#111113}
+.s.red{background:radial-gradient(80% 70% at 100% 0%,rgba(255,170,120,.35),transparent 60%),linear-gradient(160deg,#F46A2A,#E24A12)}
+.s.dark{background:radial-gradient(90% 70% at 100% 100%,rgba(242,88,31,.12),transparent 60%),#F4EFE8}
+.s.k-final{background:radial-gradient(100% 70% at 50% 110%,rgba(242,88,31,.45),transparent 62%),#111113}
+.chrome{font-size:20px;letter-spacing:.14em;align-items:center}
+.chrome .brand{display:flex;align-items:center;gap:14px}
+.chrome .brand b{font-family:Anton,sans-serif;font-weight:400;letter-spacing:.02em;font-size:22px;color:#121214;background:var(--red);width:42px;height:42px;border-radius:50%;display:grid;place-items:center}
+.red .chrome .brand b{background:#121214;color:#F46A2A}
+.chrome em{font-style:normal;opacity:.5}
+.foot{align-items:center}
+.prog{display:flex;gap:8px}
+.prog i{display:block;width:34px;height:4px;border-radius:4px;background:rgba(244,239,232,.18)}
+.prog i.on{background:var(--red)}
+.red .prog i{background:rgba(18,18,20,.2)} .red .prog i.on{background:#121214}
+.dark .prog i{background:rgba(18,18,20,.15)} .dark .prog i.on{background:var(--red)}
+.lab{display:flex;align-items:center;gap:14px}
+.lab::before{content:"";width:34px;height:3px;background:currentColor;border-radius:3px;opacity:.9}
+.s:not(.red):not(.dark) .lab{color:var(--red)!important}
+.ck{background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.02));border:1.5px solid rgba(255,255,255,.12);box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 20px 40px rgba(0,0,0,.25)}
+.ck i{width:58px;height:58px;min-width:58px;border-radius:50%;background:var(--red);color:#121214;display:grid;place-items:center;font-size:30px;font-family:Anton,sans-serif}
+.box{background:linear-gradient(135deg,#F46A2A,#E04812);box-shadow:0 30px 60px rgba(242,88,31,.35);position:relative;overflow:hidden}
+.box::after{content:"";position:absolute;top:-60%;right:-20%;width:60%;height:220%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent);transform:rotate(20deg)}
+.photo{bottom:auto;height:860px;background-position:center 35%}
+.photo::after{background:linear-gradient(180deg,rgba(17,17,19,.05) 0%,rgba(17,17,19,.25) 30%,rgba(17,17,19,.85) 58%,#111113 74%),linear-gradient(90deg,rgba(242,88,31,.18),transparent 45%)}
+.k-cover .lab{color:var(--paper)!important;opacity:.75}
 """
 import sys
 

@@ -58,7 +58,7 @@ Metade das pessoas, mais faturamento e tempo pra acompanhar cada uma direito. Re
 
 Crescer de verdade é escolher pra quem você atende, quanto cobra e quanto tempo dedica a cada um."""+CTA,
   "slides": [
-    {"k":"cover","kicker":"Agenda cheia pode ser sinal de","big":"Preço baixo.","bs":264,"sub":"Mais gente, mais cansaço e [[a mesma margem]] no fim do mês.","lab":"Mentalidade de empresário"},
+    {"k":"cover","photo":"computador.jpg","kicker":"Agenda cheia pode ser sinal de","big":"preço baixo.","bs":264,"sub":"Mais gente, mais cansaço e [[a mesma margem]] no fim do mês.","lab":"Mentalidade de empresário"},
     {"k":"stmt","H":"Lotou e o dinheiro [[não acompanhou?]]","B":"É o padrão de quem cresce no volume: mais aluno, mais cansaço, mesma margem. **A demanda está aí. O que trava é o modelo.**"},
     {"k":"stmt","H":"3 sinais de que [[é o modelo.]]","items":["Você não tem horário pra pensar no negócio.","Seu preço é o mesmo de 2 anos atrás.","Todo mês começa do zero."]},
     {"k":"red","lab":"Exemplo ilustrativo","H":"60 × R$ 150 = R$ 9 mil","nw":1,"hs":92,"big":"30 × R$ 450 = R$ 13,5 mil","bigs":92,"B":"**Metade das pessoas. Mais faturamento.** E tempo pra atender cada uma direito."},
