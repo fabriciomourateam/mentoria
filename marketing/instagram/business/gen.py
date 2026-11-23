@@ -217,6 +217,18 @@ GF_CSS = """
  linear-gradient(180deg,#0d0a08,#150d07)}
 .s,.s.red,.s.dark,.s.k-final{background:transparent!important}
 .r,.H .r{text-shadow:none!important}
+.cblock{position:absolute;top:0;height:1350px;z-index:1}
+.cblock.orange{background:radial-gradient(70% 50% at 80% 10%,rgba(255,220,160,.45),transparent 60%),linear-gradient(165deg,#FFA049 0%,#F46A1E 45%,#D9480F 100%);
+ box-shadow:0 0 120px rgba(255,138,42,.45)}
+.cblock.cream{background:radial-gradient(80% 60% at 100% 100%,rgba(255,170,90,.28),transparent 60%),linear-gradient(170deg,#FBF6EF,#EFE6DA)}
+.red .H,.red .B,.red .B b,.red .lab{color:#140c06!important}
+.red .r{background:none;-webkit-text-fill-color:#fff;color:#fff;filter:none}
+.red .chrome,.dark .chrome{color:rgba(20,12,6,.6)}
+.red .prog i,.dark .prog i{background:rgba(20,12,6,.18)} .red .prog i.on{background:#140c06;box-shadow:none}
+.dark .H,.dark .B,.dark .B b{color:#17110c!important}
+.dark .r{background:linear-gradient(90deg,#E5520F,#F28A2A);-webkit-background-clip:text;background-clip:text;color:transparent;filter:none}
+.dark .lab{color:#D9530F!important}
+.red .lab::before,.dark .lab::before{background:currentColor}
 .flowph::after{background:linear-gradient(90deg,rgba(255,138,42,.18),transparent 45%),linear-gradient(180deg,transparent 40%,rgba(13,10,8,.7))}
 .flowph{filter:sepia(.25) saturate(1.1)}
 """
@@ -261,7 +273,7 @@ def flow_overlay(slides):
     dots = "".join(f'<circle cx="{a}" cy="{b}" r="9" fill="#fff" stroke="#F2581F" stroke-width="5"/>' for a, b in pts[2:-1])
     if GLASS:
         parts = [p.replace('fill="rgba(244,239,232,.14)"', 'fill="rgba(255,170,90,.10)" stroke="rgba(255,180,100,.35)" stroke-width="1.5"')
-                  .replace('fill="rgba(18,18,20,.16)"', 'fill="rgba(255,170,90,.10)" stroke="rgba(255,180,100,.35)" stroke-width="1.5"') for p in parts]
+                  .replace('fill="rgba(18,18,20,.16)"', 'fill="rgba(217,72,15,.10)" stroke="rgba(217,72,15,.35)" stroke-width="1.5"') for p in parts]
         grad = f'<linearGradient id="lg" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="{8*W}" y2="0"><stop offset="0" stop-color="#FF7A1A"/><stop offset=".5" stop-color="#FFB050"/><stop offset="1" stop-color="#FFD27A"/></linearGradient>'
         glow2 = '<filter id="gw2" x="-5%" y="-80%" width="110%" height="260%"><feGaussianBlur stdDeviation="14"/></filter>'
         streaks = (f'<g fill="none" stroke="url(#lg)" opacity=".55">'
@@ -269,12 +281,13 @@ def flow_overlay(slides):
                    f'<path d="M-20 1180 C 1500 1020, 2800 1330, 4300 1150 S 7200 1000, 8660 1120" stroke-width="1.2"/>'
                    f'<path d="M-20 1260 C 1700 1150, 3200 1350, 4700 1240 S 7400 1130, 8660 1220" stroke-width="1" opacity=".6"/>'
                    f'<path d="M-20 1310 C 1900 1250, 3500 1360, 5000 1300 S 7600 1230, 8660 1290" stroke-width="1" opacity=".35"/></g>')
-        line = (f'<path d="{d}" stroke="url(#lg)" stroke-width="34" fill="none" opacity=".55" filter="url(#gw2)"/>'
-                f'<path d="{d}" stroke="url(#lg)" stroke-width="10" fill="none" stroke-linejoin="round" stroke-linecap="round"/>')
+        line = (f'<g clip-path="url(#notcr)"><path d="{d}" stroke="url(#lg)" stroke-width="34" fill="none" opacity=".55" filter="url(#gw2)"/>'
+                f'<path d="{d}" stroke="url(#lg)" stroke-width="10" fill="none" stroke-linejoin="round" stroke-linecap="round"/></g>'
+                f'<g clip-path="url(#cr)"><path d="{d}" stroke="#140c06" stroke-width="10" fill="none" stroke-linejoin="round"/></g>')
         dots = "".join(f'<circle cx="{a}" cy="{b}" r="10" fill="#FFD27A" stroke="#FF8A2A" stroke-width="4" filter="drop-shadow(0 0 10px #FF8A2A)"/>' for a, b in pts[2:-1])
         arrow = arrow.replace('fill="#F2581F"', 'fill="#FFC15A"')
         labels = labels.replace('fill="#F2581F"', 'fill="#FFB050"').replace('fill="rgba(244,239,232,.5)"', 'fill="rgba(255,200,140,.6)"')
-        defs = f'{grad}{glow2}<filter id="gl2"><feGaussianBlur stdDeviation="5"/></filter>'
+        defs = f'{clip}{grad}{glow2}<filter id="gl2"><feGaussianBlur stdDeviation="5"/></filter>'
         return f'<svg id="flow" width="{8*W}" height="1350" viewBox="0 0 {8*W} 1350"><defs>{defs}</defs>{streaks}{"".join(parts)}{line}{dots}{arrow}{labels}</svg>'
     return f'<svg id="flow" width="{8*W}" height="1350" viewBox="0 0 {8*W} 1350"><defs>{clip}{glow}</defs>{"".join(parts)}{line}{dots}{arrow}{labels}</svg>'
 
@@ -335,6 +348,18 @@ def thread(red_idx):
 </svg>"""
 
 
+def cblocks(slides):
+    W, b = 1080, 70
+    out = []
+    for i, s in enumerate(slides):
+        if s["k"] in ("red", "dark"):
+            cls = "orange" if s["k"] == "red" else "cream"
+            # paralelogramo: invade o slide anterior embaixo e o seguinte em cima
+            out.append(f'<div class="cblock {cls}" style="left:{i*W-b}px;width:{W+2*b}px;'
+                       f'clip-path:polygon({b}px 0,100% 0,{W+b}px 100%,0 100%)"></div>')
+    return "".join(out)
+
+
 def flowph(slides):
     ph = slides[0].get("photo")
     return f'<div class="flowph" style="background-image:url(../fotos/{ph})"></div>' if ph else ""
@@ -350,6 +375,7 @@ def build(slug, slides):
 <style>{CSS}{DARK_CSS if DARK else ""}{GLASS_CSS if GLASS else ""}{FLOW_CSS if FLOW else ""}{GF_CSS if GLASS and FLOW else ""}</style></head>
 <body><div id="pano">
 {flowph(slides) if FLOW else ""}
+{cblocks(slides) if GLASS and FLOW else ""}
 {body}
 {flow_overlay(slides) if FLOW else ""}
 {"" if DARK else thread(red_idx)}
