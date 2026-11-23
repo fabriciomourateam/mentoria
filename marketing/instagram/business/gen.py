@@ -80,21 +80,22 @@ def md(s):
 
 
 def chrome(i):
-    if sys.argv[1:2] in (["dark"], ["glass"]):
+    if sys.argv[1:2] in (["dark"], ["glass"], ["flow"]):
         return (f'<div class="a chrome mono"><span class="brand"><b>FM</b>Fabricio Moura · Mentoria</span>'
                 f'<span>{i:02d} <em>/ 08</em></span></div>')
     return f'<div class="a chrome mono"><span>Fabricio Moura</span><span>{i:02d}/08</span></div>'
 
 
 def foot(i):
-    if sys.argv[1:2] in (["dark"], ["glass"]):
+    if sys.argv[1:2] in (["dark"], ["glass"], ["flow"]):
         bars = "".join(f'<i class="{"on" if k <= i else ""}"></i>' for k in range(1, 9))
         go = "Arraste" if i == 1 else ("" if i == 8 else "")
         return f'<div class="a foot mono"><span class="prog">{bars}</span><span class="go">{go}{" →" if i < 8 else ""}</span></div>'
     return '<div class="a foot mono"><span></span><span class="go">{}</span></div>'.format("Arraste →" if i == 1 else "→")
 
 
-DARK = sys.argv[1:2] in (["dark"], ["glass"])
+DARK = sys.argv[1:2] in (["dark"], ["glass"], ["flow"])
+FLOW = sys.argv[1:2] == ["flow"]
 GLASS = sys.argv[1:2] == ["glass"]
 DARK_CSS = """
 :root{--paper:#F4EFE8;--ink:#121214;--red:#F2581F;--mute:rgba(244,239,232,.55)}
@@ -182,6 +183,71 @@ WAVES = ('<svg class="waves" viewBox="0 0 1080 520" preserveAspectRatio="none"><
          '<path d="M-20 470 C 300 390, 600 540, 1100 360" stroke-width="1" opacity=".6"/><path d="M-20 500 C 340 440, 640 560, 1100 420" stroke-width="1" opacity=".35"/></g></svg>')
 
 
+FLOW_CSS = """
+#pano{background:
+ radial-gradient(900px 700px at 300px 1300px,rgba(242,88,31,.30),transparent 70%),
+ radial-gradient(1100px 800px at 2700px 1350px,rgba(242,88,31,.22),transparent 70%),
+ radial-gradient(1000px 700px at 5100px 1400px,rgba(242,88,31,.30),transparent 70%),
+ radial-gradient(1200px 900px at 8200px 1300px,rgba(242,88,31,.45),transparent 70%),
+ #111113}
+.s,.s.k-final{background:transparent}
+.s.k-cover .photo{display:none}
+.s:not(.k-cover) .low{height:390px}
+.ck{padding:16px 22px;font-size:44px}
+.k-final .low .B{font-size:38px}
+.k-final .box .H{white-space:nowrap;font-size:100px}
+.k-cover .low .B{font-size:60px!important}
+.k-cover .lab{display:none}
+.flowph{position:absolute;left:0;top:0;width:1400px;height:900px;background-size:cover;background-position:30% 35%;z-index:0;
+ -webkit-mask-image:linear-gradient(90deg,#000 68%,transparent 100%),linear-gradient(180deg,#000 45%,transparent 92%);-webkit-mask-composite:source-in;
+ mask-image:linear-gradient(90deg,#000 68%,transparent 100%),linear-gradient(180deg,#000 45%,transparent 92%);mask-composite:intersect;opacity:.95}
+.flowph::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(242,88,31,.16),transparent 40%),linear-gradient(180deg,transparent 40%,rgba(17,17,19,.6))}
+.s.k-stmt:nth-of-type(2) .H,.s.k-stmt:nth-of-type(2) .B{text-shadow:0 2px 24px rgba(0,0,0,.6)}
+svg#flow{position:absolute;left:0;top:0;pointer-events:none;z-index:4}
+.s{z-index:2}
+"""
+
+
+def flow_overlay(slides):
+    W = 1080
+    red = next(i for i, s in enumerate(slides) if s["k"] == "red")      # 0-based
+    cream = [i for i, s in enumerate(slides) if s["k"] == "dark"]
+    base, flat = 1250, 1196
+    parts = []
+    # barras: agenda lotando antes da virada (mais e mais altas); depois, menos e espaçadas
+    x = 80
+    while x < red * W - 40:
+        h = 24 + (x / (red * W)) ** 1.4 * 150
+        parts.append(f'<rect x="{x:.0f}" y="{base-h:.0f}" width="26" height="{h:.0f}" rx="6" fill="rgba(244,239,232,.14)"/>')
+        x += 46
+    x = (red + 1) * W + 90
+    k = 0
+    while x < 7 * W + 600:
+        h = 40 + 16 * (k % 3)
+        sl = int(x // W)
+        col = "rgba(18,18,20,.16)" if sl in cream else "rgba(244,239,232,.14)"
+        parts.append(f'<rect x="{x:.0f}" y="{base-h:.0f}" width="40" height="{h:.0f}" rx="8" fill="{col}"/>')
+        x += 190; k += 1
+    # linha do faturamento: parada até a virada, sobe no slide laranja e segue subindo até o CTA
+    x0, xr = 80, red * W
+    pts = [(x0, flat), (xr + 60, flat), (xr + W - 60, 1110), ((red + 1) * W + 400, 1098), (5 * W + 500, 1084), (6 * W + 520, 1074), (7 * W + 60, 1080), (7 * W + 900, 1072)]
+    d = "M" + " L".join(f"{a:.0f},{b:.0f}" for a, b in pts)
+    rx = red * W
+    clip = f'<clipPath id="cr"><rect x="{rx}" y="0" width="{W}" height="1350"/></clipPath><clipPath id="notcr"><rect x="0" y="0" width="{rx}" height="1350"/><rect x="{rx+W}" y="0" width="{8*W}" height="1350"/></clipPath>'
+    glow = '<filter id="gw" x="-5%" y="-50%" width="110%" height="200%"><feGaussianBlur stdDeviation="9"/></filter>'
+    line = (f'<g clip-path="url(#notcr)"><path d="{d}" stroke="#F2581F" stroke-width="26" fill="none" opacity=".55" filter="url(#gw)"/>'
+            f'<path d="{d}" stroke="#F2581F" stroke-width="12" fill="none" stroke-linejoin="round" stroke-linecap="round"/></g>'
+            f'<g clip-path="url(#cr)"><path d="{d}" stroke="#121214" stroke-width="12" fill="none" stroke-linejoin="round"/></g>')
+    ex, ey = pts[-1]
+    arrow = f'<path d="M{ex-6},{ey-28} L{ex+40},{ey} L{ex-6},{ey+28} Z" fill="#F2581F" transform="rotate(-2 {ex} {ey})"/><text x="{ex-330}" y="{ey-30}" fill="#F2581F" font-family="Space Mono" font-size="20" letter-spacing="3" font-weight="700">SUA CONSULTORIA</text>'
+    labels = (f'<text x="{W+80}" y="{flat-26}" fill="#F2581F" font-family="Space Mono" font-size="20" letter-spacing="3" font-weight="700">FATURAMENTO</text>'
+              f'<text x="{W+80}" y="{base+0}" dy="-0" fill="rgba(244,239,232,.45)" font-family="Space Mono" font-size="20" letter-spacing="3"></text>'
+              f'<text x="{red*W-260}" y="{base-185}" fill="rgba(244,239,232,.5)" font-family="Space Mono" font-size="20" letter-spacing="3">AGENDA LOTADA</text>'
+              f'<text x="{(red+1)*W+90}" y="{base-90}" fill="rgba(244,239,232,.5)" font-family="Space Mono" font-size="20" letter-spacing="3">MENOS GENTE, MAIS MARGEM</text>')
+    dots = "".join(f'<circle cx="{a}" cy="{b}" r="9" fill="#fff" stroke="#F2581F" stroke-width="5"/>' for a, b in pts[2:-1])
+    return f'<svg id="flow" width="{8*W}" height="1350" viewBox="0 0 {8*W} 1350"><defs>{clip}{glow}</defs>{"".join(parts)}{line}{dots}{arrow}{labels}</svg>'
+
+
 def slide(i, sl):
     kind = sl["k"]
     cls = {"red": " red", "dark": " dark"}.get(kind, "")
@@ -238,6 +304,11 @@ def thread(red_idx):
 </svg>"""
 
 
+def flowph(slides):
+    ph = slides[0].get("photo")
+    return f'<div class="flowph" style="background-image:url(../fotos/{ph})"></div>' if ph else ""
+
+
 def build(slug, slides):
     assert len(slides) == 8, slug
     red_idx = next(i for i, s in enumerate(slides, 1) if s["k"] == "red")
@@ -245,12 +316,14 @@ def build(slug, slides):
     doc = f"""<!doctype html>
 <html lang="pt-BR"><head><meta charset="utf-8">
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Manrope:wght@600;700;800&family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-<style>{CSS}{DARK_CSS if DARK else ""}{GLASS_CSS if GLASS else ""}</style></head>
+<style>{CSS}{DARK_CSS if DARK else ""}{GLASS_CSS if GLASS else ""}{FLOW_CSS if FLOW else ""}</style></head>
 <body><div id="pano">
+{flowph(slides) if FLOW else ""}
 {body}
+{flow_overlay(slides) if FLOW else ""}
 {"" if DARK else thread(red_idx)}
 </div>{FIT_JS}</body></html>"""
-    d = os.path.join(HERE, slug + ("-glass" if GLASS else "-dark" if DARK else ""))
+    d = os.path.join(HERE, slug + ("-flow" if FLOW else "-glass" if GLASS else "-dark" if DARK else ""))
     os.makedirs(d, exist_ok=True)
     open(os.path.join(d, "index.html"), "w").write(doc)
 
