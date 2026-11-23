@@ -101,7 +101,7 @@ Regra simples: no máximo 24 horas entre o pagamento e o seu primeiro contato.
 
 Teste: compra o seu próprio serviço e anota o que você recebe e quando."""+CTA,
   "slides": [
-    {"k":"cover","kicker":"O aluno decide se fica","big":"Na semana 1.","bs":240,"sub":"Bem antes do retorno e do [[fim do plano.]]","lab":"A estrutura de uma boa consultoria online"},
+    {"k":"cover","photo":"palco.jpg","kicker":"O aluno decide se fica","big":"na semana 1.","bs":240,"sub":"Bem antes do retorno e do [[fim do plano.]]","lab":"A estrutura de uma boa consultoria online"},
     {"k":"stmt","H":"Pagou e ficou dias [[sem notícia?]]","B":"É aí que nasce o arrependimento. A pessoa estava empolgada e o silêncio esfria. **Quem esfria na semana 1 raramente renova.**"},
     {"k":"stmt","H":"O que precisa [[acontecer.]]","items":["Boas-vindas no mesmo dia do pagamento.","Prazo claro de quando o plano chega.","Uma vitória pequena nos primeiros 7 dias."]},
     {"k":"red","lab":"A regra","H":"24 horas.","hs":276,"B":"É o tempo máximo entre o pagamento e o seu primeiro contato. **Pode ser uma mensagem pronta, mas tem que chegar.**"},

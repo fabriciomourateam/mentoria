@@ -1,6 +1,6 @@
 # Gera os carrosséis educativos do @fabriciomoura.business no molde aprovado (DESIGN.md).
 # Uso: python3 gen.py  -> cria cNN-slug/index.html; depois render.cjs em cada pasta.
-import html, os, re
+import html, os, re, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 LINE_Y = 600
@@ -87,10 +87,40 @@ def foot(i):
     return '<div class="a foot mono"><span></span><span class="go">{}</span></div>'.format("Arraste →" if i == 1 else "→")
 
 
+DARK = sys.argv[1:2] == ["dark"]
+DARK_CSS = """
+:root{--paper:#F4EFE8;--ink:#121214;--red:#F2581F;--mute:rgba(244,239,232,.55)}
+.s{background:radial-gradient(120% 80% at 100% 100%,rgba(242,88,31,.22),transparent 55%),#121214;color:var(--paper)}
+.s.red{background:#F2581F;color:#121214}
+.s.dark{background:#F4EFE8;color:#121214}
+.s.dark .B,.s.dark .B b{color:#121214}
+.s.dark .lab{color:#C8441A}
+.H{font-family:Manrope,sans-serif;font-weight:800;text-transform:none;letter-spacing:-.035em;line-height:1.04}
+.chrome{color:rgba(244,239,232,.5)}
+.red .chrome,.dark .chrome{color:rgba(18,18,20,.55)}
+.B{color:rgba(244,239,232,.86)} .B b{color:#fff}
+.red .B,.red .B b{color:#121214}
+.r{color:var(--red)} .red .r{color:#fff} .dark .r{color:var(--red)}
+.ck{background:rgba(244,239,232,.05);border:1.5px solid rgba(244,239,232,.14);border-radius:22px;padding:22px 26px;font-size:50px}
+.ck i{font-family:Manrope,sans-serif;font-weight:800}
+.box{background:var(--red);color:#121214;border-radius:24px}
+.box .H.r{color:#121214}
+.foot .go{color:var(--red)}
+.photo{position:absolute;inset:0;background-size:cover;background-position:center 20%}
+.photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(18,18,20,.15) 0%,rgba(18,18,20,.35) 35%,#121214 72%)}
+.k-cover .top{bottom:auto;top:620px;gap:10px}
+.k-cover .low{top:930px;height:300px}
+"""
+import sys
+
+
 def slide(i, sl):
     kind = sl["k"]
     cls = {"red": " red", "dark": " dark"}.get(kind, "")
-    out = [f'<section class="s{cls}" style="left:{(i-1)*1080}px">', chrome(i)]
+    out = [f'<section class="s{cls} k-{kind}" style="left:{(i-1)*1080}px">']
+    if DARK and kind == "cover" and sl.get("photo"):
+        out.append(f'<div class="photo" style="background-image:url(../fotos/{sl["photo"]})"></div>')
+    out.append(chrome(i))
     if kind == "cover":
         out.append(f'<div class="a top"><div style="font-size:54px;font-weight:700;letter-spacing:-.02em">{md(sl["kicker"])}</div>'
                    f'<div class="H" style="font-size:{sl.get("bs",250)}px;line-height:1;white-space:nowrap">{md(sl["big"])}</div></div>')
@@ -144,19 +174,22 @@ def build(slug, slides):
     body = "\n".join(slide(i, s) for i, s in enumerate(slides, 1))
     doc = f"""<!doctype html>
 <html lang="pt-BR"><head><meta charset="utf-8">
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-<style>{CSS}</style></head>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Manrope:wght@600;700;800&family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>{CSS}{DARK_CSS if DARK else ""}</style></head>
 <body><div id="pano">
 {body}
-{thread(red_idx)}
+{"" if DARK else thread(red_idx)}
 </div>{FIT_JS}</body></html>"""
-    d = os.path.join(HERE, slug)
+    d = os.path.join(HERE, slug + ("-dark" if DARK else ""))
     os.makedirs(d, exist_ok=True)
     open(os.path.join(d, "index.html"), "w").write(doc)
 
 
 from posts import POSTS  # noqa: E402
 
+ONLY = sys.argv[2:]
 for slug, p in POSTS.items():
+    if ONLY and slug not in ONLY:
+        continue
     build(slug, p["slides"])
     print("ok", slug)
