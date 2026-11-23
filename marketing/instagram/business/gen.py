@@ -193,6 +193,8 @@ FLOW_CSS = """
 .s,.s.k-final{background:transparent}
 .s.k-cover .photo{display:none}
 .s:not(.k-cover) .low{height:390px}
+.low:has(> .ck:nth-of-type(4)){gap:14px}
+.low:has(> .ck:nth-of-type(4)) .ck{padding:10px 20px;font-size:40px}
 .ck{padding:16px 22px;font-size:44px}
 .k-final .low .B{font-size:38px}
 .k-final .box .H{white-space:nowrap;font-size:100px}
@@ -234,8 +236,18 @@ GF_CSS = """
 """
 
 
-def flow_overlay(slides):
+FLOWTXT = {
+    # main, pre (antes da virada), post (depois), end (seta), ticks (sobre os 4 pontos)
+    "c03-agenda-cheia": ("FATURAMENTO", "AGENDA LOTADA", "MENOS GENTE, MAIS MARGEM", "SUA CONSULTORIA", None),
+    "c05-semana-1": ("CONFIANÇA DO ALUNO", "DIAS SEM NOTÍCIA", "CONTATO · META · VITÓRIA", "RENOVAÇÃO", ("24H", "DIA 3", "DIA 5", "DIA 7")),
+    "c06-renovacao": ("TAXA DE RENOVAÇÃO", "PEDIDO NO ÚLTIMO DIA", "FASE 1 · FASE 2 · FASE 3", "ALUNO QUE FICA", ("MÊS 1", "MÊS 3", "MÊS 6", "MÊS 9")),
+    "c07-4-numeros": ("SEUS NÚMEROS", "SÓ O PLACAR", "CONTATOS · CONVERSÃO · VENDAS · CAIXA", "DONO DO NEGÓCIO", ("SEM 1", "SEM 2", "SEM 3", "SEM 4")),
+}
+
+
+def flow_overlay(slides, slug=""):
     W = 1080
+    t_main, t_pre, t_post, t_end, ticks = FLOWTXT.get(slug, FLOWTXT["c03-agenda-cheia"])
     red = next(i for i, s in enumerate(slides) if s["k"] == "red")      # 0-based
     cream = [i for i, s in enumerate(slides) if s["k"] == "dark"]
     base, flat = 1250, 1196
@@ -265,12 +277,16 @@ def flow_overlay(slides):
             f'<path d="{d}" stroke="#F2581F" stroke-width="12" fill="none" stroke-linejoin="round" stroke-linecap="round"/></g>'
             f'<g clip-path="url(#cr)"><path d="{d}" stroke="#121214" stroke-width="12" fill="none" stroke-linejoin="round"/></g>')
     ex, ey = pts[-1]
-    arrow = f'<path d="M{ex-6},{ey-28} L{ex+40},{ey} L{ex-6},{ey+28} Z" fill="#F2581F" transform="rotate(-2 {ex} {ey})"/><text x="{ex-330}" y="{ey-30}" fill="#F2581F" font-family="Space Mono" font-size="20" letter-spacing="3" font-weight="700">SUA CONSULTORIA</text>'
-    labels = (f'<text x="{W+80}" y="{flat-26}" fill="#F2581F" font-family="Space Mono" font-size="20" letter-spacing="3" font-weight="700">FATURAMENTO</text>'
+    arrow = f'<path d="M{ex-6},{ey-28} L{ex+40},{ey} L{ex-6},{ey+28} Z" fill="#F2581F" transform="rotate(-2 {ex} {ey})"/><text x="{ex-330}" y="{ey-30}" fill="#F2581F" font-family="Space Mono" font-size="20" letter-spacing="3" font-weight="700">{t_end}</text>'
+    labels = (f'<text x="{W+80}" y="{flat-26}" fill="#F2581F" font-family="Space Mono" font-size="20" letter-spacing="3" font-weight="700">{t_main}</text>'
               f'<text x="{W+80}" y="{base+0}" dy="-0" fill="rgba(244,239,232,.45)" font-family="Space Mono" font-size="20" letter-spacing="3"></text>'
-              f'<text x="{red*W-260}" y="{base-185}" fill="rgba(244,239,232,.5)" font-family="Space Mono" font-size="20" letter-spacing="3">AGENDA LOTADA</text>'
-              f'<text x="{(red+1)*W+90}" y="{base-90}" fill="rgba(244,239,232,.5)" font-family="Space Mono" font-size="20" letter-spacing="3">MENOS GENTE, MAIS MARGEM</text>')
+              f'<text x="{red*W-100}" y="{base-185}" text-anchor="end" fill="rgba(244,239,232,.5)" font-family="Space Mono" font-size="20" letter-spacing="3">{t_pre}</text>'
+              f'<text x="{(red+1)*W+90}" y="{base-90}" fill="rgba(244,239,232,.5)" font-family="Space Mono" font-size="20" letter-spacing="3">{t_post}</text>')
     dots = "".join(f'<circle cx="{a}" cy="{b}" r="9" fill="#fff" stroke="#F2581F" stroke-width="5"/>' for a, b in pts[2:-1])
+    if ticks:
+        cols = {red: "#140c06"} | {c: "#C2470C" for c in cream}
+        labels += "".join(f'<text x="{a}" y="{b-30}" text-anchor="middle" fill="{cols.get(int(a//W), "#F2581F")}" font-family="Space Mono" font-size="20" letter-spacing="2" font-weight="700">{t}</text>'
+                          for (a, b), t in zip(pts[2:-1], ticks))
     if GLASS:
         parts = [p.replace('fill="rgba(244,239,232,.14)"', 'fill="rgba(255,170,90,.10)" stroke="rgba(255,180,100,.35)" stroke-width="1.5"')
                   .replace('fill="rgba(18,18,20,.16)"', 'fill="rgba(217,72,15,.10)" stroke="rgba(217,72,15,.35)" stroke-width="1.5"') for p in parts]
@@ -377,7 +393,7 @@ def build(slug, slides):
 {flowph(slides) if FLOW else ""}
 {cblocks(slides) if GLASS and FLOW else ""}
 {body}
-{flow_overlay(slides) if FLOW else ""}
+{flow_overlay(slides, slug) if FLOW else ""}
 {"" if DARK else thread(red_idx)}
 </div>{FIT_JS}</body></html>"""
     d = os.path.join(HERE, slug + ("-glassflow" if GLASS and FLOW else "-flow" if FLOW else "-glass" if GLASS else "-dark" if DARK else ""))
