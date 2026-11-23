@@ -95,7 +95,7 @@ DARK_CSS = """
 .s.dark{background:#F4EFE8;color:#121214}
 .s.dark .B,.s.dark .B b{color:#121214}
 .s.dark .lab{color:#C8441A}
-.H{font-family:Manrope,sans-serif;font-weight:800;text-transform:none;letter-spacing:-.035em;line-height:1.04}
+.H{font-family:Anton,sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:.005em;line-height:1.08}
 .chrome{color:rgba(244,239,232,.5)}
 .red .chrome,.dark .chrome{color:rgba(18,18,20,.55)}
 .B{color:rgba(244,239,232,.86)} .B b{color:#fff}

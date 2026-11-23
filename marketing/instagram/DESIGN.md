@@ -60,8 +60,7 @@ Regra: texto nunca encosta na linha; a linha entra num slide na mesma altura em 
 
 ## Tema escuro (padrão a partir de 23/11/2026)
 Adotado para falar a mesma língua da apresentação de vendas (conjunto "A"): fundo grafite `#121214`
-com brilho laranja no canto, laranja `#F2581F`, creme `#F4EFE8`, títulos em **Manrope 800** em caixa
-normal (não caixa alta), cards com borda clara e cantos arredondados, sem a linha contínua.
+com brilho laranja no canto, laranja `#F2581F`, creme `#F4EFE8`, títulos em **Anton caixa alta** (decisão do Fabricio em 23/11), cards com borda clara e cantos arredondados, sem a linha contínua.
 Ritmo: slides escuros, um slide laranja (o número) e um creme (a virada). Capa com foto do Fabricio
 (pasta `business/fotos/`, recortes provisórios da apresentação; trocar por originais em alta).
 Gerar: `python3 business/gen.py dark <slug...>` cria `business/<slug>-dark/`.
