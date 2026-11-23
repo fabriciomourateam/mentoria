@@ -78,7 +78,7 @@ Duas saídas: precificar o pacote inteiro ou reduzir o tempo sem reduzir o cuida
 
 Desafio: cronometra uma semana e me conta o resultado."""+CTA,
   "slides": [
-    {"k":"cover","kicker":"Sua consulta custa R$ 200.","big":"Sua hora","bs":264,"sub":"provavelmente vale [[menos da metade]] disso.","lab":"A conta que quase ninguém faz"},
+    {"k":"cover","photo":"computador.jpg","kicker":"Sua consulta custa R$ 200.","big":"sua hora","bs":264,"sub":"provavelmente vale [[menos da metade]] disso.","lab":"A conta que quase ninguém faz"},
     {"k":"stmt","H":"A consulta não acaba [[na chamada.]]","B":"Tem o plano, as mensagens, os ajustes, o retorno. **Esse tempo também é seu, e ninguém está pagando por ele.**"},
     {"k":"stmt","lab":"Exemplo ilustrativo","H":"Pra onde vai [[o tempo.]]","items":["1h de consulta","1h montando o plano","1h30 de mensagens no mês","30min de ajustes"],"B":"**Total: 4 horas por aluno.**"},
     {"k":"red","lab":"Exemplo ilustrativo","H":"R$ 200 ÷ 4h","nw":1,"hs":180,"big":"= R$ 50 a hora.","bigs":156,"B":"E ainda sai imposto, plataforma e ferramentas. **A consulta de R$ 200 vira uma hora de R$ 40.**"},
@@ -124,7 +124,7 @@ Exemplo ilustrativo: com 40 alunos, sair de 30% pra 60% de renovação são 12 a
 
 Qual é a sua taxa de renovação hoje?"""+CTA,
   "slides": [
-    {"k":"cover","kicker":"Renovação","big":"Se planeja.","bs":258,"sub":"E começa no [[primeiro dia]] do plano.","lab":"A estrutura de uma boa consultoria online"},
+    {"k":"cover","photo":"celular.jpg","kicker":"Renovação","big":"se planeja.","bs":258,"sub":"E começa no [[primeiro dia]] do plano.","lab":"A estrutura de uma boa consultoria online"},
     {"k":"stmt","H":"Pedir no fim do plano [[é tarde.]]","B":"Se a pessoa chegou no último mês sem saber o que vem depois, a decisão de sair já foi tomada. **Você só fica sabendo agora.**"},
     {"k":"stmt","H":"Como [[planejar.]]","items":["Mostre a jornada inteira logo no início.","Marque a evolução a cada mês.","Apresente a próxima fase antes do fim."]},
     {"k":"red","lab":"Exemplo ilustrativo · 40 alunos","H":"De 30% pra 60%","nw":1,"hs":168,"big":"= 12 alunos a mais.","bigs":132,"B":"Por ciclo, **sem gastar um real pra trazer gente nova.** Por isso renovação vem antes de captação."},
@@ -146,7 +146,7 @@ Se as vendas caem, você sabe onde olhar: chegou menos gente ou converteu menos?
 
 Uma planilha, 4 colunas, 10 minutos toda segunda."""+CTA,
   "slides": [
-    {"k":"cover","kicker":"Olhar só o faturamento é ver","big":"Tarde demais.","bs":228,"sub":"Ele é o resultado. Esses [[4 números]] mostram antes.","lab":"Mentalidade de empresário"},
+    {"k":"cover","photo":"trofeus.jpg","kicker":"Olhar só o faturamento é ver","big":"tarde demais.","bs":228,"sub":"Ele é o resultado. Esses [[4 números]] mostram antes.","lab":"Mentalidade de empresário"},
     {"k":"stmt","H":"Faturamento é [[só o placar.]]","B":"Quando ele cai, o problema começou semanas antes. **Quem olha só o placar descobre tarde.**"},
     {"k":"stmt","H":"Os 4 [[números.]]","hs":180,"items":["Contatos novos na semana.","Quantos viraram venda.","Alunos ativos.","Quantos renovaram."]},
     {"k":"red","lab":"Exemplo ilustrativo","H":"20 contatos × 25%","nw":1,"hs":144,"big":"= 5 vendas.","bigs":180,"B":"Se as vendas caem, você sabe onde olhar: **chegou menos gente ou converteu menos?** São problemas diferentes."},
