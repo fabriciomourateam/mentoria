@@ -80,23 +80,23 @@ def md(s):
 
 
 def chrome(i):
-    if sys.argv[1:2] in (["dark"], ["glass"], ["flow"]):
+    if sys.argv[1:2] in (["dark"], ["glass"], ["flow"], ["glassflow"]):
         return (f'<div class="a chrome mono"><span class="brand"><b>FM</b>Fabricio Moura · Mentoria</span>'
                 f'<span>{i:02d} <em>/ 08</em></span></div>')
     return f'<div class="a chrome mono"><span>Fabricio Moura</span><span>{i:02d}/08</span></div>'
 
 
 def foot(i):
-    if sys.argv[1:2] in (["dark"], ["glass"], ["flow"]):
+    if sys.argv[1:2] in (["dark"], ["glass"], ["flow"], ["glassflow"]):
         bars = "".join(f'<i class="{"on" if k <= i else ""}"></i>' for k in range(1, 9))
         go = "Arraste" if i == 1 else ("" if i == 8 else "")
         return f'<div class="a foot mono"><span class="prog">{bars}</span><span class="go">{go}{" →" if i < 8 else ""}</span></div>'
     return '<div class="a foot mono"><span></span><span class="go">{}</span></div>'.format("Arraste →" if i == 1 else "→")
 
 
-DARK = sys.argv[1:2] in (["dark"], ["glass"], ["flow"])
-FLOW = sys.argv[1:2] == ["flow"]
-GLASS = sys.argv[1:2] == ["glass"]
+DARK = sys.argv[1:2] in (["dark"], ["glass"], ["flow"], ["glassflow"])
+FLOW = sys.argv[1:2] in (["flow"], ["glassflow"])
+GLASS = sys.argv[1:2] in (["glass"], ["glassflow"])
 DARK_CSS = """
 :root{--paper:#F4EFE8;--ink:#121214;--red:#F2581F;--mute:rgba(244,239,232,.55)}
 .s{background:radial-gradient(120% 80% at 100% 100%,rgba(242,88,31,.22),transparent 55%),#121214;color:var(--paper)}
@@ -207,6 +207,20 @@ svg#flow{position:absolute;left:0;top:0;pointer-events:none;z-index:4}
 .s{z-index:2}
 """
 
+GF_CSS = """
+#pano{background:
+ radial-gradient(900px 650px at 250px 1350px,rgba(255,138,42,.38),transparent 70%),
+ radial-gradient(1000px 700px at 2400px 1400px,rgba(255,120,30,.22),transparent 70%),
+ radial-gradient(1100px 900px at 3780px 700px,rgba(255,138,42,.30),transparent 70%),
+ radial-gradient(1000px 700px at 5600px 1400px,rgba(255,120,30,.24),transparent 70%),
+ radial-gradient(1300px 900px at 8300px 1250px,rgba(255,150,50,.50),transparent 70%),
+ linear-gradient(180deg,#0d0a08,#150d07)}
+.s,.s.red,.s.dark,.s.k-final{background:transparent!important}
+.r,.H .r{text-shadow:none!important}
+.flowph::after{background:linear-gradient(90deg,rgba(255,138,42,.18),transparent 45%),linear-gradient(180deg,transparent 40%,rgba(13,10,8,.7))}
+.flowph{filter:sepia(.25) saturate(1.1)}
+"""
+
 
 def flow_overlay(slides):
     W = 1080
@@ -245,6 +259,23 @@ def flow_overlay(slides):
               f'<text x="{red*W-260}" y="{base-185}" fill="rgba(244,239,232,.5)" font-family="Space Mono" font-size="20" letter-spacing="3">AGENDA LOTADA</text>'
               f'<text x="{(red+1)*W+90}" y="{base-90}" fill="rgba(244,239,232,.5)" font-family="Space Mono" font-size="20" letter-spacing="3">MENOS GENTE, MAIS MARGEM</text>')
     dots = "".join(f'<circle cx="{a}" cy="{b}" r="9" fill="#fff" stroke="#F2581F" stroke-width="5"/>' for a, b in pts[2:-1])
+    if GLASS:
+        parts = [p.replace('fill="rgba(244,239,232,.14)"', 'fill="rgba(255,170,90,.10)" stroke="rgba(255,180,100,.35)" stroke-width="1.5"')
+                  .replace('fill="rgba(18,18,20,.16)"', 'fill="rgba(255,170,90,.10)" stroke="rgba(255,180,100,.35)" stroke-width="1.5"') for p in parts]
+        grad = f'<linearGradient id="lg" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="{8*W}" y2="0"><stop offset="0" stop-color="#FF7A1A"/><stop offset=".5" stop-color="#FFB050"/><stop offset="1" stop-color="#FFD27A"/></linearGradient>'
+        glow2 = '<filter id="gw2" x="-5%" y="-80%" width="110%" height="260%"><feGaussianBlur stdDeviation="14"/></filter>'
+        streaks = (f'<g fill="none" stroke="url(#lg)" opacity=".55">'
+                   f'<path d="M-20 1180 C 1500 1020, 2800 1330, 4300 1150 S 7200 1000, 8660 1120" stroke-width="2" filter="url(#gl2)"/>'
+                   f'<path d="M-20 1180 C 1500 1020, 2800 1330, 4300 1150 S 7200 1000, 8660 1120" stroke-width="1.2"/>'
+                   f'<path d="M-20 1260 C 1700 1150, 3200 1350, 4700 1240 S 7400 1130, 8660 1220" stroke-width="1" opacity=".6"/>'
+                   f'<path d="M-20 1310 C 1900 1250, 3500 1360, 5000 1300 S 7600 1230, 8660 1290" stroke-width="1" opacity=".35"/></g>')
+        line = (f'<path d="{d}" stroke="url(#lg)" stroke-width="34" fill="none" opacity=".55" filter="url(#gw2)"/>'
+                f'<path d="{d}" stroke="url(#lg)" stroke-width="10" fill="none" stroke-linejoin="round" stroke-linecap="round"/>')
+        dots = "".join(f'<circle cx="{a}" cy="{b}" r="10" fill="#FFD27A" stroke="#FF8A2A" stroke-width="4" filter="drop-shadow(0 0 10px #FF8A2A)"/>' for a, b in pts[2:-1])
+        arrow = arrow.replace('fill="#F2581F"', 'fill="#FFC15A"')
+        labels = labels.replace('fill="#F2581F"', 'fill="#FFB050"').replace('fill="rgba(244,239,232,.5)"', 'fill="rgba(255,200,140,.6)"')
+        defs = f'{grad}{glow2}<filter id="gl2"><feGaussianBlur stdDeviation="5"/></filter>'
+        return f'<svg id="flow" width="{8*W}" height="1350" viewBox="0 0 {8*W} 1350"><defs>{defs}</defs>{streaks}{"".join(parts)}{line}{dots}{arrow}{labels}</svg>'
     return f'<svg id="flow" width="{8*W}" height="1350" viewBox="0 0 {8*W} 1350"><defs>{clip}{glow}</defs>{"".join(parts)}{line}{dots}{arrow}{labels}</svg>'
 
 
@@ -254,7 +285,7 @@ def slide(i, sl):
     out = [f'<section class="s{cls} k-{kind}" style="left:{(i-1)*1080}px">']
     if DARK and kind == "cover" and sl.get("photo"):
         out.append(f'<div class="photo" style="background-image:url(../fotos/{sl["photo"]})"></div>')
-    if GLASS:
+    if GLASS and not FLOW:
         out.append(WAVES)
     out.append(chrome(i))
     if kind == "cover":
@@ -316,14 +347,14 @@ def build(slug, slides):
     doc = f"""<!doctype html>
 <html lang="pt-BR"><head><meta charset="utf-8">
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Manrope:wght@600;700;800&family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-<style>{CSS}{DARK_CSS if DARK else ""}{GLASS_CSS if GLASS else ""}{FLOW_CSS if FLOW else ""}</style></head>
+<style>{CSS}{DARK_CSS if DARK else ""}{GLASS_CSS if GLASS else ""}{FLOW_CSS if FLOW else ""}{GF_CSS if GLASS and FLOW else ""}</style></head>
 <body><div id="pano">
 {flowph(slides) if FLOW else ""}
 {body}
 {flow_overlay(slides) if FLOW else ""}
 {"" if DARK else thread(red_idx)}
 </div>{FIT_JS}</body></html>"""
-    d = os.path.join(HERE, slug + ("-flow" if FLOW else "-glass" if GLASS else "-dark" if DARK else ""))
+    d = os.path.join(HERE, slug + ("-glassflow" if GLASS and FLOW else "-flow" if FLOW else "-glass" if GLASS else "-dark" if DARK else ""))
     os.makedirs(d, exist_ok=True)
     open(os.path.join(d, "index.html"), "w").write(doc)
 
