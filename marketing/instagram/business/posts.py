@@ -172,7 +172,7 @@ Na quinta eu falei que faturamento é só o placar. A placa também é. O jogo f
 
 É esse caminho que eu passo na mentoria pra treinador e nutricionista que já atende e quer escalar."""+CTA,
   "slides": [
-    {"k":"cover","photo":"trofeus.jpg","phstyle":"width:1250px;background-position:50% 10%","kicker":"O que tem por trás","big":"das placas.","bs":250,"sub":"Estrutura, processo e [[número toda semana.]]","lab":"Bastidores"},
+    {"k":"cover","photo":"trofeus-edit.jpg","phstyle":"width:1250px;background-position:50% 10%","kicker":"O que tem por trás","big":"das placas.","bs":250,"sub":"Estrutura, processo e [[número toda semana.]]","lab":"Bastidores"},
     {"k":"stmt","H":"Toda placa tem [[um bastidor.]]","B":"Muita gente vê a placa e pergunta qual foi o segredo. **A resposta é meio sem graça: estrutura, montada peça por peça.**"},
     {"k":"stmt","H":"O que mudou [[no caminho.]]","items":["Vender acompanhamento, sem consulta avulsa.","Processo na entrada, entrega e renovação.","Time, pra eu deixar de ser o gargalo.","Números olhados toda semana."]},
     {"k":"red","lab":"Hoje","H":"+2 mil transformações","nw":1,"hs":120,"big":"+200 alunos ativos.","bigs":150,"B":"No meu time, com processo e número toda semana. **Sem eu precisar estar em todo atendimento.**"},
