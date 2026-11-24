@@ -1,6 +1,19 @@
 import cv2, numpy as np, sys
 src, out, dbg = sys.argv[1:4]
 im = cv2.imread(src)
+# linha do cabelo: puxa o cabelo pra baixo (liquify) e tira o brilho da testa
+H, W = im.shape[:2]
+yy, xx = np.mgrid[0:H, 0:W].astype(np.float32)
+cx = 361.0
+ax = np.clip(1 - np.abs(xx - cx) / 52.0, 0, 1) ** 0.6           # some fora de x 309..413
+amp = 7.0 + 5.0 * np.clip(np.abs(xx - cx) / 34.0, 0, 1)         # mais nas entradas
+up = np.clip((yy - 40) / 36.0, 0, 1); dn = np.clip((112 - yy) / 36.0, 0, 1)
+bump = np.minimum(up, dn) ** 0.9
+d = amp * ax * bump
+im = cv2.remap(im, xx, yy - d, cv2.INTER_CUBIC, borderMode=cv2.BORDER_REFLECT)
+sh = np.zeros((H, W), np.float32); cv2.ellipse(sh, (362, 90), (24, 11), 0, 0, 360, 1, -1)
+sh = cv2.GaussianBlur(sh, (0, 0), 6)[..., None]
+im = np.clip(im * (1 - 0.13 * sh), 0, 255).astype(np.uint8)
 # regioes (x1,y1,x2,y2) no original 600x752: numero + texto de cada placa
 R = [(62,200,178,298), (225,295,330,382), (340,320,412,392), (95,405,182,462)]
 d = im.copy()
