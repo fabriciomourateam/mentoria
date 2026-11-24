@@ -241,6 +241,7 @@ FLOWTXT = {
     "c03-agenda-cheia": ("FATURAMENTO", "AGENDA LOTADA", "MENOS GENTE, MAIS MARGEM", "SUA CONSULTORIA", None),
     "c05-semana-1": ("CONFIANÇA DO ALUNO", "DIAS SEM NOTÍCIA", "CONTATO · META · VITÓRIA", "RENOVAÇÃO", ("24H", "DIA 3", "DIA 5", "DIA 7")),
     "c06-renovacao": ("TAXA DE RENOVAÇÃO", "PEDIDO NO ÚLTIMO DIA", "FASE 1 · FASE 2 · FASE 3", "ALUNO QUE FICA", ("MÊS 1", "MÊS 3", "MÊS 6", "MÊS 9")),
+    "c08-bastidor-placas": ("CRESCIMENTO", "AGENDA NO LIMITE", "ESTRUTURA · PROCESSO · TIME", "AS PLACAS", ("ENTRADA", "ENTREGA", "RENOVAÇÃO", "NÚMEROS")),
     "c07-4-numeros": ("SEUS NÚMEROS", "SÓ O PLACAR", "CONTATOS · CONVERSÃO · VENDAS · CAIXA", "DONO DO NEGÓCIO", ("SEM 1", "SEM 2", "SEM 3", "SEM 4")),
 }
 
@@ -378,7 +379,8 @@ def cblocks(slides):
 
 def flowph(slides):
     ph = slides[0].get("photo")
-    return f'<div class="flowph" style="background-image:url(../fotos/{ph})"></div>' if ph else ""
+    extra = slides[0].get("phstyle", "")
+    return f'<div class="flowph" style="background-image:url(../fotos/{ph});{extra}"></div>' if ph else ""
 
 
 def build(slug, slides):

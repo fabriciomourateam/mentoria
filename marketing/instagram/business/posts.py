@@ -155,4 +155,30 @@ Uma planilha, 4 colunas, 10 minutos toda segunda."""+CTA,
     {"k":"stmt","lab":"Faz agora","H":"Uma planilha, [[4 colunas.]]","B":"Toda segunda, 10 minutos. **Em um mês você vai conhecer o seu negócio melhor do que em um ano de feeling.**"},
     {"k":"final","H":"Salva e começa [[segunda.]]","B":FINAL_B},
   ]},
+"c08-bastidor-placas": {
+  "caption": """O que tem por trás dessas placas.
+
+Muita gente vê a placa e pergunta qual foi o segredo. A resposta é meio sem graça: estrutura, montada peça por peça.
+
+O que mudou no caminho:
+1. Parei de vender consulta avulsa e passei a vender acompanhamento.
+2. Coloquei processo na entrada, na entrega e na renovação.
+3. Montei um time pra eu deixar de ser o gargalo.
+4. Passei a olhar os números toda semana.
+
+Hoje são +2 mil transformações e +200 alunos ativos no meu time.
+
+Na quinta eu falei que faturamento é só o placar. A placa também é. O jogo foi jogado antes, nos bastidores.
+
+É esse caminho que eu passo na mentoria pra treinador e nutricionista que já atende e quer escalar."""+CTA,
+  "slides": [
+    {"k":"cover","photo":"trofeus.jpg","phstyle":"width:1250px;background-position:50% 10%","kicker":"O que tem por trás","big":"das placas.","bs":250,"sub":"Estrutura, processo e [[número toda semana.]]","lab":"Bastidores"},
+    {"k":"stmt","H":"Toda placa tem [[um bastidor.]]","B":"Muita gente vê a placa e pergunta qual foi o segredo. **A resposta é meio sem graça: estrutura, montada peça por peça.**"},
+    {"k":"stmt","H":"O que mudou [[no caminho.]]","items":["Vender acompanhamento, sem consulta avulsa.","Processo na entrada, entrega e renovação.","Time, pra eu deixar de ser o gargalo.","Números olhados toda semana."]},
+    {"k":"red","lab":"Hoje","H":"+2 mil transformações","nw":1,"hs":120,"big":"+200 alunos ativos.","bigs":150,"B":"No meu time, com processo e número toda semana. **Sem eu precisar estar em todo atendimento.**"},
+    {"k":"stmt","lab":"O que ninguém vê","H":"A placa também [[é placar.]]","B":"Na quinta eu falei que faturamento é só o placar. **O jogo foi jogado antes:** na entrada, no acompanhamento, na renovação."},
+    {"k":"dark","H":"A estrutura [[vem primeiro.]]","B":"Quem espera faturar pra depois se organizar fica preso na agenda. **Primeiro a estrutura. O número vem atrás.**"},
+    {"k":"stmt","lab":"Por que eu conto isso","H":"É isso que [[eu ensino.]]","B":"Na mentoria eu passo esse caminho pra treinador e nutricionista que já atende e quer escalar. **No seu negócio, com os seus números.**"},
+    {"k":"final","H":"Quer montar [[a sua?]]","B":FINAL_B},
+  ]},
 }
