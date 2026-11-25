@@ -219,7 +219,15 @@ GF_CSS = """
  linear-gradient(180deg,#0d0a08,#150d07)}
 .s,.s.red,.s.dark,.s.k-final{background:transparent!important}
 .r,.H .r{text-shadow:none!important}
-.cblock{position:absolute;top:0;height:1350px;z-index:1}
+.cblock{position:absolute;top:0;height:1350px;z-index:1;
+ box-shadow:inset 2px 0 0 rgba(255,236,210,.55),inset -2px 0 0 rgba(255,236,210,.55),inset 60px 0 80px -60px rgba(60,20,0,.28),inset -60px 0 80px -60px rgba(60,20,0,.28)!important}
+.cseam{position:absolute;top:0;height:1350px;width:150px;z-index:1;pointer-events:none}
+.cseam.orange.l{background:linear-gradient(270deg,rgba(255,138,42,.30),rgba(255,138,42,.08) 45%,transparent)}
+.cseam.orange.r{background:linear-gradient(90deg,rgba(255,138,42,.30),rgba(255,138,42,.08) 45%,transparent)}
+.cseam.cream.l{background:linear-gradient(270deg,rgba(255,226,196,.16),rgba(255,226,196,.04) 45%,transparent)}
+.cseam.cream.r{background:linear-gradient(90deg,rgba(255,226,196,.16),rgba(255,226,196,.04) 45%,transparent)}
+.cseam::after{content:"";position:absolute;top:8%;bottom:8%;width:2px;background:linear-gradient(180deg,transparent,rgba(255,200,140,.75) 30%,rgba(255,200,140,.75) 70%,transparent)}
+.cseam.l::after{right:0} .cseam.r::after{left:0}
 .cblock.orange{background:radial-gradient(70% 50% at 80% 10%,rgba(255,220,160,.45),transparent 60%),linear-gradient(165deg,#FFA049 0%,#F46A1E 45%,#D9480F 100%);
  box-shadow:0 0 120px rgba(255,138,42,.45)}
 .cblock.cream{background:radial-gradient(80% 60% at 100% 100%,rgba(255,170,90,.28),transparent 60%),linear-gradient(170deg,#FBF6EF,#EFE6DA)}
@@ -231,7 +239,8 @@ GF_CSS = """
 .dark .r{background:linear-gradient(90deg,#E5520F,#F28A2A);-webkit-background-clip:text;background-clip:text;color:transparent;filter:none}
 .dark .lab{color:#D9530F!important}
 .red .lab::before,.dark .lab::before{background:currentColor}
-.flowph::after{background:linear-gradient(90deg,rgba(255,138,42,.18),transparent 45%),linear-gradient(180deg,transparent 40%,rgba(13,10,8,.7))}
+.flowph::after{background:linear-gradient(90deg,rgba(255,138,42,.14),transparent 45%),linear-gradient(180deg,rgba(13,10,8,.30) 0%,rgba(13,10,8,.42) 35%,rgba(13,10,8,.88) 78%),rgba(13,10,8,.10)}
+.k-cover .H,.k-cover .B,.k-cover .a.top div{text-shadow:0 4px 30px rgba(0,0,0,.65)}
 .flowph{filter:sepia(.25) saturate(1.1)}
 """
 
@@ -372,8 +381,11 @@ def cblocks(slides):
         if s["k"] in ("red", "dark"):
             cls = "orange" if s["k"] == "red" else "cream"
             # paralelogramo: invade o slide anterior embaixo e o seguinte em cima
-            out.append(f'<div class="cblock {cls}" style="left:{i*W-b}px;width:{W+2*b}px;'
-                       f'clip-path:polygon({b}px 0,100% 0,{W+b}px 100%,0 100%)"></div>')
+            out.append(f'<div class="cblock {cls}" style="left:{i*W}px;width:{W}px"></div>')
+            if i > 0:
+                out.append(f'<div class="cseam {cls} l" style="left:{i*W-150}px"></div>')
+            if i < len(slides) - 1:
+                out.append(f'<div class="cseam {cls} r" style="left:{(i+1)*W}px"></div>')
     return "".join(out)
 
 
